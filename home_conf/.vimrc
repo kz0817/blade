@@ -79,7 +79,7 @@ highlight Normal                                    guifg=White  guibg=Black   g
 highlight Constant     ctermfg=Cyan                 guifg=Cyan                 gui=NONE
 highlight Error        ctermfg=White   ctermbg=Red  guifg=White  guibg=Red     gui=NONE
 highlight Special      ctermfg=Yellow               guifg=Yellow               gui=NONE
-highlight Comment      ctermfg=Green                guifg=Green                gui=NONE
+highlight Comment      ctermfg=Green                guifg=#00ff00              gui=NONE
 highlight Statement    ctermfg=Yellow               guifg=Yellow               gui=NONE
 highlight Type         ctermfg=Yellow               guifg=Yellow               gui=NONE
 highlight Preproc      ctermfg=Yellow               guifg=Yellow               gui=NONE
@@ -96,6 +96,7 @@ highlight Search       ctermfg=Blue                 guifg=Blue                 g
 "highlight Macro        ctermfg=Cyan
 highlight Identifier   ctermfg=None
 highlight Title        ctermfg=Cyan                 guifg=Cyan                 gui=NONE
+highlight Underlined   ctermfg=White cterm=Underline  guifg=White              gui=Underline
 
 highlight LineNr       ctermfg=Yellow               guifg=Yellow
 highlight Visual       ctermfg=White                guifg=White  guibg=Blue
