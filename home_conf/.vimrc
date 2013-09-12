@@ -94,9 +94,8 @@ highlight Search       ctermfg=Blue                 guifg=Blue                 g
 "highlight Define       ctermfg=Cyan
 "highlight Keyword      ctermfg=Cyan
 "highlight Macro        ctermfg=Cyan
-highlight Identifier   ctermfg=None
+highlight Identifier   ctermfg=Yellow               guifg=Yellow               gui=NONE
 highlight Title        ctermfg=Cyan                 guifg=Cyan                 gui=NONE
-highlight Underlined   ctermfg=White cterm=Underline  guifg=White              gui=Underline
 
 highlight LineNr       ctermfg=Yellow               guifg=Yellow
 highlight Visual       ctermfg=White                guifg=White  guibg=Blue
@@ -112,12 +111,15 @@ highlight SpellErrors  ctermfg=White ctermbg=Blue   guifg=White guibg=Blue
 highlight Folded       ctermfg=Cyan  ctermbg=None   guifg=Cyan
 
 "Used in HTML syntax
-highlight Underlined   ctermfg=None  cterm=None
+highlight Underlined   ctermfg=White cterm=Underline  guifg=White              gui=Underline
 
 highlight DiffAdd      ctermbg=DarkRed
 highlight DiffChange   ctermbg=DarkBlue
 highlight DiffText     ctermbg=DarkBlue
 highlight DiffDelete   ctermbg=Black ctermfg=Gray
+
+"Used in JavaScript
+highlight javaScript   ctermfg=White                guifg=White                gui=NONE
 
 " ===================================================================
 " Options for GVIM
