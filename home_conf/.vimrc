@@ -112,6 +112,7 @@ highlight Folded       ctermfg=Cyan  ctermbg=None   guifg=Cyan
 
 "Used in HTML syntax
 highlight Underlined   ctermfg=White cterm=Underline  guifg=White              gui=Underline
+highlight htmlEndTag   ctermfg=Cyan                 guifg=Cyan                 gui=NONE
 
 highlight DiffAdd      ctermbg=DarkRed
 highlight DiffChange   ctermbg=DarkBlue
@@ -120,6 +121,7 @@ highlight DiffDelete   ctermbg=Black ctermfg=Gray
 
 "Used in JavaScript
 highlight javaScript   ctermfg=White                guifg=White                gui=NONE
+highlight javaScriptBraces  ctermfg=White           guifg=White                gui=NONE
 
 " ===================================================================
 " Options for GVIM
