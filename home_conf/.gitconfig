@@ -4,3 +4,4 @@
 
 [core]
 	pager = 
+	editor = vim
