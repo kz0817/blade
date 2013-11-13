@@ -140,7 +140,7 @@ if [ $OS_TYPE = "Linux" ]; then
   alias ls='ls --color=auto --show-control-chars'
 fi
 if [ $OS_TYPE = "Darwin" ]; then
-  export LSCOLORS=gxcxcxdxbxegedabagacad
+  export LSCOLORS=gxcxcxdxDxegedabagacad
 fi
 
 # GNU screen: title ----------------------------------------------
