@@ -93,7 +93,12 @@ export PATH=~/bin:/usr/local/bin:/usr/local/X11R7/bin:/usr/bin:/bin:./:/usr/loca
 # /lib in LD_LIBRARY_PATH may happens errors of package updates in 64bit Distros.
 #export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
 
-if [ x`uname -o` = x"Cygwin" ]; then
+OS_TYPE=`uname`
+if [ -z $OS_TYPE ]; then
+  OS_TYPE="unknown"
+fi
+
+if [ $OS_TYPE = "Cygwin" ]; then
     export DBUS_SESSION_BUS_ADDRESS="tcp:host=localhost,port=30100"
     export PATH=$PATH:/cygdrive/c/Windows/System32
 fi
@@ -113,9 +118,9 @@ if [ -d $MINGW32_ROOT ]; then
 fi
 
 # Aliases --------------------------------------------------------
-alias la='ls -ah'
-alias ll='ls -lhG'
-alias lla='ls -alh'
+alias ls='ls -Gh'
+alias ll='ls -l'
+alias lla='ls -al'
 alias vi=vim
 
 alias cp='cp -iv'
@@ -127,11 +132,16 @@ alias su='su -'
 alias less='less -R'
 
 # ls -------------------------------------------------------------
-export LS_COLORS='no=01;37;49:fi=00;39;49:di=01;36;49:ln=01;32;49:pi=01;33;49:so=01;35;49:bd=01;33;49:cd=01;33;49:or=01;32;49:ex=01;33;49:su=01;33;44:sg=01;33;44:*core=01;31'
-if [ `ls --version | head -n1 | awk '{ if( $NF > 5.9 ) print "1"; else print "0"; }'` -ne 0 ]; then
-  export LS_COLORS=$LS_COLORS':ow=01;36;44:tw=01;36;44'
+if [ $OS_TYPE = "Linux" ]; then
+  export LS_COLORS='no=01;37;49:fi=00;39;49:di=01;36;49:ln=01;32;49:pi=01;33;49:so=01;35;49:bd=01;33;49:cd=01;33;49:or=01;32;49:ex=01;33;49:su=01;33;44:sg=01;33;44:*core=01;31'
+  if [ `ls --version | head -n1 | awk '{ if( $NF > 5.9 ) print "1"; else print "0"; }'` -ne 0 ]; then
+    export LS_COLORS=$LS_COLORS':ow=01;36;44:tw=01;36;44'
+  fi
+  alias ls='ls --color=auto --show-control-chars'
 fi
-alias ls='ls --color=auto --show-control-chars'
+if [ $OS_TYPE = "Darwin" ]; then
+  export LSCOLORS=gxcxcxdxbxegedabagacad
+fi
 
 # GNU screen: title ----------------------------------------------
 if [ $HOSTNAME != michi ]; then
