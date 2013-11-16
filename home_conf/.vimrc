@@ -131,8 +131,10 @@ set guioptions-=T
 set guioptions-=m
 set guioptions-=r
 set guioptions-=L
-"set guifont=TakaoGothic\ 11
-set guifont=TakaoGothic\ Bold\ 10
+if !has('gui_macvim')
+  "set guifont=TakaoGothic\ 11
+  set guifont=TakaoGothic\ Bold\ 10
+endif
 
 " ===================================================================
 " Auto commands
