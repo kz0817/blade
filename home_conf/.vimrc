@@ -134,6 +134,8 @@ set guioptions-=L
 if !has('gui_macvim')
   "set guifont=TakaoGothic\ 11
   set guifont=TakaoGothic\ Bold\ 10
+else
+  set guifont=Takaoゴシック:h12
 endif
 
 " ===================================================================
