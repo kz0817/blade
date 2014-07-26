@@ -1,0 +1,9 @@
+* Make a hosts file like
+
+  $ cat hosts
+  [all]
+  192.168.10.1
+
+* run
+
+  $ ansible-playbook -i hosts setup-home.yaml
