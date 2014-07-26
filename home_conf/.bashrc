@@ -119,8 +119,8 @@ fi
 
 # Aliases --------------------------------------------------------
 alias ls='ls -Gh'
-alias ll='ls -lGh'
-alias lla='ls -alGh'
+alias ll='ls -lGhs'
+alias lla='ls -alGhs'
 alias vi=vim
 
 alias cp='cp -iv'
