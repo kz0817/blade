@@ -7,3 +7,9 @@
 * run
 
   $ ansible-playbook -i hosts setup-home.yaml
+
+* Note
+The following packages shall be installed before the above run.
+
+- python
+- git
