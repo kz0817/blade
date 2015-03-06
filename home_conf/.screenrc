@@ -14,6 +14,7 @@ bind -c resize l eval 'resize +1' 'command -c resize'
 bind -c resize h eval 'resize -1' 'command -c resize'
 #caption always “%{b RK} %y/%m/%d(%D)%c:%s %{bu dr} | %-w%{=bu CK}%n %t%{-}%+w”
 bind s # reset xon
+bind f # prevent 'Defflow on'
 bind _ resize max
 bind = resize =
 
