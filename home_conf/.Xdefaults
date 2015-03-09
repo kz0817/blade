@@ -1,7 +1,10 @@
 XTerm*foreground: white
 XTerm*background: black
 XTerm*scrollBar:  false
+XTerm*eightBitInput: false
+XTerm*eightBitOutput: true
 XTerm*font: rk14
+!XTerm*font: -misc-fixed-medium-r-normal-*-14-130-75-75-*-*-jisx0208.1983-*
 XTerm*boldFont: rk14
 
 URxvt.foreground: white
