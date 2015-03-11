@@ -130,6 +130,7 @@ alias od='od -tx1z -Ax -v'
 
 alias su='su -'
 alias less='less -R'
+alias gdb='gdb -q'
 
 # ls -------------------------------------------------------------
 if [ $OS_TYPE = "Linux" ]; then
