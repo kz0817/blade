@@ -1,6 +1,6 @@
 - hosts: all
   vars:
-    misc_dir: "misc"
+    misc_dir: "~/misc"
   tasks:
     - name: "mkdir misc"
       file: dest={{ misc_dir }} state=directory
