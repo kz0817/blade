@@ -4,7 +4,7 @@ startup_message off
 #hardstatus alwayslastline "[%02c] %`%-w%{=b bw}%n %t%{-}%+w"
 hardstatus alwayslastline " %`%-w%{=b bw}%n %t%{-}%+w"
 encoding utf8
-defscrollback 65536
+defscrollback 1024
 
 bind r eval 'echo Resize window' 'command -c resize'
 bind -c resize ^] command
