@@ -30,6 +30,9 @@ set showcmd
 " Display corresponding ()
 set showmatch
 
+" Incrementtal search
+set incsearch
+
 " Set locale
 set termencoding=2byte-utf-8
 set encoding=2byte-utf-8
