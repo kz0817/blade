@@ -6,3 +6,5 @@
 	pager = 
 [push]
 	default = simple
+[color]
+	ui = always
