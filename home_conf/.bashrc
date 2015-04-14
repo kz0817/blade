@@ -86,9 +86,18 @@ alias grep='grep -E --color=auto'
 # Open Office ----------------------------------------------------
 #export OOO_FORCE_DESKTOP=none
 
+# Scala ----------------------------------------------------------
+if [ $OS_TYPE = "Darwin" ]; then
+  export SCALA_HOME=/opt/scala
+fi
+
 # Path to search -------------------------------------------------
 #
 export PATH=~/bin:/usr/local/bin:/usr/local/X11R7/bin:/usr/bin:/bin:./:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/cross-i686/bin:~/android-sdk-linux_86/tools
+
+if [ $OS_TYPE = "Darwin" ]; then
+  export PATH=$PATH:$SCALA_HOME/bin
+fi
 
 # /lib in LD_LIBRARY_PATH may happens errors of package updates in 64bit Distros.
 #export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
@@ -126,7 +135,13 @@ alias vi=vim
 alias cp='cp -iv'
 alias rm='rm -iv'
 alias mv='mv -iv'
-alias od='od -tx1z -Ax -v'
+if [ $OS_TYPE = "Linux" ]; then
+  alias od='od -tx1z -Ax -v'
+fi
+if [ $OS_TYPE = "Darwin" ]; then
+  alias od='od -tx1 -Ax'
+fi
+
 
 alias su='su -'
 alias less='less -R'
