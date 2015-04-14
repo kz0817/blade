@@ -20,6 +20,9 @@ set noai
 " display ruler
 set ruler
 
+" search mode line
+set modeline
+
 " Don't wrap at end of display
 "set nowrap
 set wrap
