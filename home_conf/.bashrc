@@ -1,12 +1,10 @@
-#
-# .bashrc
-#   created:     2004.07.11 by K.Yamato
-#   last update  2011.10.12
-#
+# Basic setting -----------------------------------------------
+OS_TYPE=`uname`
+if [ -z $OS_TYPE ]; then
+  OS_TYPE="unknown"
+fi
 
-#
-# Japanese env. -----------------------------------------------
-#
+# for Japanese and English ------------------------------------
 alias utf='export LANG=ja_JP.UTF-8; export LANGUAGE=ja_JP.UTF-8; export LC_ALL=ja_JP.UTF-8'
 alias en='export LANG=en.UTF-8; export LANGUAGE=en.UTF-8; export LC_ALL=C'
 
@@ -15,7 +13,6 @@ if [ x$TERM = xxterm ]; then
 fi
 
 # Source the Machine independent setting  ------------------------
-#
 if [ -f /etc/def.bashrc ]; then
   source /etc/def.bashrc
 fi
@@ -86,30 +83,23 @@ alias grep='grep -E --color=auto'
 # Open Office ----------------------------------------------------
 #export OOO_FORCE_DESKTOP=none
 
-# Scala ----------------------------------------------------------
-if [ $OS_TYPE = "Darwin" ]; then
-  export SCALA_HOME=/opt/scala
-fi
-
-# Path to search -------------------------------------------------
+# PATH -----------------------------------------------------------
 #
 export PATH=~/bin:/usr/local/bin:/usr/local/X11R7/bin:/usr/bin:/bin:./:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/cross-i686/bin:~/android-sdk-linux_86/tools
-
-if [ $OS_TYPE = "Darwin" ]; then
-  export PATH=$PATH:$SCALA_HOME/bin
-fi
 
 # /lib in LD_LIBRARY_PATH may happens errors of package updates in 64bit Distros.
 #export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
 
-OS_TYPE=`uname`
-if [ -z $OS_TYPE ]; then
-  OS_TYPE="unknown"
-fi
-
+# Cygwin ---------------------------------------------------------
 if [ $OS_TYPE = "Cygwin" ]; then
     export DBUS_SESSION_BUS_ADDRESS="tcp:host=localhost,port=30100"
     export PATH=$PATH:/cygdrive/c/Windows/System32
+fi
+
+# Scala ----------------------------------------------------------
+if [ $OS_TYPE = "Darwin" ]; then
+  export SCALA_HOME=/opt/scala
+  export PATH=$PATH:$SCALA_HOME/bin
 fi
 
 # Path for emdevkitwin32 -----------------------------------------
