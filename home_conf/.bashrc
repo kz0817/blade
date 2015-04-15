@@ -62,7 +62,6 @@ export SVN_EDITOR=vim
 
 # rsync ----------------------------------------------------------
 #alias rsync='rsync -avzu'
-#export RSYNC_PASSWORD=michiko
 
 # distcc ---------------------------------------------------------
 #export DISTCC_HOSTS='localhost'
@@ -74,7 +73,6 @@ alias screen='screen -U'
 #export GREP_COLOR='1;33'
 export GREP_COLOR='1;37;41'
 alias grep='grep -E --color=auto'
-#alias grep='grep -n'
 
 # xdvi ----------------------------------------------------------
 #export TEXMF=/usr/local/teTeX/texmf
@@ -84,7 +82,6 @@ alias grep='grep -E --color=auto'
 #export OOO_FORCE_DESKTOP=none
 
 # PATH -----------------------------------------------------------
-#
 export PATH=~/bin:/usr/local/bin:/usr/local/X11R7/bin:/usr/bin:/bin:./:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/cross-i686/bin:~/android-sdk-linux_86/tools
 
 # /lib in LD_LIBRARY_PATH may happens errors of package updates in 64bit Distros.
