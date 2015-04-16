@@ -13,8 +13,8 @@ if [ x$TERM = xxterm ]; then
 fi
 
 # Source the Machine independent setting  ------------------------
-if [ -f /etc/def.bashrc ]; then
-  source /etc/def.bashrc
+if [ -f .bashrc.local ]; then
+  source .bashrc.local
 fi
 
 if [ -f .hostname ]; then
@@ -96,6 +96,8 @@ fi
 # Scala ----------------------------------------------------------
 if [ $OS_TYPE = "Darwin" ]; then
   export SCALA_HOME=/opt/scala
+fi
+if [ -e $SCALA_HOME ]; then
   export PATH=$PATH:$SCALA_HOME/bin
 fi
 
