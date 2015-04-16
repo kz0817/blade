@@ -17,10 +17,6 @@ if [ -f .bashrc.local ]; then
   source .bashrc.local
 fi
 
-if [ -f .hostname ]; then
-  HOST=`cat .hostname`
-fi
-
 if [ x$USER = x"root" ]; then
   PMARK="#"
 else
@@ -30,8 +26,8 @@ fi
 HISTSIZE=100000
 HISTFILESIZE=100000
 
-if [ x$HOST != x ]; then
-  PS1="[$HOST]\w $PMARK "
+if [ x$MAIN_HOSTNAME != x ]; then
+  PS1="[$MAIN_HOSTNAME]\w $PMARK "
 else
   PS1="[\h]\w $PMARK "
 fi
