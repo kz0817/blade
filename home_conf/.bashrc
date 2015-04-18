@@ -26,8 +26,8 @@ fi
 HISTSIZE=100000
 HISTFILESIZE=100000
 
-if [ x$MAIN_HOSTNAME != x ]; then
-  PS1="[$MAIN_HOSTNAME]\w $PMARK "
+if [ x$NICKNAME != x ]; then
+  PS1="[$NICKNAME]\w $PMARK "
 else
   PS1="[\h]\w $PMARK "
 fi
