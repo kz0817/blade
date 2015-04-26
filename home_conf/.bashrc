@@ -145,7 +145,9 @@ if [ $OS_TYPE = "Darwin" ]; then
 fi
 
 # GNU screen: title ----------------------------------------------
-if [ $HOSTNAME != michi ]; then
+if [ x$NICKNAME != x ]; then
+   export SCREEN_HOST=$NICKNAME:
+else
    export SCREEN_HOST=`echo $HOSTNAME | sed "s,\..*$,,"`:
 fi
 
