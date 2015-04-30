@@ -36,6 +36,9 @@ set showmatch
 " Incrementtal search
 set incsearch
 
+" Automatically read the updated files
+set autoread
+
 " Set locale
 set termencoding=2byte-utf-8
 set encoding=2byte-utf-8
