@@ -4,6 +4,7 @@
 
 [core]
 	pager = 
+	editor = vim
 [push]
 	default = simple
 [color]
