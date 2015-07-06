@@ -64,6 +64,7 @@ export SVN_EDITOR=vim
 
 # screen ---------------------------------------------------------
 alias screen='screen -U'
+alias screen-flow-offs='screen -X defflow off; screen -X flow off'
 
 # grep -----------------------------------------------------------
 #export GREP_COLOR='1;33'
