@@ -3,6 +3,9 @@
     - name: "install git"
       apt: name=git
 
+    - name: "install ansible"
+      apt: name=ansible
+
     - name: "add a user"
       user: name={{ user }} append=yes
 
