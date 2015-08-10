@@ -4,7 +4,7 @@
       apt: name=git
 
     - name: "add a user"
-      user: name={{ user }}
+      user: name={{ user }} append=yes
 
     - name: "mkdir ~/.sshc key"
       file: path=/home/{{ user }}/.ssh state=directory mode=0700 owner={{ user }} group={{ user }}
@@ -12,4 +12,6 @@
     - name: "copy public key"
       copy: src=~/.ssh/id_dsa.pub dest=/home/{{ user }}/.ssh/authorized_keys owner={{ user }} group={{ user }}
 
+    - name: "setting for sudoer"
+      copy: content="{{ user }} ALL=(ALL:ALL) NOPASSWD:ALL" dest=/etc/sudoers.d/{{ user }}-nopasswd
 
