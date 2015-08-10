@@ -1,0 +1,15 @@
+- hosts: all
+  tasks:
+    - name: "install git"
+      apt: name=git
+
+    - name: "add a user"
+      user: name={{ user }}
+
+    - name: "mkdir ~/.sshc key"
+      file: path=/home/{{ user }}/.ssh state=directory mode=0700 owner={{ user }} group={{ user }}
+
+    - name: "copy public key"
+      copy: src=~/.ssh/id_dsa.pub dest=/home/{{ user }}/.ssh/authorized_keys owner={{ user }} group={{ user }}
+
+

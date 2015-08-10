@@ -4,7 +4,11 @@
   [all]
   192.168.10.1
 
-* run
+* run (example): initialize (mainly add the first user).
+
+  $ ansible-playbook -i hosts initialize.yaml --extra-vars user=user_name -u ubuntu -s
+
+* run: setup home directory
 
   $ ansible-playbook -i hosts setup-home.yaml
 
