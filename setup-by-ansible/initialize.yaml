@@ -1,10 +1,24 @@
 - hosts: all
   tasks:
-    - name: "install git"
+    - name: "install git (apt)"
       apt: name=git
+      when: ansible_distribution == "Ubuntu"
 
-    - name: "install ansible"
+    - name: "install ansible (apt)"
       apt: name=ansible
+      when: ansible_distribution == "Ubuntu"
+
+    - name: "install epel-release (yum)"
+      yum: name=epel-release
+      when: ansible_distribution == "CentOS"
+
+    - name: "install git (yum)"
+      yum: name=git
+      when: ansible_distribution == "CentOS"
+
+    - name: "install ansible (yum)"
+      yum: name=ansible
+      when: ansible_distribution == "CentOS"
 
     - name: "add a user"
       user: name={{ user }} append=yes
