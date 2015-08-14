@@ -16,6 +16,10 @@
       yum: name=git
       when: ansible_distribution == "CentOS"
 
+    - name: "install vim (yum)"
+      yum: name=vim
+      when: ansible_distribution == "CentOS"
+
     - name: "install ansible (yum)"
       yum: name=ansible
       when: ansible_distribution == "CentOS"
