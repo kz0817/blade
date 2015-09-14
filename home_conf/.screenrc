@@ -29,3 +29,4 @@ shelltitle "$ |bash"
 vbell off
 
 defflow off
+term screen-256color
