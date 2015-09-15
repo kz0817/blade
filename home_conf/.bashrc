@@ -152,12 +152,18 @@ else
    export SCREEN_HOST=`echo $HOSTNAME | sed "s,\..*$,,"`:
 fi
 
+if [ x$TERM = xscreen -o x$TERM = xscreen-256color ]; then
+  USE_SCREEN=1
+else
+  USE_SCREEN=0
+fi
+
 function title_screen () {
   cmd=`history 1 | sed s/\ *[0-9]*\ *//`
   echo -en "\033k$SCREEN_HOST$cmd\033\\"
 }
 
-if [ x$TERM = xscreen ]; then
+if [ $USE_SCREEN -eq 1 ]; then
   trap "title_screen" DEBUG
 fi
 
@@ -167,6 +173,6 @@ function printdir() {
   #echo -en "\033k[$SCREEN_HOST$(pwd | awk '{ print $(NF) }' FS='/')]\033\134"
 }
 
-if [ x$TERM = xscreen ]; then
+if [ $USE_SCREEN -eq 1 ]; then
   PROMPT_COMMAND='printdir'
 fi
