@@ -66,6 +66,9 @@ export SVN_EDITOR=vim
 alias screen='screen -U'
 alias screen-flow-offs='screen -X defflow off; screen -X flow off'
 
+# git -----------------------------------------------------------
+alias git-show-push-curr-upstream='git branch --color=never | grep "^\*" | awk "{ print \"git push -u origin \" \$2 }" '
+
 # grep -----------------------------------------------------------
 #export GREP_COLOR='1;33'
 export GREP_COLOR='1;37;41'
