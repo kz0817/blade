@@ -27,7 +27,7 @@
     - name: "add a user"
       user: name={{ user }} append=yes
 
-    - name: "mkdir ~/.ssh key"
+    - name: "mkdir ~/.ssh"
       file: path=/home/{{ user }}/.ssh state=directory mode=0700 owner={{ user }} group={{ user }}
 
     - name: "copy public key"
