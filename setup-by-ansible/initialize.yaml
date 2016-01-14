@@ -24,6 +24,10 @@
       yum: name=ansible
       when: ansible_distribution == "CentOS"
 
+    - name: "install sudo (yum)"
+      yum: name=sudo
+      when: ansible_distribution == "CentOS"
+
     - name: "add a user"
       user: name={{ user }} append=yes
 

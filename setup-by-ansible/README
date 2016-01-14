@@ -6,7 +6,13 @@
 
 * run (example): initialize (mainly add the first user).
 
+  - When you can login as ubuntu who can be root by sudo.
+
   $ ansible-playbook -i hosts initialize.yaml --extra-vars user=user_name -u ubuntu -s
+
+  - When you can login as root with a password.
+
+  $ ansible-playbook -i hosts initialize.yaml --extra-vars user=user_name -u root -k
 
 * run: setup home directory
 
