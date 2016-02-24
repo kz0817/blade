@@ -6,9 +6,13 @@
 
 * run (example): initialize (mainly add the first user).
 
+  The script creates a new user whose name can be given by 'user_name' variable.
+
   - When you can login as ubuntu who can be root by sudo.
 
-  $ ansible-playbook -i hosts initialize.yaml --extra-vars user=user_name -u ubuntu -s
+  $ ansible-playbook -i hosts initialize.yaml --extra-vars user=user_name -u ubuntu -s -K
+
+    -K can be omitted if the user (ubuntu in the above) can be root w/o password.
 
   - When you can login as root with a password.
 
