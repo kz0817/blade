@@ -29,7 +29,7 @@
       when: ansible_distribution == "CentOS"
 
     - name: "add a user"
-      user: name={{ user }} append=yes
+      user: name={{ user }} append=yes shell=/bin/bash
 
     - name: "mkdir ~/.ssh"
       file: path=/home/{{ user }}/.ssh state=directory mode=0700 owner={{ user }} group={{ user }}
