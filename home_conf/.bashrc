@@ -86,6 +86,11 @@ export PATH=~/bin:/usr/local/bin:/usr/local/X11R7/bin:/usr/bin:/bin:./:/usr/loca
 
 # /lib in LD_LIBRARY_PATH may happens errors of package updates in 64bit Distros.
 #export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
+DEVTOOLSET2_DIR=/opt/rh/devtoolset-2
+DEVTOOLSET2_BIN_DIR=$DEVTOOLSET2_DIR/root/usr/bin
+if [ -d $DEVTOOLSET2_BIN_DIR ]; then
+  export PATH=$DEVTOOLSET2_BIN_DIR:$PATH
+fi
 
 # Cygwin ---------------------------------------------------------
 if [ $OS_TYPE = "Cygwin" ]; then
@@ -114,6 +119,12 @@ export MINGW32_SYSROOT=$MINGW32_ROOT/sys-root/mingw
 if [ -d $MINGW32_ROOT ]; then
   export PATH=$PATH:$MINGW32_ROOT/bin:$MINGW32_SYSROOT/bin
 fi
+
+# Path for Vivado ------------------------------------------------
+#VIVADO_DIR=~/Xilinx
+#. $VIVADO_DIR/settings64.sh
+export XILINX_VIVADO=/opt/Xilinx/SDAccel/2016.1
+
 
 # Aliases --------------------------------------------------------
 alias ls='ls -Gh'
