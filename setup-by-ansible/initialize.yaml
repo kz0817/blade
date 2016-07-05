@@ -32,7 +32,10 @@
       yum: name=libselinux-python
       when: ansible_distribution == "CentOS"
 
+    # We ignore the result for the machine w/o selinux.
     - selinux: state=disabled
+      ignore_errors: True
+      when: ansible_distribution == "CentOS"
 
     - name: "add a user"
       user: name={{ user }} append=yes shell=/bin/bash
