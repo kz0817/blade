@@ -19,8 +19,13 @@
     - name: "link .gdbinit"
       file: src=misc/priv-misc/home_conf/.gdbinit dest=.gdbinit state=link
 
-    - name: "link .gitconfig"
+    - name: "link .gitconfig (CentOS6)"
       file: src=misc/priv-misc/home_conf/.gitconfig dest=.gitconfig state=link
+      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
+
+    - name: "link .gitconfig (Non CentOS6)"
+      file: src=misc/priv-misc/home_conf/.gitconfig.cent6 dest=.gitconfig state=link
+      when: not (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
 
     - name: "check .bashrc is not link"
       command: test -f .bashrc -a ! -L .bashrc
