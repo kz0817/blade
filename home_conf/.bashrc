@@ -122,8 +122,8 @@ fi
 
 # Path for Vivado ------------------------------------------------
 #VIVADO_DIR=~/Xilinx
-#. $VIVADO_DIR/settings64.sh
 export XILINX_VIVADO=/opt/Xilinx/SDAccel/2016.1
+alias source_vivado_env='. $XILINX_VIVADO/settings64.sh'
 
 
 # Aliases --------------------------------------------------------
