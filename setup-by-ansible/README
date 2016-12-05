@@ -28,7 +28,7 @@ The following packages shall be installed before the above run.
 Some matter in .bashrc inserts escape sequences and makes it fail sometimes.
 In such case, change the TERM environment like,
 
-  $ TERM=xterm ansbile-playbook -i hosts setup-home.yaml
+  $ TERM=xterm ansible-playbook -i hosts setup-home.yaml
 
 - python
 - git
