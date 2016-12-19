@@ -1,44 +1,50 @@
 - hosts: all
   tasks:
+    - group_by: key=os_{{ ansible_distribution }}
+
+- hosts: os_Ubuntu
+  gather_facts: False
+  tasks:
     - name: "install git (apt)"
       apt: name=git
-      when: ansible_distribution == "Ubuntu"
 
     - name: "install ansible (apt)"
       apt: name=ansible
-      when: ansible_distribution == "Ubuntu"
 
+
+- hosts: os_CentOS
+  gather_facts: False
+  tasks:
     - name: "install epel-release (yum)"
       yum: name=epel-release
-      when: ansible_distribution == "CentOS"
 
     - name: "install git (yum)"
       yum: name=git
-      when: ansible_distribution == "CentOS"
 
     - name: "install vim (yum)"
       yum: name=vim
-      when: ansible_distribution == "CentOS"
 
     - name: "install ansible (yum)"
       yum: name=ansible
-      when: ansible_distribution == "CentOS"
 
     - name: "install sudo (yum)"
       yum: name=sudo
-      when: ansible_distribution == "CentOS"
 
     - name: "install libselinux-python (yum)"
       yum: name=libselinux-python
-      when: ansible_distribution == "CentOS"
 
     # We ignore the result for the machine w/o selinux.
     - selinux: state=disabled
       ignore_errors: True
-      when: ansible_distribution == "CentOS"
 
+- hosts: all
+  gather_facts: False
+  tasks:
     - name: "add a user"
       user: name={{ user }} append=yes shell=/bin/bash
+
+    - name: "ownership of home dir"
+      file: owner={{ user }} path=/home/{{ user }} group={{ user }}
 
     - name: "mkdir ~/.ssh"
       file: path=/home/{{ user }}/.ssh state=directory mode=0700 owner={{ user }} group={{ user }}
@@ -48,4 +54,5 @@
 
     - name: "setting for sudoer"
       copy: content="{{ user }} ALL=(ALL:ALL) NOPASSWD:ALL" dest=/etc/sudoers.d/{{ user }}-nopasswd
+
 
