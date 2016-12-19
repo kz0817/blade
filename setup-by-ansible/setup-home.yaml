@@ -39,3 +39,5 @@
     - name: "link .bashrc"
       file: src=misc/priv-misc/home_conf/.bashrc dest=.bashrc state=link
 
+    - name: "copy .bash_profile"
+      copy: src=files/bash_profile dest=~/.bash_profile force=no
