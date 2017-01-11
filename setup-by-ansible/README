@@ -10,9 +10,12 @@
 
   - When you can login as ubuntu who can be root by sudo.
 
-  $ ansible-playbook -i hosts initialize.yaml --extra-vars user=user_name -u ubuntu -s -K
+  $ ansible-playbook -i hosts initialize.yaml --extra-vars user=user_name -u ubuntu -k -K -b
 
-    -K can be omitted if the user (ubuntu in the above) can be root w/o password.
+    -k: Ask password to login
+    -K: Ask password for sudo.
+        So it can be omitted if the user (ubuntu in the above) becomes root w/o password.
+    -b: Run with sudo
 
   - When you can login as root with a password.
 
