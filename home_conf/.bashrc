@@ -6,7 +6,7 @@ fi
 
 # for Japanese and English ------------------------------------
 alias utf='export LANG=ja_JP.UTF-8; export LANGUAGE=ja_JP.UTF-8; export LC_ALL=ja_JP.UTF-8'
-alias en='export LANG=en.UTF-8; export LANGUAGE=en.UTF-8; export LC_ALL=C'
+alias en='export LANG=en_US.UTF-8; export LANGUAGE=en_US.UTF-8; export LC_ALL=en_US.UTF-8'
 
 if [ x$TERM = xxterm ]; then
   en
@@ -82,7 +82,8 @@ alias grep='grep -E --color=auto'
 #export OOO_FORCE_DESKTOP=none
 
 # PATH -----------------------------------------------------------
-export PATH=~/bin:/usr/local/bin:/usr/local/X11R7/bin:/usr/bin:/bin:./:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/cross-i686/bin:~/android-sdk-linux_86/tools
+#export PATH=~/bin:/usr/local/bin:/usr/local/X11R7/bin:/usr/bin:/bin:./:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/cross-i686/bin:~/android-sdk-linux_86/tools
+export PATH=~/bin:/usr/local/bin:/usr/local/X11R7/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/cross-i686/bin:~/android-sdk-linux_86/tools
 
 # /lib in LD_LIBRARY_PATH may happens errors of package updates in 64bit Distros.
 #export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
