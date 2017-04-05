@@ -30,3 +30,8 @@ vbell off
 
 defflow off
 term screen-256color
+
+deflog on
+logfile .screen-logs/%Y%m%d.%S.%n.log
+logtstamp on
+logtstamp string "\n-- SCREEN [%Y/%m/%d %02c:%s] %n:%t --\n"
