@@ -25,6 +25,10 @@
 
   $ ansible-playbook -i hosts setup-home.yaml
 
+# An example for localhost
+
+    $ ansible-playbook -i localhost, -c local misc/priv-misc/setup-by-ansible/setup-home.yaml
+
 * Note
 The following packages shall be installed before the above run.
 
