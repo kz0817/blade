@@ -35,30 +35,6 @@ fi
 # Subversion ----------------------------------------------------
 export SVN_EDITOR=vim
 
-# ROOT -----------------------------------------------------------
-#if [ x$HOSTNAME = xmi ]; then
-#  export ROOTSYS=/cern/root
-#  alias  root='root -l'
-#  #export SAMBADIR=/usr/local/samba
-#fi
-
-# teTeX ----------------------------------------------------------
-#if [ x$HOSTNAME = xmi ]; then
-#  export TETEX_PATH=/usr/local/teTeX
-#  #export TEXMF=$TETEX_PATH/share/texmf
-#fi
-
-# Python ---------------------------------------------------------
-#if [ x$HOSTNAME = xmi ]; then
-#  #export PYTHONPATH=/usr/local/lib/python2.5/site-packages:$ROOTSYS/lib:~/michi.work/tools/slib
-#  export PYTHONPATH=/usr/local/lib/python2.4/site-packages:$ROOTSYS/lib:~/michi.work/tools/slib
-#  export PYTHONSTARTUP=~/.pyrc
-#  #export WINEPREFIX=/usr/local/winedrive
-#fi
-
-# rsync ----------------------------------------------------------
-#alias rsync='rsync -avzu'
-
 # distcc ---------------------------------------------------------
 #export DISTCC_HOSTS='localhost'
 
@@ -74,16 +50,8 @@ alias git-show-push-curr-upstream='git branch --color=never | grep "^\*" | awk "
 export GREP_COLOR='1;37;41'
 alias grep='grep -E --color=auto'
 
-# xdvi ----------------------------------------------------------
-#export TEXMF=/usr/local/teTeX/texmf
-#export XDVIINPUTS='.;$TEXMF/{xdvi,dvips}//'
-
-# Open Office ----------------------------------------------------
-#export OOO_FORCE_DESKTOP=none
-
 # PATH -----------------------------------------------------------
-#export PATH=~/bin:/usr/local/bin:/usr/local/X11R7/bin:/usr/bin:/bin:./:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/cross-i686/bin:~/android-sdk-linux_86/tools
-export PATH=~/bin:/usr/local/bin:/usr/local/X11R7/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/cross-i686/bin:~/android-sdk-linux_86/tools
+export PATH=~/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/android-sdk-linux_86/tools
 
 # /lib in LD_LIBRARY_PATH may happens errors of package updates in 64bit Distros.
 #export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
@@ -93,12 +61,6 @@ if [ -d $DEVTOOLSET2_BIN_DIR ]; then
   export PATH=$DEVTOOLSET2_BIN_DIR:$PATH
 fi
 
-# Cygwin ---------------------------------------------------------
-if [ $OS_TYPE = "Cygwin" ]; then
-    export DBUS_SESSION_BUS_ADDRESS="tcp:host=localhost,port=30100"
-    export PATH=$PATH:/cygdrive/c/Windows/System32
-fi
-
 # Scala ----------------------------------------------------------
 if [ $OS_TYPE = "Darwin" ]; then
   export SCALA_HOME=/opt/scala
@@ -106,26 +68,6 @@ fi
 if [ -e $SCALA_HOME ]; then
   export PATH=$PATH:$SCALA_HOME/bin
 fi
-
-# Path for emdevkitwin32 -----------------------------------------
-EMDEVKITWINRC=/cygdrive/c/emdevkitwin32/emdevkitwinrc
-if [ -f $EMDEVKITWINRC ]; then
-  . $EMDEVKITWINRC
-  export PATH=$EMDEVKITWIN32_BINS:$PATH
-  export PKG_CONFIG_PATH=$EMDEVKITWIN32_PKG_CONFIG_PATH
-fi
-
-export MINGW32_ROOT=/usr/i686-pc-mingw32
-export MINGW32_SYSROOT=$MINGW32_ROOT/sys-root/mingw
-if [ -d $MINGW32_ROOT ]; then
-  export PATH=$PATH:$MINGW32_ROOT/bin:$MINGW32_SYSROOT/bin
-fi
-
-# Path for Vivado ------------------------------------------------
-#VIVADO_DIR=~/Xilinx
-export XILINX_VIVADO=/opt/Xilinx/SDAccel/2016.1
-alias source_vivado_env='. $XILINX_VIVADO/settings64.sh'
-
 
 # Aliases --------------------------------------------------------
 alias ls='ls -Gh'

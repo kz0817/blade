@@ -6,6 +6,6 @@
 	pager = 
 	editor = vim
 [push]
-#	default = simple
+	default = simple
 [color]
 	ui = always
