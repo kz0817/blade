@@ -11,33 +11,33 @@
            accept_hostkey=yes
 
     - name: "link .vimrc"
-      file: src=misc/priv-misc/home_conf/.vimrc dest=.vimrc state=link
+      file: src=misc/priv-misc/home_conf/.vimrc dest=~/.vimrc state=link
 
     - name: "link .screenrc"
-      file: src=misc/priv-misc/home_conf/.screenrc dest=.screenrc state=link
+      file: src=misc/priv-misc/home_conf/.screenrc dest=~/.screenrc state=link
 
     - name: "link .gdbinit"
-      file: src=misc/priv-misc/home_conf/.gdbinit dest=.gdbinit state=link
+      file: src=misc/priv-misc/home_conf/.gdbinit dest=~/.gdbinit state=link
 
     - name: "link .gitconfig (CentOS6)"
-      file: src=misc/priv-misc/home_conf/.gitconfig dest=.gitconfig state=link
+      file: src=misc/priv-misc/home_conf/.gitconfig dest=~/.gitconfig state=link
       when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
 
     - name: "link .gitconfig (Non CentOS6)"
-      file: src=misc/priv-misc/home_conf/.gitconfig.cent6 dest=.gitconfig state=link
+      file: src=misc/priv-misc/home_conf/.gitconfig.cent6 dest=~/.gitconfig state=link
       when: not (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
 
     - name: "check .bashrc is not link"
-      command: test -f .bashrc -a ! -L .bashrc
+      command: test -f ~/.bashrc -a ! -L .bashrc
       register: result
       ignore_errors: True
 
     - name: "backup .bashrc if needed"
-      command: mv .bashrc .bashrc.orig
+      command: mv ~/.bashrc ~/.bashrc.orig
       when: result|success
 
     - name: "link .bashrc"
-      file: src=misc/priv-misc/home_conf/.bashrc dest=.bashrc state=link
+      file: src=misc/priv-misc/home_conf/.bashrc dest=~/.bashrc state=link
 
     - name: "copy .bash_profile"
       copy: src=files/bash_profile dest=~/.bash_profile force=no
