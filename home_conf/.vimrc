@@ -156,6 +156,8 @@ au BufNewFile,BufRead *.s       :set ts=4
 au BufNewFile,BufRead *.s       :set noexpandtab
 au BufNewFile,BufRead *.spec    :set ts=8
 au BufNewFile,BufRead *.spec    :set noexpandtab
+au BufNewFile,BufRead *.cc      :set expandtab
+au BufNewFile,BufRead *.cc      :set ts=4
 au BufNewFile,BufRead *.py      :set expandtab
 au BufNewFile,BufRead *.py      :set ts=4
 au BufNewFile,BufRead *.java    :set expandtab
