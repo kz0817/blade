@@ -1,0 +1,3 @@
+#!/bin/sh
+
+stty size | awk '{ print "stty rows " $1 " cols "$2 }'
