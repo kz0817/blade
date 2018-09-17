@@ -1,3 +1,4 @@
 #!/bin/sh
 
+echo '# Note: the following command should be executed at the top line (e.g. use 'clear' command or Ctrl + l in advance)'
 stty size | awk '{ print "stty rows " $1 " cols "$2 }'
