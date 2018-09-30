@@ -17,10 +17,6 @@
         So it can be omitted if the user (ubuntu in the above) becomes root w/o password.
     -b: Run with sudo
 
-  - When you use python3 on the target, the following option should be added.
-
-     -e 'ansible_python_interpreter=/usr/bin/python3'
-
   - When you can login as root with a password.
 
   $ ansible-playbook -i hosts initialize.yaml --extra-vars user=user_name -u root -k
