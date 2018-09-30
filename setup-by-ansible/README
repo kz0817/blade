@@ -43,3 +43,8 @@ In such case, change the TERM environment like,
 
 - python
 - git
+
+
+# When there's only python3 on the target host, the following option should be added.
+
+    -e 'ansible_python_interpreter=/usr/bin/python3'
