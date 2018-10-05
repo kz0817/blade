@@ -71,9 +71,9 @@ if [ -e $SCALA_HOME ]; then
 fi
 
 # Aliases --------------------------------------------------------
-alias ls='ls -Gh'
-alias ll='ls -lGhs'
-alias lla='ls -alGhs'
+alias ls='ls -h'
+alias ll='ls -lhs'
+alias lla='ls -alhs'
 alias vi=vim
 
 alias cp='cp -iv'
