@@ -71,9 +71,6 @@ if [ -e $SCALA_HOME ]; then
 fi
 
 # Aliases --------------------------------------------------------
-alias ls='ls -h'
-alias ll='ls -lhs'
-alias lla='ls -alhs'
 alias vi=vim
 
 alias cp='cp -iv'
@@ -93,6 +90,10 @@ alias gdb='gdb -q'
 
 # ls -------------------------------------------------------------
 if [ $OS_TYPE = "Linux" ]; then
+  alias ls='ls -h'
+  alias ll='ls -lhs'
+  alias lla='ls -alhs'
+
   export LS_COLORS='no=01;37;49:fi=00;39;49:di=01;36;49:ln=01;32;49:pi=01;33;49:so=01;35;49:bd=01;33;49:cd=01;33;49:or=01;32;49:ex=01;33;49:su=01;33;44:sg=01;33;44:*core=01;31'
   if [ `ls --version | head -n1 | awk '{ if( $NF > 5.9 ) print "1"; else print "0"; }'` -ne 0 ]; then
     export LS_COLORS=$LS_COLORS':ow=01;36;44:tw=01;36;44'
@@ -100,6 +101,9 @@ if [ $OS_TYPE = "Linux" ]; then
   alias ls='ls --color=auto --show-control-chars'
 fi
 if [ $OS_TYPE = "Darwin" ]; then
+  alias ls='ls -Gh'
+  alias ll='ls -lGhs'
+  alias lla='ls -aGlhs'
   export LSCOLORS=gxcxcxdxDxegedabagacad
 fi
 
