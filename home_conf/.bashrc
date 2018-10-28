@@ -43,9 +43,6 @@ alias screen='screen -U'
 alias screen-flow-offs='screen -X defflow off; screen -X flow off'
 alias screen-ssh-auth-sock-update='~/misc/priv-misc/bin/screen-ssh-auth-sock-update.py > ~/.screen-ssh-auth && . ~/.screen-ssh-auth'
 
-# git -----------------------------------------------------------
-alias git-show-push-curr-upstream='git branch --color=never | grep "^\*" | awk "{ print \"git push -u origin \" \$2 }" '
-
 # grep -----------------------------------------------------------
 export GREP_COLOR='1;37;41'
 alias grep='grep -E --color=auto'

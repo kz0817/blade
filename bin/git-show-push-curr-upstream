@@ -1,0 +1,4 @@
+#!/bin/sh
+
+git branch --color=never | grep "^\*" | awk "{ print \"git push -u origin \" \$2 }"
+
