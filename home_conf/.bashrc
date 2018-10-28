@@ -47,15 +47,12 @@ alias screen-ssh-auth-sock-update='~/misc/priv-misc/bin/screen-ssh-auth-sock-upd
 alias git-show-push-curr-upstream='git branch --color=never | grep "^\*" | awk "{ print \"git push -u origin \" \$2 }" '
 
 # grep -----------------------------------------------------------
-#export GREP_COLOR='1;33'
 export GREP_COLOR='1;37;41'
 alias grep='grep -E --color=auto'
 
 # PATH -----------------------------------------------------------
 export PATH=~/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/android-sdk-linux_86/tools
 
-# /lib in LD_LIBRARY_PATH may happens errors of package updates in 64bit Distros.
-#export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib
 DEVTOOLSET2_DIR=/opt/rh/devtoolset-2
 DEVTOOLSET2_BIN_DIR=$DEVTOOLSET2_DIR/root/usr/bin
 if [ -d $DEVTOOLSET2_BIN_DIR ]; then
@@ -130,10 +127,8 @@ if [ $USE_SCREEN -eq 1 ]; then
   trap "title_screen" DEBUG
 fi
 
-# function printdir()
 function printdir() {
   echo -en "\033k[$SCREEN_HOST$(pwd | awk '{ print $(NF) }' FS='/')]\033\\"
-  #echo -en "\033k[$SCREEN_HOST$(pwd | awk '{ print $(NF) }' FS='/')]\033\134"
 }
 
 if [ $USE_SCREEN -eq 1 ]; then
