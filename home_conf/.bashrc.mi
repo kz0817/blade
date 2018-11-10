@@ -1,1 +1,2 @@
 export NICKNAME=mi
+export CUDA_DIR=/Developer/NVIDIA/CUDA-10.0
