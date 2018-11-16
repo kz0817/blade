@@ -158,6 +158,8 @@ au BufNewFile,BufRead *.spec    :set ts=8
 au BufNewFile,BufRead *.spec    :set noexpandtab
 au BufNewFile,BufRead *.cc      :set expandtab
 au BufNewFile,BufRead *.cc      :set ts=4
+au BufNewFile,BufRead *.h       :set expandtab
+au BufNewFile,BufRead *.h       :set ts=4
 au BufNewFile,BufRead *.cu      :set expandtab
 au BufNewFile,BufRead *.cu      :set ts=4
 au BufNewFile,BufRead *.py      :set expandtab
