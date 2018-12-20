@@ -1,0 +1,17 @@
+# Example to build
+
+    docker build . -t rip
+
+or if you specify a makemkv version
+
+    docker build -t rip --build-arg version=1.14.2 .
+
+
+# Example to run the buil image
+
+    docker run -it --privileged --device /dev/sr0 -v /host/share_path:/container/mount_path rip /bin/bash
+    --privileged``d
+
+# How to rip
+
+    makemkvcon --decrypt backup disc:/dev/sr0 title
