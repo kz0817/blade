@@ -174,6 +174,8 @@ au BufNewFile,BufRead *.js      :set expandtab
 au BufNewFile,BufRead *.js      :set ts=4
 au BufNewFile,BufRead *.php     :set expandtab
 au BufNewFile,BufRead *.php     :set ts=4
+au BufNewFile,BufRead *.go      :set expandtab
+au BufNewFile,BufRead *.go      :set ts=4
 au BufNewFile,BufRead build.xml :set expandtab
 au BufNewFile,BufRead build.xml :set ts=4
 "autocmd BufReadPost *.tex     :setlocal spell spelllang=en_us
