@@ -9,13 +9,25 @@ import (
     "errors"
     "time"
     "strconv"
+    "math"
 )
+
+type UnitInfo struct {
+    label string
+    div   float64
+    showLength int
+}
 
 type Args struct {
     interfaceName string
     procNetDevPath string
     interval float64
     autoUnit bool
+    useComma bool
+    unit string
+
+    // set by code in this program
+    unitInfo UnitInfo
 }
 
 type OneWayFlowStat struct {
@@ -35,8 +47,8 @@ type Context struct {
 }
 
 type OneWayThroughput struct {
-    bytes float32
-    packets float32
+    bytes float64
+    packets float64
 }
 
 type Throughput struct {
@@ -95,9 +107,8 @@ func parseDevLine(line string) FlowStat {
 
 func calcOneWayThroughput(prev *OneWayFlowStat, curr *OneWayFlowStat) OneWayThroughput {
 
-    throughput := func(v uint64, dt time.Duration) float32 {
-        a := float64(v) / dt.Seconds()
-        return float32(a)
+    throughput := func(v uint64, dt time.Duration) float64 {
+        return float64(v) / dt.Seconds()
     }
 
     t := curr.timestamp
@@ -125,7 +136,7 @@ func iterate(args *Args, ctx *Context) Throughput {
     return throughput
 }
 
-func setUnit(v float32) string {
+func setUnit(v float64) string {
     units :=  []string{"  B", "KiB", "MiB", "GiB", "TiB", "EiB"}
     unitIdx := 0
 
@@ -140,6 +151,36 @@ func setUnit(v float32) string {
     return fmt.Sprintf("%8.3f %s", v, units[unitIdx])
 }
 
+func adjustSpaces(s string, totalLength int) string {
+    format := fmt.Sprintf("%%%ds", totalLength)
+    return fmt.Sprintf(format, s)
+}
+
+func insertCommaEvery3Digits(v float64, showLength int) string {
+    const fractionPartLen = 3
+    format := fmt.Sprintf("%%.%df", fractionPartLen)
+    original := fmt.Sprintf(format, v)
+    origLen := len(original)
+
+    integerPartLen := origLen - fractionPartLen - 1
+    numComma := (integerPartLen - 1) / 3
+
+    numFirstGroup := integerPartLen % 3
+    if numFirstGroup == 0 {
+        numFirstGroup = 3
+    }
+
+    slicePos := numFirstGroup
+    processed := original[0:slicePos]
+    for i := 0; i < numComma; i++ {
+        processed += ","
+        processed += original[slicePos:slicePos+3]
+        slicePos += 3
+    }
+    processed += original[integerPartLen:]
+    return adjustSpaces(processed, showLength)
+}
+
 func showThroughput(args *Args, throughput *Throughput) {
 
     var thrRxBytes string
@@ -149,13 +190,42 @@ func showThroughput(args *Args, throughput *Throughput) {
         thrRxBytes = setUnit(throughput.rx.bytes)
         thrTxBytes = setUnit(throughput.tx.bytes)
     } else {
-        thrRxBytes = fmt.Sprintf("%.3e B", throughput.rx.bytes)
-        thrTxBytes = fmt.Sprintf("%.3e B", throughput.tx.bytes)
+        unitInfo := &args.unitInfo
+        thrRx := throughput.rx.bytes / unitInfo.div
+        thrTx := throughput.tx.bytes / unitInfo.div
+
+        if (args.useComma) {
+            thrRxBytes = insertCommaEvery3Digits(thrRx, unitInfo.showLength)
+            thrTxBytes = insertCommaEvery3Digits(thrTx, unitInfo.showLength)
+        } else {
+            thrRxBytes = fmt.Sprintf("%.3e", thrRx)
+            thrTxBytes = fmt.Sprintf("%.3e", thrTx)
+        }
+
+        thrRxBytes += " " + unitInfo.label
+        thrTxBytes += " " + unitInfo.label
     }
 
     fmt.Printf("[RX] %s/s, %6.1f pkts/s\n", thrRxBytes, throughput.rx.packets)
     fmt.Printf("[TX] %s/s, %6.1f pkts/s\n", thrTxBytes, throughput.tx.packets)
     fmt.Println("---")
+}
+
+func fixupUnit(args *Args) {
+    unitMap := map[string]UnitInfo{
+        "":  {"B",   1.0,                 15},
+        "K": {"KiB", 1024.0,              12},
+        "M": {"MiB", math.Pow(1024.0, 2), 9},
+        "G": {"GiB", math.Pow(1024.0, 3), 6},
+        "T": {"TiB", math.Pow(1024.0, 4), 3},
+    }
+
+    var found bool
+    args.unitInfo, found = unitMap[strings.ToUpper(args.unit)]
+    if found == false {
+        fmt.Errorf("Unknown unit: %s\n", args.unit)
+        os.Exit(-1)
+    }
 }
 
 func main() {
@@ -165,8 +235,12 @@ func main() {
     flag.StringVar(&args.interfaceName, "i",
                    "eth0", "Network interface name")
     flag.Float64Var(&args.interval, "t", 1, "Interval (sec)")
-    flag.BoolVar(&args.autoUnit, "u", false, "Automatic unit selection")
+    flag.BoolVar(&args.autoUnit, "a", false, "Automatic unit selection")
+    flag.BoolVar(&args.useComma, "c", false, "Use comma every 3 digits")
+    flag.StringVar(&args.unit, "u", "", "Unit: K, M, G, T")
     flag.Parse()
+
+    fixupUnit(args)
     fmt.Printf("Interface: %s\n", args.interfaceName)
     fmt.Printf("Interval : %.1f\n", args.interval)
 
