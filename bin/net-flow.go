@@ -23,7 +23,7 @@ type Args struct {
     procNetDevPath string
     interval float64
     autoUnit bool
-    useComma bool
+    showExp bool
     unit string
 
     // set by code in this program
@@ -194,12 +194,12 @@ func showThroughput(args *Args, throughput *Throughput) {
         thrRx := throughput.rx.bytes / unitInfo.div
         thrTx := throughput.tx.bytes / unitInfo.div
 
-        if (args.useComma) {
-            thrRxBytes = insertCommaEvery3Digits(thrRx, unitInfo.showLength)
-            thrTxBytes = insertCommaEvery3Digits(thrTx, unitInfo.showLength)
-        } else {
+        if (args.showExp) {
             thrRxBytes = fmt.Sprintf("%.3e", thrRx)
             thrTxBytes = fmt.Sprintf("%.3e", thrTx)
+        } else {
+            thrRxBytes = insertCommaEvery3Digits(thrRx, unitInfo.showLength)
+            thrTxBytes = insertCommaEvery3Digits(thrTx, unitInfo.showLength)
         }
 
         thrRxBytes += " " + unitInfo.label
@@ -236,7 +236,7 @@ func main() {
                    "eth0", "Network interface name")
     flag.Float64Var(&args.interval, "t", 1, "Interval (sec)")
     flag.BoolVar(&args.autoUnit, "a", false, "Automatic unit selection")
-    flag.BoolVar(&args.useComma, "c", false, "Use comma every 3 digits")
+    flag.BoolVar(&args.showExp, "e", false, "Show result as expo. style")
     flag.StringVar(&args.unit, "u", "", "Unit: K, M, G, T")
     flag.Parse()
 
