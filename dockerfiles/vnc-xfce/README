@@ -1,0 +1,18 @@
+# Example to build
+
+    ./example-build.sh
+
+
+# Example to run a container
+
+    docker run -it --name container1 vnc-xfce
+
+# How to start XFCE
+
+    xfce4-session
+
+# Appendix: Example to start VNC server
+
+    vncserver :0 -geometry 1280x800
+
+NOTE: vncserver is automatically launched from /run.sh.
