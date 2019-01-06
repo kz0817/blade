@@ -113,8 +113,8 @@ highlight MoreMsg      ctermfg=Green                guifg=Green
 highlight Question     ctermfg=Green                guifg=Green
 "highlight StatusLine   cterm=Reverse ctermfg=Cyan ctermbg=White
 "highlight StatusLineNC cterm=Reverse ctermfg=Blue ctermbg=White
-highlight StatusLine   cterm=Reverse ctermfg=Blue ctermbg=White guifg=Blue  guibg=White gui=Reverse
-highlight StatusLineNC cterm=Reverse ctermfg=LightGray ctermbg=Black guifg=White guibg=Black gui=Reverse
+highlight StatusLine   cterm=Reverse ctermfg=DarkBlue ctermbg=White guifg=Blue  guibg=White gui=Reverse
+highlight StatusLineNC cterm=Reverse ctermfg=White ctermbg=Black guifg=White guibg=Black gui=Reverse
 highlight SpellErrors  ctermfg=White ctermbg=Blue   guifg=White guibg=Blue
 
 highlight Folded       ctermfg=Cyan  ctermbg=None   guifg=Cyan
