@@ -102,7 +102,7 @@ if [ $OS_TYPE = "Darwin" ]; then
   alias ll='ls -lGhs'
   alias lla='ls -aGlhs'
   export BLOCKSIZE=1048576
-  export LSCOLORS=gxcxcxdxDxegedabagacad
+  export LSCOLORS=GxCxcxdxDxegedabagHfHf
 fi
 
 # GNU screen: title ----------------------------------------------
