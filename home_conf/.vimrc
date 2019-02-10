@@ -165,7 +165,7 @@ au BufNewFile,BufRead *.cu      :set ts=4
 au BufNewFile,BufRead *.py      :set expandtab
 au BufNewFile,BufRead *.py      :set ts=4
 au BufNewFile,BufRead *.java    :set expandtab
-au BufNewFile,BufRead *.java    :set ts=4
+au BufNewFile,BufRead *.java    :set ts=2
 au BufNewFile,BufRead *.scala   :set expandtab
 au BufNewFile,BufRead *.scala   :set ts=2
 au BufNewFile,BufRead *.jsp     :set expandtab
