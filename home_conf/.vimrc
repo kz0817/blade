@@ -56,7 +56,7 @@ set wildmode=longest:list
 " Display Status line
 "set statusline=%h%f%m%r%=<%l:%c>\ %y
 "set statusline=(%n)\ %h%f%m%r%=%{TimeStamp()}\ %{GetStatusEx()}%y\ %03l:%02c\ 
-set statusline=%4l:\ %h%f%m%r%=%{TimeStamp()}\ %{GetStatusEx()}%y\ 
+set statusline=%4l:\ %h%f%m%r%=\ %4l:%-3c\ %{GetStatusEx()}%y
 " Save the cursor position in quitting
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
@@ -165,7 +165,7 @@ au BufNewFile,BufRead *.cu      :set ts=4
 au BufNewFile,BufRead *.py      :set expandtab
 au BufNewFile,BufRead *.py      :set ts=4
 au BufNewFile,BufRead *.java    :set expandtab
-au BufNewFile,BufRead *.java    :set ts=2
+au BufNewFile,BufRead *.java    :set ts=4
 au BufNewFile,BufRead *.scala   :set expandtab
 au BufNewFile,BufRead *.scala   :set ts=2
 au BufNewFile,BufRead *.jsp     :set expandtab
