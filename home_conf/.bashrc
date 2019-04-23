@@ -60,6 +60,11 @@ if [ -e $SCALA_HOME ]; then
   export PATH=$PATH:$SCALA_HOME/bin
 fi
 
+# Gradle ----------------------------------------------------------
+if [ -e $GRADLE_HOME ]; then
+  export PATH=$PATH:$GRADLE_HOME/bin
+fi
+
 # CUDA ----------------------------------------------------------
 # CUDA_DIR has to be set in another place (e.g. .bashrc.local)
 if [ -e $CUDA_DIR ]; then
