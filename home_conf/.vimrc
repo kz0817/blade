@@ -56,7 +56,7 @@ set wildmode=longest:list
 " Display Status line
 "set statusline=%h%f%m%r%=<%l:%c>\ %y
 "set statusline=(%n)\ %h%f%m%r%=%{TimeStamp()}\ %{GetStatusEx()}%y\ %03l:%02c\ 
-set statusline=%4l:\ %h%f%m%r%=\ %4l:%-3c\ %{GetStatusEx()}%y
+set statusline=\ %h%f%m%r%=\ %4l:%-3c\ %{GetStatusEx()}%y
 " Save the cursor position in quitting
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
