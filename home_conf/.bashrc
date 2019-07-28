@@ -89,6 +89,8 @@ alias su='su -'
 alias less='less -R'
 alias gdb='gdb -q'
 
+alias reset2='reset; stty sane; tput rs1; clear; echo -e "\033c"'
+
 # ls -------------------------------------------------------------
 if [ $OS_TYPE = "Linux" ]; then
   alias ls='ls -h'
