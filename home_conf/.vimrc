@@ -54,9 +54,7 @@ set foldlevel=100
 set wildmode=longest:list
 
 " Display Status line
-"set statusline=%h%f%m%r%=<%l:%c>\ %y
-"set statusline=(%n)\ %h%f%m%r%=%{TimeStamp()}\ %{GetStatusEx()}%y\ %03l:%02c\ 
-set statusline=\ %h%f%m%r%=\ %4l:%-3c%{GetStatusEx()}%y
+set statusline=%!GetFileColor()
 " Save the cursor position in quitting
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
@@ -111,10 +109,9 @@ highlight Visual       ctermfg=Blue  ctermbg=White  guifg=White  guibg=Blue
 highlight Directory    ctermfg=Cyan                 guifg=Cyan
 highlight MoreMsg      ctermfg=Green                guifg=Green
 highlight Question     ctermfg=Green                guifg=Green
-"highlight StatusLine   cterm=Reverse ctermfg=Cyan ctermbg=White
-"highlight StatusLineNC cterm=Reverse ctermfg=Blue ctermbg=White
-highlight StatusLine   cterm=Reverse ctermfg=DarkBlue ctermbg=White guifg=Blue  guibg=White gui=Reverse
-highlight StatusLineNC cterm=Reverse ctermfg=White ctermbg=Black guifg=White guibg=Black gui=Reverse
+highlight StatusLine   cterm=None ctermfg=black ctermbg=black
+highlight StatusLineNC cterm=None ctermfg=233 ctermbg=233
+highlight VertSplit    cterm=None ctermfg=233 ctermbg=233
 highlight SpellErrors  ctermfg=White ctermbg=Blue   guifg=White guibg=Blue
 
 highlight Folded       ctermfg=Cyan  ctermbg=None   guifg=Cyan
@@ -183,6 +180,10 @@ au BufNewFile,BufRead build.xml :set expandtab
 au BufNewFile,BufRead build.xml :set ts=4
 "autocmd BufReadPost *.tex     :setlocal spell spelllang=en_us
 
+au WinEnter * setlocal statusline=%!SetStatusLine('on')
+au WinLeave * setlocal statusline=%!SetStatusLine('off')
+set statusline=%!SetStatusLine('on')
+
 " ===================================================================
 " Key mapping
 " ===================================================================
@@ -195,13 +196,56 @@ map <Down>  <Nop>
 " ===================================================================
 " Functions
 " ===================================================================
-function! GetStatusEx()
-  let str = ''
-  let str = str . '' . &fileformat . ']'
-  if has('multi_byte') && &fileencoding != ''
-    let str = '[' . &fileencoding . ':' . str
+highlight ActiveSLPath     cterm=None ctermfg=15  ctermbg=21
+highlight InactiveSLPath   cterm=None ctermfg=234 ctermbg=250
+
+highlight ActiveSLAttr     cterm=None ctermfg=159 ctermbg=159
+highlight InactiveSLAttr   cterm=None ctermfg=234 ctermbg=15
+
+highlight ActiveSLBase     cterm=None ctermfg=15  ctermbg=18
+highlight InactiveSLBase   cterm=None ctermfg=15  ctermbg=238
+
+highlight ActiveSLFmt      cterm=None ctermfg=15  ctermbg=21
+highlight InactiveSLFmt    cterm=None ctermfg=15  ctermbg=240
+
+highlight ActiveSLType     cterm=None ctermfg=15  ctermbg=26
+highlight InactiveSLType   cterm=None ctermfg=15  ctermbg=242
+
+highlight ActiveSLPos      cterm=None ctermfg=0   ctermbg=39
+highlight InactiveSLPos    cterm=None ctermfg=234 ctermbg=250
+
+function! SetStatusLine(mode)
+  if a:mode == 'on'
+    let c_path = '%#ActiveSLPath#'
+    let c_attr = '%#ActiveSLAtrh#'
+    let c_base = '%#ActiveSLBase#'
+    let c_fmt  = '%#ActiveSLFmt#'
+    let c_type = '%#ActiveSLType#'
+    let c_pos  = '%#ActiveSLPos#'
   else
-    let str = '[' . str
+    let c_path = '%#InactiveSLPath#'
+    let c_attr = '%#InactiveSLAttr#'
+    let c_base = '%#InactiveSLBase#'
+    let c_fmt  = '%#InactiveSLFmt#'
+    let c_type = '%#InactiveSLType#'
+    let c_pos  = '%#InactiveSLPos#'
+  endif
+  let sl = ''
+  let sl = sl . c_path . ' %h%f '
+  let sl = sl . c_attr . '%m%r'
+  let sl = sl . c_base . '%='
+  let sl = sl . c_fmt  . ' %{GetStatusEx()}'
+  let sl = sl . c_type . ' %y '
+  let sl = sl . c_pos  . ' %4l:%-3c'
+  return sl
+endfunction
+
+function! GetStatusEx()
+  let str = &fileformat . ' '
+  if has('multi_byte') && &fileencoding != ''
+    let str = '' . &fileencoding . ':' . str
+  else
+    let str = '' . str
   endif
   return str
 endfunction
@@ -291,7 +335,7 @@ endfunction
 " ===================================================================
 " for SCREEN
 " ===================================================================
-function SetScreenTabName(name)
+function! SetScreenTabName(name)
   "let arg = '\033k' . a:name . '\033\\'
   "silent! exe '!echo -en "' . "$SCREEN_HOSTNAME" . arg . "\""
   silent! exe '!echo -en "' . '\033k{' . $SCREEN_HOST . a:name . '}\033\\' . "\""
