@@ -196,7 +196,7 @@ map <Down>  <Nop>
 " ===================================================================
 " Functions
 " ===================================================================
-highlight ActiveSLPath     cterm=None ctermfg=234 ctermbg=15
+highlight ActiveSLPath     cterm=None ctermfg=25  ctermbg=255
 highlight InactiveSLPath   cterm=None ctermfg=233 ctermbg=250
 
 highlight ActiveSLAttr     cterm=None ctermfg=0   ctermbg=214
