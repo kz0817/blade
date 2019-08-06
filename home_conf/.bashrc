@@ -28,6 +28,7 @@ else
   PS1="[\h]\w $PMARK "
 fi
 
+
 # Subversion ----------------------------------------------------
 export SVN_EDITOR=vim
 

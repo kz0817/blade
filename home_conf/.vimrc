@@ -196,28 +196,28 @@ map <Down>  <Nop>
 " ===================================================================
 " Functions
 " ===================================================================
-highlight ActiveSLPath     cterm=None ctermfg=15  ctermbg=21
-highlight InactiveSLPath   cterm=None ctermfg=234 ctermbg=250
+highlight ActiveSLPath     cterm=None ctermfg=234 ctermbg=15
+highlight InactiveSLPath   cterm=None ctermfg=233 ctermbg=250
 
-highlight ActiveSLAttr     cterm=None ctermfg=159 ctermbg=159
-highlight InactiveSLAttr   cterm=None ctermfg=234 ctermbg=15
+highlight ActiveSLAttr     cterm=None ctermfg=0   ctermbg=214
+highlight InactiveSLAttr   cterm=None ctermfg=0   ctermbg=254
 
-highlight ActiveSLBase     cterm=None ctermfg=15  ctermbg=18
+highlight ActiveSLBase     cterm=None ctermfg=15  ctermbg=25
 highlight InactiveSLBase   cterm=None ctermfg=15  ctermbg=238
 
-highlight ActiveSLFmt      cterm=None ctermfg=15  ctermbg=21
-highlight InactiveSLFmt    cterm=None ctermfg=15  ctermbg=240
+highlight ActiveSLFmt      cterm=None ctermfg=159 ctermbg=25
+highlight InactiveSLFmt    cterm=None ctermfg=253 ctermbg=238
 
-highlight ActiveSLType     cterm=None ctermfg=15  ctermbg=26
+highlight ActiveSLType     cterm=None ctermfg=158 ctermbg=32
 highlight InactiveSLType   cterm=None ctermfg=15  ctermbg=242
 
-highlight ActiveSLPos      cterm=None ctermfg=0   ctermbg=39
+highlight ActiveSLPos      cterm=None ctermfg=233 ctermbg=81
 highlight InactiveSLPos    cterm=None ctermfg=234 ctermbg=250
 
 function! SetStatusLine(mode)
   if a:mode == 'on'
     let c_path = '%#ActiveSLPath#'
-    let c_attr = '%#ActiveSLAtrh#'
+    let c_attr = '%#ActiveSLAttr#'
     let c_base = '%#ActiveSLBase#'
     let c_fmt  = '%#ActiveSLFmt#'
     let c_type = '%#ActiveSLType#'
@@ -235,7 +235,7 @@ function! SetStatusLine(mode)
   let sl = sl . c_attr . '%m%r'
   let sl = sl . c_base . '%='
   let sl = sl . c_fmt  . ' %{GetStatusEx()}'
-  let sl = sl . c_type . ' %y '
+  let sl = sl . c_type . ' %Y '
   let sl = sl . c_pos  . ' %4l:%-3c'
   return sl
 endfunction
