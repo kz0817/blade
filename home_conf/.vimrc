@@ -107,6 +107,7 @@ highlight Title        ctermfg=Cyan                 guifg=Cyan                 g
 highlight LineNr       ctermfg=Yellow               guifg=Yellow
 highlight Visual       ctermfg=Blue  ctermbg=White  guifg=White  guibg=Blue
 highlight Directory    ctermfg=Cyan                 guifg=Cyan
+highlight ModeMsg      ctermfg=214                  guifg=Yellow
 highlight MoreMsg      ctermfg=Green                guifg=Green
 highlight Question     ctermfg=Green                guifg=Green
 highlight StatusLine   cterm=None ctermfg=black ctermbg=black
