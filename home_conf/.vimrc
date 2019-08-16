@@ -91,7 +91,7 @@ highlight Statement    ctermfg=Yellow               guifg=Yellow               g
 highlight Type         ctermfg=Yellow               guifg=Yellow               gui=NONE
 highlight Preproc      ctermfg=Yellow               guifg=Yellow               gui=NONE
 highlight Function     ctermfg=Cyan                 guifg=Cyan                 gui=NONE
-highlight SpecialKey   ctermfg=DarkGray             guifg=DarkGray             gui=NONE
+highlight SpecialKey   ctermfg=236                  guifg=DarkGray             gui=NONE
 highlight Delimiter    ctermfg=Cyan                 guifg=Cyan                 gui=NONE
 highlight String       ctermfg=Cyan                 guifg=Cyan                 gui=NONE
 highlight Search       ctermfg=Blue                 guifg=Blue                 gui=NONE
