@@ -209,7 +209,7 @@ highlight InactiveSLBase   cterm=None ctermfg=15  ctermbg=238
 highlight ActiveSLFmt      cterm=None ctermfg=159 ctermbg=25
 highlight InactiveSLFmt    cterm=None ctermfg=253 ctermbg=238
 
-highlight ActiveSLType     cterm=None ctermfg=158 ctermbg=32
+highlight ActiveSLType     cterm=None ctermfg=159 ctermbg=32
 highlight InactiveSLType   cterm=None ctermfg=15  ctermbg=242
 
 highlight ActiveSLPos      cterm=None ctermfg=233 ctermbg=81
