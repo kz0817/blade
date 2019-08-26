@@ -116,7 +116,7 @@ highlight VertSplit    cterm=None ctermfg=233 ctermbg=233
 highlight SpellErrors  ctermfg=White ctermbg=Blue   guifg=White guibg=Blue
 
 highlight Folded       ctermfg=Cyan  ctermbg=None   guifg=Cyan
-highlight Terminal     ctermfg=white ctermbg=234
+highlight Terminal     ctermfg=white ctermbg=233
 
 "Used in HTML syntax
 highlight Underlined   ctermfg=White cterm=Underline  guifg=White              gui=Underline
