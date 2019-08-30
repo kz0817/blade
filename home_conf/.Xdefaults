@@ -10,19 +10,22 @@ XTerm*boldFont: rk14
 URxvt.foreground: white
 URxvt.background: black
 URxvt.scrollBar: false
-URxvt.termName: xterm
+URxvt.termName: xterm-256color
 !URxvt.font: -misc-fixed-medium-r-normal-*-14-*-*-*-*-*-jisx0208.1983-*, \
 !
-URxvt.font: -*-lucidatypewriter-medium-r-normal-*-12-*-*-*-*-*-*-*, \
-            -*-gothic-*-*-*-*-*-*-*-*-*-*-jisx0208.1983-*
+!URxvt.font: -*-lucidatypewriter-medium-r-normal-*-12-*-*-*-*-*-*-*, \
+!            -*-gothic-*-*-*-*-*-*-*-*-*-*-jisx0208.1983-*
 !            [codeset=JISX0208]xft:MS Gothic
 
 !            [codeset=JISX0208]xft:MS Gothic:size=8
 !URxvt.font: -b&h-lucidatypewriter-medium-r-*-*-12-*-*-*-*-*-*-*
 !URxvt.boldFont: -misc-fixed-medium-r-normal-*-14-*-*-*-*-*-jisx0208.1983-*
-URxvt.boldFont: -*-lucidatypewriter-medium-r-normal-*-12-*-*-*-*-*-*-*, \
-                -*-gothic-*-*-*-*-*-*-*-*-*-*-jisx0208.1983-*
+!URxvt.boldFont: -*-lucidatypewriter-medium-r-normal-*-12-*-*-*-*-*-*-*, \
+!                -*-gothic-*-*-*-*-*-*-*-*-*-*-jisx0208.1983-*
 !                [codeset=JISX0208]xft:MS Gothic
+URxvt.font: xft:DejaVu Sans Mono:size=10
+URxvt.boldFont: xft:DejaVu Sans Mono:size=10
+URxvt.letterSpace: -1
 
 Rxvt.foreground: white
 Rxvt.background: black
