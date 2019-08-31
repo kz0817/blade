@@ -23,7 +23,7 @@ URxvt.termName: xterm-256color
 !URxvt.boldFont: -*-lucidatypewriter-medium-r-normal-*-12-*-*-*-*-*-*-*, \
 !                -*-gothic-*-*-*-*-*-*-*-*-*-*-jisx0208.1983-*
 !                [codeset=JISX0208]xft:MS Gothic
-URxvt.font: xft:DejaVu Sans Mono:size=10
+URxvt.font: xft:DejaVu Sans Mono:size=10, xft:Noto Sans CJK JP
 URxvt.boldFont: xft:DejaVu Sans Mono:size=10
 URxvt.letterSpace: -1
 
