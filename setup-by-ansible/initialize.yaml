@@ -3,7 +3,7 @@
     - group_by: key=os_{{ ansible_distribution }}
     - group_by: key=create_user
       when: user is defined
-    - debug: msg="Distro. {{ ansible_distribution }}"
+    - debug: msg="Distro {{ ansible_distribution }}"
 
 - hosts: os_Ubuntu
   gather_facts: False
@@ -39,6 +39,17 @@
     # We ignore the result for the machine w/o selinux.
     - selinux: state=disabled
       ignore_errors: True
+
+
+- hosts: os_Alpine
+  gather_facts: False
+  tasks:
+    - name: "install ansible (apk)"
+      apk: name=ansible
+
+    - name: "install git (apk)"
+      apk: name=git
+
 
 - hosts: create_user
   gather_facts: False
