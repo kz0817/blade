@@ -112,6 +112,8 @@ highlight MoreMsg      ctermfg=Green                guifg=Green
 highlight Question     ctermfg=Green                guifg=Green
 highlight StatusLine   cterm=None ctermfg=black ctermbg=black
 highlight StatusLineNC cterm=None ctermfg=233 ctermbg=233
+highlight link StatusLineTerm   StatusLine
+highlight link StatusLineTermNC StatusLineNC
 highlight VertSplit    cterm=None ctermfg=233 ctermbg=233
 highlight SpellErrors  ctermfg=White ctermbg=Blue   guifg=White guibg=Blue
 
