@@ -1,6 +1,9 @@
 - hosts: all
   tasks:
     - group_by: key=os_{{ ansible_distribution }}
+    - group_by: key=create_user
+      when: user is defined
+    - debug: msg="Distro. {{ ansible_distribution }}"
 
 - hosts: os_Ubuntu
   gather_facts: False
@@ -37,7 +40,7 @@
     - selinux: state=disabled
       ignore_errors: True
 
-- hosts: all
+- hosts: create_user
   gather_facts: False
   tasks:
     - name: "add a user"
