@@ -50,6 +50,9 @@
     - name: "install git (apk)"
       apk: name=git
 
+    - name: "install screen (apk)"
+      apk: name=screen
+
 
 - hosts: create_user
   gather_facts: False
