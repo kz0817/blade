@@ -41,3 +41,26 @@
 
     - name: "copy .bash_profile"
       copy: src=files/bash_profile dest=~/.bash_profile force=no
+
+    - name: "mkdir .vnc/"
+      file:
+        path: ~/.vnc
+        state: directory
+
+    - name: "link .vnc/xstartup"
+      file:
+        src: "{{ misc_dir }}/priv-misc/home_conf/.vnc/xstartup"
+        dest: ~/.vnc/xstartup
+        state: link
+
+    - name: "mkdir .config/i3"
+      file:
+        path: ~/.config/i3
+        state: directory
+
+    - name: "link .config/i3/config"
+      file:
+        src: "{{ misc_dir }}/priv-misc/home_conf/.config/i3/config"
+        dest: ~/.config/i3/config
+        state: link
+
