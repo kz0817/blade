@@ -6,9 +6,10 @@
       file: dest={{ misc_dir }} state=directory
 
     - name: "download priv-misc"
-      git: repo=git@github.com:kz0817/priv-misc.git
-           dest=misc/priv-misc
-           accept_hostkey=yes
+      git:
+        repo: git@github.com:kz0817/priv-misc.git
+        dest: misc/priv-misc
+        accept_hostkey: yes
 
     - name: "link .vimrc"
       file: src=misc/priv-misc/home_conf/.vimrc dest=~/.vimrc state=link
