@@ -30,12 +30,12 @@
 
     - name: "check .bashrc is not link"
       command: test -f ~/.bashrc -a ! -L .bashrc
-      register: bashrc_should_link
+      register: bashrc_is_not_link
       failed_when: False
 
     - name: "backup .bashrc if needed"
       command: mv ~/.bashrc ~/.bashrc.orig
-      when: bashrc_should_link.rc == 0
+      when: bashrc_is_not_link.rc == 0
 
     - name: "link .bashrc"
       file: src=misc/priv-misc/home_conf/.bashrc dest=~/.bashrc state=link
