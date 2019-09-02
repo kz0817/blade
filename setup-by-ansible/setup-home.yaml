@@ -30,15 +30,16 @@
 
     - name: "check .bashrc is not link"
       command: test -f ~/.bashrc -a ! -L .bashrc
-      register: result
-      ignore_errors: True
+      register: bashrc_should_link
+      failed_when: False
 
     - name: "backup .bashrc if needed"
       command: mv ~/.bashrc ~/.bashrc.orig
-      when: result|success
+      when: bashrc_should_link.rc == 0
 
     - name: "link .bashrc"
       file: src=misc/priv-misc/home_conf/.bashrc dest=~/.bashrc state=link
+      when: bashrc_should_link.rc == 0
 
     - name: "copy .bash_profile"
       copy: src=files/bash_profile dest=~/.bash_profile force=no
