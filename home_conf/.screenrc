@@ -13,8 +13,17 @@ bind -c resize j eval 'resize -1' 'command -c resize'
 bind -c resize l eval 'resize +1' 'command -c resize'
 bind -c resize h eval 'resize -1' 'command -c resize'
 #caption always “%{b RK} %y/%m/%d(%D)%c:%s %{bu dr} | %-w%{=bu CK}%n %t%{-}%+w”
-bind s # reset xon
-bind f # prevent 'Defflow on'
+
+# prevent xon/off from being sent
+bind s
+bind ^s
+bind q
+bind ^q
+
+# prevent flow control mode from being changed
+bind f
+bind ^f
+
 bind _ resize max
 bind = resize =
 
