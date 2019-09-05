@@ -65,3 +65,8 @@
         dest: ~/.config/i3/config
         state: link
 
+    - name: "link .Xdefaults"
+      file:
+        src: "{{ misc_dir }}/priv-misc/home_conf/.Xdefaults"
+        dest: ~/.Xdefaults
+        state: link
