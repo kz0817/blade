@@ -29,8 +29,9 @@ else
 fi
 
 
-# Subversion ----------------------------------------------------
-export SVN_EDITOR=vim
+# Editor --------------------------------------------------------
+export EDITOR=vim
+export SVN_EDITOR=$EDITOR
 
 # distcc ---------------------------------------------------------
 #export DISTCC_HOSTS='localhost'
