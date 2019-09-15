@@ -38,4 +38,4 @@ iface eth1 inet static
 # Run command in the container
 
     cd /priv-misc/setup-by-ansible
-    ansible -i local, -c local zabbix-server.yml -e 'ansible_python_interpreter=/usr/bin/python3'
+    ansible-playbook -i local, -c local zabbix-server.yml -e 'ansible_python_interpreter=/usr/bin/python3'
