@@ -1,0 +1,108 @@
+---
+- name: Check if zabbix-release package is installed
+  shell: dpkg -l zabbix-release | grep 4.0
+  register: zabbix_release_is_installed
+  failed_when: false
+
+- name: Download a zabbix-relase file
+  get_url:
+    url: 'https://repo.zabbix.com/zabbix/4.0/debian/pool/main/z/zabbix-release/{{ zabbix_release_deb }}'
+    dest: /tmp
+  when: zabbix_release_is_installed.rc != 0
+
+- name: Install a zabbix-release file
+  apt:
+    deb: '/tmp/{{ zabbix_release_deb }}'
+  when: zabbix_release_is_installed.rc != 0
+
+- name: Delete a zabbix-release file
+  file:
+    path: '/tmp/{{ zabbix_release_deb }}'
+    state: absent
+
+- name: Install necessary packages
+  apt:
+    name:
+      - zabbix-server-mysql
+      - zabbix-frontend-php
+      - php-mysql
+
+- name: Modifiy MySQL systemd file to let it work in a container.
+  replace:
+    path: /etc/systemd/system/mysqld.service
+    regexp: '^{{ item }}'
+    replace: '# {{ item }}'
+  with_items:
+    - ProtectSystem=full
+    - PrivateDevices=true
+    - ProtectHome=true
+  register: mysql_service_file
+
+- name: Make strict mode off
+  copy:
+    src: files/strict_mode_off.cnf
+    dest: /etc/mysql/conf.d/strict_mode_off.cnf
+  register: strict_mode_off
+  tags: copy_conf
+
+- name: Restart MySQL
+  systemd:
+    name: mysqld.service
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+  when: mysql_service_file.changed or strict_mode_off.changed
+
+- name: Check if zabbix db exits
+  command: mysql -uroot -e 'show create database zabbix'
+  register: db_zabbix_exits
+  failed_when: false
+  tags: create_db
+
+- name: Create a zabbix user on MySQL
+  command: mysql -uroot -e "create database zabbix character set utf8 collate utf8_bin; grant all privileges on zabbix.* to zabbix@localhost identified by 'zabbix';"
+  when: db_zabbix_exits.rc != 0
+  tags: create_db
+
+- name: Create tables
+  shell: 'zcat {{ item }} | mysql -uroot -Dzabbix'
+  with_items:
+    - /usr/share/zabbix-server-mysql/schema.sql.gz
+    - /usr/share/zabbix-server-mysql/images.sql.gz
+    - /usr/share/zabbix-server-mysql/data.sql.gz
+  when: db_zabbix_exits.rc != 0
+
+- name: Configure zabbix_server.conf
+  lineinfile:
+    path: /etc/zabbix/zabbix_server.conf
+    regexp: 'DBPassword='
+    insertafter: '^# DBPasswrod='
+    line: DBPassword=zabbix
+
+- name: Start zabbix-server
+  service:
+    name: zabbix-server
+    state: restarted
+    enabled: yes
+
+- name: Set timezone for frontend
+  replace:
+    path: /etc/apache2/conf-available/zabbix-frontend-php.conf
+    regexp: '# php_value date.timezone.*$'
+    replace: 'php_value date.timezone Asia/Tokyo'
+  register: frontend_timezone
+
+- name: Enable frontend
+  file:
+    src: /etc/apache2/conf-available/zabbix-frontend-php.conf
+    dest: /etc/apache2/conf-enabled/zabbix-frontend-php.conf
+    state: link
+  register: link_enabled
+
+- name: Start appache
+  service:
+    name: apache2
+    state: restarted
+    enabled: yes
+  when: frontend_timezone.changed or link_enabled.changed
+
