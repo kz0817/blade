@@ -25,6 +25,7 @@
     name:
       - zabbix-server-mysql
       - zabbix-frontend-php
+      - zabbix-agent
       - php-mysql
 
 - name: Modifiy MySQL systemd file to let it work in a container.
@@ -78,6 +79,12 @@
     regexp: 'DBPassword='
     insertafter: '^# DBPasswrod='
     line: DBPassword=zabbix
+
+- name: Start zabbix agent
+  service:
+    name: zabbix-agent
+    state: restarted
+    enabled: yes
 
 - name: Start zabbix-server
   service:
