@@ -1,0 +1,8 @@
+---
+- name: Install packages for Debian
+  apt:
+    name:
+      - sudo
+      - git
+      - procps
+      - openssh-server

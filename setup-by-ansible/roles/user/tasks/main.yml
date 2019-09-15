@@ -1,0 +1,35 @@
+---
+- name: Add a group
+  group:
+    name: '{{ groupname }}'
+    gid: '{{ gid }}'
+
+- name: Add a user
+  user:
+    name: '{{ username }}'
+    uid: '{{ uid }}'
+    group: '{{ groupname }}'
+    append: yes
+    shell: /bin/bash
+
+- name: Create ~/.ssh
+  file:
+    path: '/home/{{ username }}/.ssh'
+    state: directory
+    mode: '0700'
+    owner: '{{ username }}'
+    group: '{{ groupname }}'
+
+- name: Copy public keys
+  copy:
+    src: ~/.ssh/authorized_keys
+    dest: '/home/{{ username }}/.ssh/authorized_keys'
+    owner: '{{ username }}'
+    group: '{{ groupname }}'
+    backup: yes
+
+- name: Setting for sudoer
+  copy:
+    content: '{{ username }} ALL=(ALL:ALL) NOPASSWD:ALL'
+    dest: '/etc/sudoers.d/{{ username }}-nopasswd'
+

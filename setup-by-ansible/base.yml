@@ -1,0 +1,9 @@
+---
+- hosts: all
+  roles:
+    - role: debian
+      when: ansible_distribution == "Debian"
+    - role: user
+      when: username is defined
+      tags: user
+
