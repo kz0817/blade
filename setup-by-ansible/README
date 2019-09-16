@@ -27,18 +27,7 @@
 
 # An example for localhost
 
-    $ ansible-playbook -i localhost, -c local misc/priv-misc/setup-by-ansible/setup-home.yaml
-
-* Note
-The following packages shall be installed before the above run.
-
-Some matter in .bashrc inserts escape sequences and makes it fail sometimes.
-In such case, change the TERM environment like,
-
-  $ TERM=xterm ansible-playbook -i hosts setup-home.yaml
-
-- python
-- git
+    $ ansible-playbook -i local, -c local misc/priv-misc/setup-by-ansible/setup-home.yaml
 
 
 # When there's only python3 on the target host, the following option should be added.

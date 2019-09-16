@@ -1,0 +1,3 @@
+---
+misc_dir: ~/misc
+priv_misc_dir: '{{ misc_dir }}/priv-misc'

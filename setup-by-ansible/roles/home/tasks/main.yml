@@ -1,0 +1,104 @@
+---
+- name: Create misc dir
+  file:
+    dest: '{{ misc_dir }}'
+    state: directory
+
+- name: Download priv-misc
+  git:
+    repo: git@github.com:kz0817/priv-misc.git
+    dest: '{{ misc_dir }}/priv-misc'
+    accept_hostkey: yes
+
+- name: Link .vimrc
+  file:
+    src: '{{ priv_misc_dir }}/home_conf/.vimrc'
+    dest: ~/.vimrc
+    state: link
+
+- name: Link .screenrc
+  file:
+    src: '{{ priv_misc_dir }}/home_conf/.screenrc'
+    dest: ~/.screenrc
+    state: link
+
+- name: Link .gdbinit
+  file:
+    src: '{{ priv_misc_dir }}/home_conf/.gdbinit'
+    dest: ~/.gdbinit
+    state: link
+
+- name: Link .gitconfig (CentOS6)
+  file:
+    src: '{{ priv_misc_dir }}/home_conf/.gitconfig'
+    dest: ~/.gitconfig
+    state: link
+  when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
+
+- name: Link .gitconfig (Non CentOS6)
+  file:
+    src: '{{ priv_misc_dir }}/home_conf/.gitconfig.cent6'
+    dest: ~/.gitconfig
+    state: link
+  when: not (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
+
+- name: Check .bashrc is not link
+  command: test -f ~/.bashrc -a ! -L .bashrc
+  register: bashrc_is_not_link
+  failed_when: false
+
+- name: Backup .bashrc if needed
+  command: mv ~/.bashrc ~/.bashrc.orig
+  when: bashrc_is_not_link.rc == 0
+
+- name: Link .bashrc
+  file:
+    src: '{{ priv_misc_dir }}/home_conf/.bashrc'
+    dest: ~/.bashrc
+    state: link
+
+- name: Copy .bash_profile
+  copy:
+    src: files/bash_profile
+    dest: ~/.bash_profile
+    force: no
+
+- name: Create .ssh/
+  file:
+    path: ~/.ssh
+    state: directory
+    mode: '0700'
+
+- name: Create .ssh/config
+  copy:
+    src: files/ssh_config
+    dest: ~/.ssh/config
+    force: no
+
+- name: Create .vnc/
+  file:
+    path: ~/.vnc
+    state: directory
+
+- name: Link .vnc/xstartup
+  file:
+    src: '{{ priv_misc_dir }}/home_conf/.vnc/xstartup'
+    dest: ~/.vnc/xstartup
+    state: link
+
+- name: Create .config/i3/
+  file:
+    path: ~/.config/i3
+    state: directory
+
+- name: Link .config/i3/config
+  file:
+    src: '{{ priv_misc_dir }}/home_conf/.config/i3/config'
+    dest: ~/.config/i3/config
+    state: link
+
+- name: Link .Xdefaults
+  file:
+    src: '{{ priv_misc_dir }}/home_conf/.Xdefaults'
+    dest: ~/.Xdefaults
+    state: link
