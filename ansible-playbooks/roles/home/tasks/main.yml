@@ -4,40 +4,40 @@
     dest: '{{ misc_dir }}'
     state: directory
 
-- name: Download priv-misc
+- name: Download blade
   git:
-    repo: git@github.com:kz0817/priv-misc.git
-    dest: '{{ misc_dir }}/priv-misc'
+    repo: git@github.com:kz0817/blade.git
+    dest: '{{ misc_dir }}/blade'
     accept_hostkey: yes
 
 - name: Link .vimrc
   file:
-    src: '{{ priv_misc_dir }}/home_conf/.vimrc'
+    src: '{{ blade_dir }}/home_conf/.vimrc'
     dest: ~/.vimrc
     state: link
 
 - name: Link .screenrc
   file:
-    src: '{{ priv_misc_dir }}/home_conf/.screenrc'
+    src: '{{ blade_dir }}/home_conf/.screenrc'
     dest: ~/.screenrc
     state: link
 
 - name: Link .gdbinit
   file:
-    src: '{{ priv_misc_dir }}/home_conf/.gdbinit'
+    src: '{{ blade_dir }}/home_conf/.gdbinit'
     dest: ~/.gdbinit
     state: link
 
 - name: Link .gitconfig (CentOS6)
   file:
-    src: '{{ priv_misc_dir }}/home_conf/.gitconfig'
+    src: '{{ blade_dir }}/home_conf/.gitconfig'
     dest: ~/.gitconfig
     state: link
   when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
 
 - name: Link .gitconfig (Non CentOS6)
   file:
-    src: '{{ priv_misc_dir }}/home_conf/.gitconfig.cent6'
+    src: '{{ blade_dir }}/home_conf/.gitconfig.cent6'
     dest: ~/.gitconfig
     state: link
   when: not (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
@@ -53,7 +53,7 @@
 
 - name: Link .bashrc
   file:
-    src: '{{ priv_misc_dir }}/home_conf/.bashrc'
+    src: '{{ blade_dir }}/home_conf/.bashrc'
     dest: ~/.bashrc
     state: link
 
@@ -82,7 +82,7 @@
 
 - name: Link .vnc/xstartup
   file:
-    src: '{{ priv_misc_dir }}/home_conf/.vnc/xstartup'
+    src: '{{ blade_dir }}/home_conf/.vnc/xstartup'
     dest: ~/.vnc/xstartup
     state: link
 
@@ -93,12 +93,12 @@
 
 - name: Link .config/i3/config
   file:
-    src: '{{ priv_misc_dir }}/home_conf/.config/i3/config'
+    src: '{{ blade_dir }}/home_conf/.config/i3/config'
     dest: ~/.config/i3/config
     state: link
 
 - name: Link .Xdefaults
   file:
-    src: '{{ priv_misc_dir }}/home_conf/.Xdefaults'
+    src: '{{ blade_dir }}/home_conf/.Xdefaults'
     dest: ~/.Xdefaults
     state: link

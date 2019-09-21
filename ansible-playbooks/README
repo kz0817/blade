@@ -27,7 +27,7 @@
 
 # An example for localhost
 
-    $ ansible-playbook -i local, -c local misc/priv-misc/setup-by-ansible/setup-home.yaml
+    $ ansible-playbook -i local, -c local misc/blade/setup-by-ansible/setup-home.yaml
 
 
 # When there's only python3 on the target host, the following option should be added.

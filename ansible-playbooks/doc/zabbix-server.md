@@ -32,10 +32,10 @@ iface eth1 inet static
 
 ## Attach a directory containing this repository
 
-    lxc config device add zabbix-server priv-misc disk source=/home/foo/priv-misc path=/priv-misc
+    lxc config device add zabbix-server blade disk source=/home/foo/blade path=/blade
 
 
 # Run command in the container
 
-    cd /priv-misc/setup-by-ansible
+    cd /blade/setup-by-ansible
     ansible-playbook -i local, -c local zabbix-server.yml -e 'ansible_python_interpreter=/usr/bin/python3'
