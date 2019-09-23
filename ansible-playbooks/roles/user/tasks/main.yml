@@ -27,6 +27,7 @@
     owner: '{{ username }}'
     group: '{{ groupname }}'
     backup: yes
+  when: skip_copy_auth_key is not defined
 
 - name: Setting for sudoer
   copy:
