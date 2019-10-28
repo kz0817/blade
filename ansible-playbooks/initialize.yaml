@@ -8,6 +8,10 @@
 - hosts: os_Ubuntu
   gather_facts: False
   tasks:
+    - name: Update cache
+      apt:
+        update_cache: yes
+
     - name: "install git (apt)"
       apt: name=git
 
