@@ -6,3 +6,7 @@
       - git
       - procps
       - openssh-server
+      - curl
+      - screen
+      - make
+      - gnupg
