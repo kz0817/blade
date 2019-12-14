@@ -157,6 +157,8 @@ au BufNewFile,BufRead *.s       :set ts=4
 au BufNewFile,BufRead *.s       :set noexpandtab
 au BufNewFile,BufRead *.spec    :set ts=8
 au BufNewFile,BufRead *.spec    :set noexpandtab
+au BufNewFile,BufRead *.c       :set expandtab
+au BufNewFile,BufRead *.c       :set ts=4
 au BufNewFile,BufRead *.cc      :set expandtab
 au BufNewFile,BufRead *.cc      :set ts=4
 au BufNewFile,BufRead *.h       :set expandtab
@@ -170,6 +172,8 @@ au BufNewFile,BufRead *.java    :set ts=4
 au BufNewFile,BufRead *.java    :set winwidth=100
 au BufNewFile,BufRead *.scala   :set expandtab
 au BufNewFile,BufRead *.scala   :set ts=2
+au BufNewFile,BufRead *.kt      :set expandtab
+au BufNewFile,BufRead *.kt      :set ts=4
 au BufNewFile,BufRead *.jsp     :set expandtab
 au BufNewFile,BufRead *.jsp     :set ts=4
 au BufNewFile,BufRead *.html    :set expandtab
