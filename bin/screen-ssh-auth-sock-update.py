@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os
 import re
+import argparse
 
 
 def get_name_and_parent_pid(pid):
@@ -24,7 +25,7 @@ def get_ancestors(pid):
     return ancestors
 
 
-def find_my_process(command):
+def find_my_process(command, need_parent_pid=False):
     re_proc_name = re.compile(r"^\d+$")
     entries = os.listdir("/proc")
     my_uid = os.getuid()
@@ -36,7 +37,7 @@ def find_my_process(command):
         cmd_name, parent_pid = get_name_and_parent_pid(dirname)
         if cmd_name != command:
             continue
-        yield dirname
+        yield parent_pid if need_parent_pid else dirname
 
 
 def get_ssh_auth_socks():
@@ -52,16 +53,33 @@ def get_ssh_auth_socks():
         for a in filter(lambda x: re_agent_name.match(x), agent_candidates):
             yield a[len("agent."):], os.path.join(agent_dir, a)
 
-
-def main():
+def get_anscestore_sshd_pids(descendent_pid):
     sshd_pids = set()
-    for pid in find_my_process("screen"):
-        for cmd, pid in get_ancestors(pid):
-            if cmd != "sshd":
-                continue
-            sshd_pids.add(pid)
+    for cmd, pid in get_ancestors(descendent_pid):
+        if cmd != "sshd":
+            continue
+        sshd_pids.add(pid)
+    return sshd_pids
+
+
+def get_sshd_pids_from_all():
+    sshd_pids = set()
+    sshd_pids.update(list(find_my_process("sshd")))
+    sshd_pids.update(list(find_my_process("ssh-agent", need_parent_pid=True)))
+    return sshd_pids
+
+def main(args):
+    if args.descendent_pid:
+        sshd_pids = get_anscestore_sshd_pids(args.descendent_pid)
+    else:
+        sshd_pids = get_sshd_pids_from_all()
+
+    if args.verbose:
+        print("sshd or ssh-agent PIDs: %s" % sshd_pids)
 
     for pid, path in get_ssh_auth_socks():
+        if args.verbose:
+            print(path)
         if pid not in sshd_pids:
             continue
         print("export SSH_AUTH_SOCK=%s" % path)
@@ -70,5 +88,14 @@ def main():
         print("Failed to find ssh auth sock.")
         return -1
 
+def start():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-p', '--descendent-pid', type=int)
+    parser.add_argument('-v', '--verbose', action='store_true')
+
+    args = parser.parse_args()
+    main(args)
+
+
 if __name__ == "__main__":
-    main()
+    start()
