@@ -33,12 +33,8 @@ def find_my_process(command):
         st = os.stat(path)
         if st.st_uid != my_uid:
              continue
-        exe_path = os.path.join(path, "exe")
-        try:
-            link_cmd = os.readlink(exe_path).split("/")[-1]
-        except:
-            continue
-        if link_cmd != command:
+        cmd_name, parent_pid = get_name_and_parent_pid(dirname)
+        if cmd_name != command:
             continue
         yield dirname
 
