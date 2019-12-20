@@ -29,6 +29,11 @@ else
 fi
 
 
+# blade --------------------------------------------------------
+if [ -z $BLADE_DIR ]; then
+  export BLADE_DIR=~/misc/blade
+fi
+
 # Editor --------------------------------------------------------
 export EDITOR=vim
 export SVN_EDITOR=$EDITOR
@@ -39,14 +44,14 @@ export SVN_EDITOR=$EDITOR
 # screen ---------------------------------------------------------
 alias screen='screen -U'
 alias screen-flow-offs='screen -X defflow off; screen -X flow off'
-alias ssh-auth-sock-update='~/misc/blade/bin/ssh-auth-sock-update.py > ~/.new-ssh-auth-sock-env && . ~/.new-ssh-auth-sock-env'
+alias ssh-auth-sock-update="$BLADE_DIR/bin/ssh-auth-sock-update.py > ~/.new-ssh-auth-sock-env && . ~/.new-ssh-auth-sock-env"
 
 # grep -----------------------------------------------------------
 export GREP_COLOR='1;37;41'
 alias grep='grep -E --color=auto'
 
 # PATH -----------------------------------------------------------
-export PATH=~/bin:~/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/android-sdk-linux_86/tools
+export PATH=~/bin:$BLADE_DIR/bin:~/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/android-sdk-linux_86/tools
 
 DEVTOOLSET2_DIR=/opt/rh/devtoolset-2
 DEVTOOLSET2_BIN_DIR=$DEVTOOLSET2_DIR/root/usr/bin
