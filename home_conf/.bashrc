@@ -46,7 +46,7 @@ export GREP_COLOR='1;37;41'
 alias grep='grep -E --color=auto'
 
 # PATH -----------------------------------------------------------
-export PATH=~/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/android-sdk-linux_86/tools
+export PATH=~/bin:~/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/android-sdk-linux_86/tools
 
 DEVTOOLSET2_DIR=/opt/rh/devtoolset-2
 DEVTOOLSET2_BIN_DIR=$DEVTOOLSET2_DIR/root/usr/bin
@@ -72,6 +72,10 @@ fi
 if [ -e $CUDA_DIR ]; then
   export PATH=$CUDA_DIR/bin:$PATH
 fi
+
+# Pyenv ----------------------------------------------------------
+export PYENV_ROOT=~/.pyenv
+export PATH=$PYENV_ROOT/bin:$PATH
 
 # Aliases --------------------------------------------------------
 alias vi=vim
