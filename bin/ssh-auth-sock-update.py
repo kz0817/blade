@@ -68,6 +68,12 @@ def get_sshd_pids_from_all():
     sshd_pids.update(list(find_my_process("ssh-agent", need_parent_pid=True)))
     return sshd_pids
 
+def show_result(args, path):
+    print(f'export SSH_AUTH_SOCK={path}')
+    print(f'if [ "$TERM" = "screen" -o "$TERM" = "screen-256color" ]; then')
+    print(f'  screen -X setenv SSH_AUTH_SOCK {path}')
+    print(f'fi')
+
 def main(args):
     if args.descendent_pid:
         sshd_pids = get_anscestore_sshd_pids(args.descendent_pid)
@@ -82,7 +88,7 @@ def main(args):
             print(path)
         if pid not in sshd_pids:
             continue
-        print("export SSH_AUTH_SOCK=%s" % path)
+        show_result(args, path)
         break
     else:
         print("Failed to find ssh auth sock.")
