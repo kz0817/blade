@@ -5,7 +5,7 @@ if [ -z "$OS_TYPE" ]; then
 fi
 
 # for Japanese and English ------------------------------------
-alias utf='export LANG=ja_JP.UTF-8; export LANGUAGE=ja_JP.UTF-8; export LC_ALL=ja_JP.UTF-8'
+alias ja='export LANG=ja_JP.UTF-8; export LANGUAGE=ja_JP.UTF-8; export LC_ALL=ja_JP.UTF-8'
 alias en='export LANG=en_US.UTF-8; export LANGUAGE=en_US.UTF-8; export LC_ALL=en_US.UTF-8'
 
 # Source the Machine independent setting  ------------------------
