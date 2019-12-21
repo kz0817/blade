@@ -1,6 +1,6 @@
 # Basic setting -----------------------------------------------
 OS_TYPE=`uname`
-if [ -z $OS_TYPE ]; then
+if [ -z "$OS_TYPE" ]; then
   OS_TYPE="unknown"
 fi
 
@@ -13,7 +13,7 @@ if [ -f .bashrc.local ]; then
   source .bashrc.local
 fi
 
-if [ x$USER = x"root" ]; then
+if [ "$USER" = "root" ]; then
   PMARK="#"
 else
   PMARK="$"
@@ -22,7 +22,7 @@ fi
 HISTSIZE=100000
 HISTFILESIZE=100000
 
-if [ x$NICKNAME != x ]; then
+if [ -n "$NICKNAME" ]; then
   PS1="[$NICKNAME]\w $PMARK "
 else
   PS1="[\h]\w $PMARK "
@@ -30,7 +30,7 @@ fi
 
 
 # blade --------------------------------------------------------
-if [ -z $BLADE_DIR ]; then
+if [ -z "$BLADE_DIR" ]; then
   export BLADE_DIR=~/misc/blade
 fi
 
@@ -63,18 +63,18 @@ fi
 if [ $OS_TYPE = "Darwin" ]; then
   export SCALA_HOME=/opt/scala
 fi
-if [ -e $SCALA_HOME ]; then
+if [ -n "$SCALA_HOME" ]; then
   export PATH=$PATH:$SCALA_HOME/bin
 fi
 
 # Gradle ----------------------------------------------------------
-if [ -e $GRADLE_HOME ]; then
+if [ -n "$GRADLE_HOME" ]; then
   export PATH=$PATH:$GRADLE_HOME/bin
 fi
 
 # CUDA ----------------------------------------------------------
 # CUDA_DIR has to be set in another place (e.g. .bashrc.local)
-if [ -e $CUDA_DIR ]; then
+if [ -n "$CUDA_DIR" ]; then
   export PATH=$CUDA_DIR/bin:$PATH
 fi
 
@@ -120,13 +120,13 @@ if [ $OS_TYPE = "Darwin" ]; then
 fi
 
 # GNU screen: title ----------------------------------------------
-if [ x$NICKNAME != x ]; then
+if [ -n "$NICKNAME" ]; then
    export SCREEN_HOST=$NICKNAME:
 else
    export SCREEN_HOST=`echo $HOSTNAME | sed "s,\..*$,,"`:
 fi
 
-if [ x$TERM = xscreen -o x$TERM = xscreen-256color ]; then
+if [ "$TERM" = "screen" -o "$TERM" = "screen-256color" ]; then
   USE_SCREEN=1
 else
   USE_SCREEN=0
