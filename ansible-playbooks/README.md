@@ -48,3 +48,4 @@ Run the following commnad by the user.
 Keep in mind that
 - SSH agent forwarding be enabled
 - python3 and git pakcages be installed
+- Try to pass `-e 'ansible_python_interpreter=/usr/bin/python2'` when OSError happens
