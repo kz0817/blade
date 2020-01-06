@@ -4,11 +4,28 @@
     dest: '{{ misc_dir }}'
     state: directory
 
+- name: Create ~/bin
+  file:
+    dest: ~/bin
+    state: directory
+
 - name: Download blade
   git:
     repo: git@github.com:kz0817/blade.git
     dest: '{{ misc_dir }}/blade'
     accept_hostkey: yes
+
+- name: Download dog
+  git:
+    repo: git@github.com:kz0817/dog.git
+    dest: '{{ misc_dir }}/dog'
+    accept_hostkey: yes
+
+- name: Link dog.py
+  file:
+    src: '{{ misc_dir }}/dog/dog.py'
+    dest: ~/bin/dog
+    state: link
 
 - name: Link .vimrc
   file:
