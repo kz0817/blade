@@ -1,7 +1,3 @@
-[user]
-	name = Kazuhiro Yamato
-	email = kz0817@gmail.com
-
 [core]
 	pager = 
 	editor = vim
@@ -9,3 +5,5 @@
 	default = simple
 [color]
 	ui = always
+[include]
+	path = .gitconfig.local
