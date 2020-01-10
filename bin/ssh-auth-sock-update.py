@@ -69,10 +69,10 @@ def get_sshd_pids_from_all():
     return sshd_pids
 
 def show_result(args, path):
-    print(f'export SSH_AUTH_SOCK={path}')
-    print(f'if [ "$TERM" = "screen" -o "$TERM" = "screen-256color" ]; then')
-    print(f'  screen -X setenv SSH_AUTH_SOCK {path}')
-    print(f'fi')
+    print('export SSH_AUTH_SOCK=%s' % path)
+    print('if [ "$TERM" = "screen" -o "$TERM" = "screen-256color" ]; then')
+    print('  screen -X setenv SSH_AUTH_SOCK %s' % path)
+    print('fi')
 
 def main(args):
     if args.descendent_pid:
