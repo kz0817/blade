@@ -27,16 +27,16 @@ Copy this directory to the target host. Then run the following commands in the t
 
 # Example to create user
 
-    ansible-playbook -i hosts base.yml tags=user -e username=$USER -e uid=2001 -e gid=2001
+    ansible-playbook -i hosts base.yml --tags=user -e username=$USER -e uid=2001 -e gid=2001
 
-Here `uid` and `gid` can be omitted as below, because they are defined in roles/user/defaults/main.yml.
+`uid` and `gid` can be omitted as below. In this case, values defined in roles/user/defaults/main.yml are used.
 
-    ansible-playbook -i hosts base.yml tags=user -e username=$USER -u root
+    ansible-playbook -i hosts base.yml --tags=user -e username=$USER -u root
 
 ## If you don't copy ~/.ssh/authroized\_kesy
 Add `skip_copy_auth_key=1` option. (In fact, the right hand side can be any value)
 
-    ansible-playbook -i hosts base.yml tags=user -e username=$USER -u root -e skip_copy_auth_key=1
+    ansible-playbook -i hosts base.yml --tags=user -e username=$USER -u root -e skip_copy_auth_key=1
 
 
 # Configuration for each users
