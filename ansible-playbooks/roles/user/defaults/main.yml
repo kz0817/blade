@@ -2,3 +2,4 @@
 uid: 2001
 gid: 2001
 groupname: '{{ username }}'
+copy_ssh_auth_key: false

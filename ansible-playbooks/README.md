@@ -33,10 +33,10 @@ Copy this directory to the target host. Then run the following commands in the t
 
     ansible-playbook -i hosts base.yml --tags=user -e username=$USER -u root
 
-## If you don't copy ~/.ssh/authroized\_kesy
-Add `skip_copy_auth_key=1` option. (In fact, the right hand side can be any value)
+## If you copy ~/.ssh/authroized\_kesy
+Add `copy_ssh_auth_key=true` or `copy_ssh_auth_key=1` like
 
-    ansible-playbook -i hosts base.yml --tags=user -e username=$USER -u root -e skip_copy_auth_key=1
+    ansible-playbook -i hosts base.yml --tags=user -e username=$USER -u root -e copy_ssh_auth_key=1
 
 
 # Configuration for each users

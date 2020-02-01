@@ -20,14 +20,14 @@
     owner: '{{ username }}'
     group: '{{ groupname }}'
 
-- name: Copy public keys
+- name: Copy SSH public keys
   copy:
     src: ~/.ssh/authorized_keys
     dest: '/home/{{ username }}/.ssh/authorized_keys'
     owner: '{{ username }}'
     group: '{{ groupname }}'
     backup: yes
-  when: skip_copy_auth_key is not defined
+  when: copy_ssh_auth_key
 
 - name: Setting for sudoer
   copy:
