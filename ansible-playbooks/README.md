@@ -43,6 +43,8 @@ Add `github_name_for_ssh_auth_key=NAME` like
 
     ansible-playbook -i hosts base.yml --tags=user -e username=$USER -u root -e github_name_for_ssh_auth_key=myname
 
+Note: When .ssh/authrozied\_keys is already placed, this option doesn't try to download if keys on Github are updated.
+
 
 # Configuration for each users
 
