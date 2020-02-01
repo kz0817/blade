@@ -27,6 +27,18 @@
     dest: ~/bin/dog
     state: link
 
+- name: Download qemu-cmd-gen.py
+  git:
+    repo: git@github.com:kz0817/qemu-helper.git
+    dest: '{{ misc_dir }}/qemu-helper'
+    accept_hostkey: yes
+
+- name: Link qemu-helper
+  file:
+    src: '{{ misc_dir }}/qemu-helper/qemu-cmd-gen.py'
+    dest: ~/bin/qemu-cmd-gen
+    state: link
+
 - name: Link .vimrc
   file:
     src: '{{ blade_dir }}/home_conf/.vimrc'
