@@ -38,6 +38,11 @@ Add `copy_ssh_auth_key=true` or `copy_ssh_auth_key=1` like
 
     ansible-playbook -i hosts base.yml --tags=user -e username=$USER -u root -e copy_ssh_auth_key=1
 
+## If you download SSH authorized keys from Github
+Add `github_name_for_ssh_auth_key=NAME` like
+
+    ansible-playbook -i hosts base.yml --tags=user -e username=$USER -u root -e github_name_for_ssh_auth_key=myname
+
 
 # Configuration for each users
 
