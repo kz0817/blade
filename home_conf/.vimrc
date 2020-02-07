@@ -163,6 +163,10 @@ au BufNewFile,BufRead *.cc      :set expandtab
 au BufNewFile,BufRead *.cc      :set ts=4
 au BufNewFile,BufRead *.h       :set expandtab
 au BufNewFile,BufRead *.h       :set ts=4
+au BufNewFile,BufRead *.cpp     :set expandtab
+au BufNewFile,BufRead *.cpp     :set ts=4
+au BufNewFile,BufRead *.hpp     :set expandtab
+au BufNewFile,BufRead *.hpp     :set ts=4
 au BufNewFile,BufRead *.cu      :set expandtab
 au BufNewFile,BufRead *.cu      :set ts=4
 au BufNewFile,BufRead *.py      :set expandtab
