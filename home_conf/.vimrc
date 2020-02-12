@@ -94,7 +94,7 @@ highlight Function     ctermfg=Cyan                 guifg=Cyan                 g
 highlight SpecialKey   ctermfg=236                  guifg=DarkGray             gui=NONE
 highlight Delimiter    ctermfg=Cyan                 guifg=Cyan                 gui=NONE
 highlight String       ctermfg=Cyan                 guifg=Cyan                 gui=NONE
-highlight Search       ctermfg=Blue                 guifg=Blue                 gui=NONE
+highlight Search       ctermfg=19 ctermbg=226       guifg=Blue                 gui=NONE
 "highlight PreProc      ctermfg=Yellow               guifg=Yellow
 "highlight Label        ctermfg=Cyan
 "highlight Tag          ctermfg=Cyan
@@ -105,7 +105,7 @@ highlight Identifier   ctermfg=Yellow               guifg=Yellow               g
 highlight Title        ctermfg=Cyan                 guifg=Cyan                 gui=NONE
 
 highlight LineNr       ctermfg=Yellow               guifg=Yellow
-highlight Visual       ctermfg=Blue  ctermbg=White  guifg=White  guibg=Blue
+highlight Visual       ctermfg=19 ctermbg=White     guifg=White  guibg=Blue
 highlight Directory    ctermfg=Cyan                 guifg=Cyan
 highlight ModeMsg      ctermfg=214                  guifg=Yellow
 highlight MoreMsg      ctermfg=Green                guifg=Green
