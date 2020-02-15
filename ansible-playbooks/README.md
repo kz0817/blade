@@ -2,7 +2,7 @@
 
 ## Example via SSH
 
-    ansible-playbook -i hosts base.yaml -u root
+    ansible-playbook -i hosts base.yml -u root
 
 The following options can be used.
 - -u: loing user

@@ -27,9 +27,20 @@ URxvt.font: xft:DejaVu Sans Mono:size=10, xft:Noto Sans CJK JP
 URxvt.boldFont: xft:DejaVu Sans Mono:size=10
 URxvt.letterSpace: -1
 
+*color1: rgb:ff/40/20
+*color4: rgb:60/30/ff
+*color9: rgb:ff/40/20
+*color10: rgb:00/ff/00
+*color11: rgb:ff/ff/00
+*color12: rgb:60/30/ff
+*color13: rgb:ff/80/ff
+*color14: rgb:00/ff/ff
+
 Rxvt.foreground: white
 Rxvt.background: black
 Rxvt.scrollBar: false
 Rxvt.termName: xterm
 Rxvt.font: "MS Gothic"-14
 Rxvt.boldFont: "MS Gothic"-14
+
+
