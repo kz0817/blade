@@ -1,3 +1,8 @@
+! How to apply this settings in a running session.
+!
+!   xrdb -merge .Xdefault
+!
+
 !Black
 *color0: rgb:00/00/00
 !Red
