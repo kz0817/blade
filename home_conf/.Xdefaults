@@ -1,3 +1,36 @@
+!Black
+*color0: rgb:00/00/00
+!Red
+*color1: rgb:ff/40/20
+!Green
+*color2: rgb:00/ff/00
+!Yellow
+*color3: rgb:ff/ff/00
+!Blue
+*color4: rgb:30/a8/ff
+!Megenta
+*color5: rgb:ff/40/ff
+!Cyan
+*color6: rgb:00/ff/ff
+!Gray (White)
+*color7: rgb:ff/ff/ff
+!Dark Gray
+*color8: rgb:80/80/80
+!Light Red
+*color9: rgb:ff/40/20
+!Light Green
+*color10: rgb:00/ff/00
+!Light Yellow
+*color11: rgb:ff/ff/00
+!Light Blue
+*color12: rgb:30/a8/ff
+!Light Magenta
+*color13: rgb:ff/40/ff
+!Light Cyan
+*color14: rgb:00/ff/ff
+!Light White
+*color15: rgb:ff/ff/ff
+
 XTerm*foreground: white
 XTerm*background: black
 XTerm*scrollBar:  false
@@ -26,15 +59,6 @@ URxvt.termName: xterm-256color
 URxvt.font: xft:DejaVu Sans Mono:size=10, xft:Noto Sans CJK JP
 URxvt.boldFont: xft:DejaVu Sans Mono:size=10
 URxvt.letterSpace: -1
-
-*color1: rgb:ff/40/20
-*color4: rgb:60/30/ff
-*color9: rgb:ff/40/20
-*color10: rgb:00/ff/00
-*color11: rgb:ff/ff/00
-*color12: rgb:60/30/ff
-*color13: rgb:ff/80/ff
-*color14: rgb:00/ff/ff
 
 Rxvt.foreground: white
 Rxvt.background: black
