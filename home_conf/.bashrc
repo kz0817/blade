@@ -132,17 +132,17 @@ else
   USE_SCREEN=0
 fi
 
-function title_screen () {
+function set_screen_title () {
   cmd=`history 1 | sed s/\ *[0-9]*\ *//`
-  echo -en "\033k$SCREEN_HOST$cmd\033\\"
+  echo -en "\033k${SCREEN_HOST}${cmd}\033\\"
 }
 
 if [ $USE_SCREEN -eq 1 ]; then
-  trap "title_screen" DEBUG
+  trap "set_screen_title" DEBUG
 fi
 
 function printdir() {
-  echo -en "\033k$SCREEN_HOST[$(pwd | awk '{ print $(NF) }' FS='/')]\033\\"
+  echo -en "\033k${SCREEN_HOST}[`basename ${PWD}`]\033\\"
 }
 
 if [ $USE_SCREEN -eq 1 ]; then
