@@ -142,7 +142,7 @@ if [ $USE_SCREEN -eq 1 ]; then
 fi
 
 function printdir() {
-  echo -en "\033k[$SCREEN_HOST$(pwd | awk '{ print $(NF) }' FS='/')]\033\\"
+  echo -en "\033k$SCREEN_HOST[$(pwd | awk '{ print $(NF) }' FS='/')]\033\\"
 }
 
 if [ $USE_SCREEN -eq 1 ]; then

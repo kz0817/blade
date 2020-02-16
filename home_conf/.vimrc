@@ -350,7 +350,7 @@ endfunction
 function! SetScreenTabName(name)
   "let arg = '\033k' . a:name . '\033\\'
   "silent! exe '!echo -en "' . "$SCREEN_HOSTNAME" . arg . "\""
-  silent! exe '!echo -en "' . '\033k{' . $SCREEN_HOST . a:name . '}\033\\' . "\""
+  silent! exe '!echo -en "' . '\033k' . $SCREEN_HOST . '{' . a:name . '}\033\\' . "\""
 endfunction
 
 if &term =~ "screen"
