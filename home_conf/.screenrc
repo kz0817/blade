@@ -1,8 +1,13 @@
 escape ^s^s
 startup_message off
-#hardstatus alwayslastline "[screen] %w"
-#hardstatus alwayslastline "[%02c] %`%-w%{=b bw}%n %t%{-}%+w"
-hardstatus alwayslastline " %`%-w%{=b bw}%n %t%{-}%+w"
+
+# %`   : result of backtick command
+# %-w  : window list before the current windo
+# %{= wk} : w: white, k: block (1st and 2nd letter is respectively f.g. and b.g. color)
+# %{-} : reset the color
+# %+w  : window list after the current windo
+hardstatus alwayslastline " %`%-w%{= .w} %n %t %{-}%+w"
+
 encoding utf8
 defscrollback 1024
 
@@ -12,7 +17,6 @@ bind -c resize k eval 'resize +1' 'command -c resize'
 bind -c resize j eval 'resize -1' 'command -c resize'
 bind -c resize l eval 'resize +1' 'command -c resize'
 bind -c resize h eval 'resize -1' 'command -c resize'
-#caption always “%{b RK} %y/%m/%d(%D)%c:%s %{bu dr} | %-w%{=bu CK}%n %t%{-}%+w”
 
 # prevent xon/off from being sent
 bind s
