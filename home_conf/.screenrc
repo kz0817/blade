@@ -6,7 +6,7 @@ startup_message off
 # %{= wk} : w: white, k: block (1st and 2nd letter is respectively f.g. and b.g. color)
 # %{-} : reset the color
 # %+w  : window list after the current windo
-hardstatus alwayslastline " %`%-w%{= .c} %n %{-}%{= .w}%t %{-}%+w"
+hardstatus alwayslastline " %`%-w%{= .c} %50>%n %{-}%{= .w}%t %{-}%+w %<"
 
 encoding utf8
 defscrollback 1024
