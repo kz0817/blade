@@ -39,6 +39,12 @@
     dest: ~/bin/qemu-cmd-gen
     state: link
 
+- name: Link diff-highlight
+  file:
+    src: '{{ misc_dir }}/blade/bin/diff-highlight'
+    dest: ~/bin/diff-highlight
+    state: link
+
 - name: Link .vimrc
   file:
     src: '{{ blade_dir }}/home_conf/.vimrc'
