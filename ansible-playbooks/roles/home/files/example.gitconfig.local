@@ -1,0 +1,9 @@
+# Copy as ~/.gitconfig.local. 
+[user]
+   name = Taro
+   email = mail@example.com
+
+[pager]
+    log = diff-highlight | less
+    show = diff-highlight | less
+    diff = diff-highlight | less
