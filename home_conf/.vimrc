@@ -115,7 +115,11 @@ highlight StatusLineNC cterm=None ctermfg=233 ctermbg=233
 highlight link StatusLineTerm   StatusLine
 highlight link StatusLineTermNC StatusLineNC
 highlight VertSplit    cterm=None ctermfg=233 ctermbg=233
-highlight SpellErrors  ctermfg=White ctermbg=Blue   guifg=White guibg=Blue
+
+highlight SpellBad     ctermfg=White ctermbg=Red  guifg=White guibg=Red
+highlight SpellCap     ctermfg=White ctermbg=163  guifg=White guibg=Blue
+highlight SpellRare    ctermfg=White ctermbg=214  guifg=White guibg=Yellow
+highlight SpellLocal   ctermfg=White ctermbg=214  guifg=White guibg=Yellow
 
 highlight Folded       ctermfg=Cyan  ctermbg=None   guifg=Cyan
 highlight Terminal     ctermfg=white ctermbg=232
