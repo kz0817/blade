@@ -4,7 +4,9 @@ startup_message off
 # %`   : result of backtick command
 # %-w  : window list before the current windo
 # %{= wk} : w: white, k: block (1st and 2nd letter is respectively f.g. and b.g. color)
+# %n   : window number
 # %{-} : reset the color
+# %n   : window title
 # %+w  : window list after the current windo
 hardstatus alwayslastline " %`%-w%{= .c} %50>%n %{-}%{= .w}%t %{-}%+w %<"
 
