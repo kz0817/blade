@@ -8,7 +8,7 @@ startup_message off
 # %{-} : reset the color
 # %n   : window title
 # %+w  : window list after the current windo
-hardstatus alwayslastline " %`%-w%{= .c} %50>%n %{-}%{= .w}%t %{-}%+w %<"
+hardstatus alwayslastline " %`%-w%{= .C} %50>%n %{-}%{= .W}%t %{-}%+w %<"
 
 encoding utf8
 defscrollback 1024
