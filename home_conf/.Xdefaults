@@ -6,7 +6,7 @@
 !Black
 *color0: rgb:00/00/00
 !Red
-*color1: rgb:ff/40/20
+*color1: rgb:ff/50/20
 !Green
 *color2: rgb:00/ff/00
 !Yellow
@@ -14,7 +14,7 @@
 !Blue
 *color4: rgb:30/a8/ff
 !Megenta
-*color5: rgb:ff/40/ff
+*color5: rgb:ff/80/ff
 !Cyan
 *color6: rgb:00/ff/ff
 !Gray (White)
@@ -22,7 +22,7 @@
 !Dark Gray
 *color8: rgb:80/80/80
 !Light Red
-*color9: rgb:ff/40/20
+*color9: rgb:ff/50/20
 !Light Green
 *color10: rgb:00/ff/00
 !Light Yellow
@@ -30,7 +30,7 @@
 !Light Blue
 *color12: rgb:30/a8/ff
 !Light Magenta
-*color13: rgb:ff/40/ff
+*color13: rgb:ff/80/ff
 !Light Cyan
 *color14: rgb:00/ff/ff
 !Light White
