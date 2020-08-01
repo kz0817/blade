@@ -40,10 +40,9 @@ set incsearch
 set autoread
 
 " Set locale
-set termencoding=2byte-utf-8
-set encoding=2byte-utf-8
-set fileencodings=2byte-utf-8,2byte-sjis,2byte-euc-jp,2byte-iso-2022-jp
-"set fileencodings=2byte-sjis,2byte-utf-8,2byte-iso-2022-jp,2byte-euc-jp
+set termencoding=utf-8
+set encoding=utf-8
+set fileencodings=utf-8,sjis,euc-jp,iso-2022-jp
 set ambiwidth=double
 
 " setting for folding
