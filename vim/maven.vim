@@ -1,5 +1,5 @@
-set makeprg=mvn\ -B\ -q\ compile
-set efm=%E[ERROR]\ %f:[%l\\,%c]\ %m,%C\ \ %m,%+G[ERROR]\ Failed\ to\ execute\ goal%m,%-G%.%#
+set makeprg=mvn\ -B\ compile
+set efm=%A[%t%.%#]\ %f:[%l\\,%c]\ %m,%C\ \ %m,%+G[ERROR]\ Failed\ to\ execute\ goal%m,%-G%.%#
 
 function! EditMavenCompileResultForQuickFix()
   let qflist = getqflist()
