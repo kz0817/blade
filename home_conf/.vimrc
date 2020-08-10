@@ -103,7 +103,7 @@ highlight Search       ctermfg=19 ctermbg=226       guifg=Blue                 g
 highlight Identifier   ctermfg=Yellow               guifg=Yellow               gui=NONE
 highlight Title        ctermfg=Cyan                 guifg=Cyan                 gui=NONE
 
-highlight LineNr       ctermfg=Yellow               guifg=Yellow
+highlight LineNr       ctermfg=214                  guifg=Yellow
 highlight Visual       ctermfg=19 ctermbg=White     guifg=White  guibg=Blue
 highlight Directory    ctermfg=Cyan                 guifg=Cyan
 highlight ModeMsg      ctermfg=214                  guifg=Yellow
@@ -123,6 +123,7 @@ highlight SpellLocal   ctermfg=White ctermbg=214  guifg=White guibg=Yellow
 highlight MatchParen   ctermfg=White ctermbg=88
 highlight Folded       ctermfg=246   ctermbg=None guifg=Cyan
 highlight Terminal     ctermfg=white ctermbg=232
+highlight QuickFixLine ctermfg=Black ctermbg=Cyan
 
 "Used in HTML syntax
 highlight Underlined   ctermfg=White cterm=Underline  guifg=White              gui=Underline
