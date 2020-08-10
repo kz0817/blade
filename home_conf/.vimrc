@@ -120,7 +120,7 @@ highlight SpellCap     ctermfg=White ctermbg=163  guifg=White guibg=Blue
 highlight SpellRare    ctermfg=White ctermbg=214  guifg=White guibg=Yellow
 highlight SpellLocal   ctermfg=White ctermbg=214  guifg=White guibg=Yellow
 
-highlight MatchParen   ctermfg=White ctermbg=52
+highlight MatchParen   ctermfg=White ctermbg=88
 highlight Folded       ctermfg=246   ctermbg=None guifg=Cyan
 highlight Terminal     ctermfg=white ctermbg=232
 
