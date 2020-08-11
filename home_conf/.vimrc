@@ -93,7 +93,7 @@ highlight Function     ctermfg=Cyan                 guifg=Cyan                 g
 highlight SpecialKey   ctermfg=236                  guifg=DarkGray             gui=NONE
 highlight Delimiter    ctermfg=Cyan                 guifg=Cyan                 gui=NONE
 highlight String       ctermfg=Cyan                 guifg=Cyan                 gui=NONE
-highlight Search       ctermfg=19 ctermbg=226       guifg=Blue                 gui=NONE
+highlight Search       ctermfg=Black ctermbg=226    guifg=Blue                 gui=NONE
 "highlight PreProc      ctermfg=Yellow               guifg=Yellow
 "highlight Label        ctermfg=Cyan
 "highlight Tag          ctermfg=Cyan
@@ -124,6 +124,7 @@ highlight MatchParen   ctermfg=White ctermbg=88
 highlight Folded       ctermfg=246   ctermbg=None guifg=Cyan
 highlight Terminal     ctermfg=white ctermbg=232
 highlight QuickFixLine ctermfg=Black ctermbg=Cyan
+highlight TODO         ctermfg=Black ctermbg=Green
 
 "Used in HTML syntax
 highlight Underlined   ctermfg=White cterm=Underline  guifg=White              gui=Underline
