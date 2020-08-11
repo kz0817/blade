@@ -102,6 +102,7 @@ highlight Search       ctermfg=Black ctermbg=226    guifg=Blue                 g
 "highlight Macro        ctermfg=Cyan
 highlight Identifier   ctermfg=Yellow               guifg=Yellow               gui=NONE
 highlight Title        ctermfg=Cyan                 guifg=Cyan                 gui=NONE
+highlight link SpecialComment Comment
 
 highlight LineNr       ctermfg=214                  guifg=Yellow
 highlight Visual       ctermfg=19 ctermbg=White     guifg=White  guibg=Blue
