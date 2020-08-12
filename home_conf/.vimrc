@@ -50,7 +50,8 @@ set foldmethod=indent
 set shiftwidth=2
 set foldlevel=100
 " set foldnestmax=0
-set wildmode=longest:list
+set wildmenu
+set wildmode=longest:list,full
 
 " Display Status line
 set statusline=%!GetFileColor()
@@ -103,14 +104,15 @@ highlight Search       ctermfg=Black ctermbg=226    guifg=Blue                 g
 highlight Identifier   ctermfg=Yellow               guifg=Yellow               gui=NONE
 highlight Title        ctermfg=Cyan                 guifg=Cyan                 gui=NONE
 highlight link SpecialComment Comment
+highlight WildMenu     ctermfg=Black ctermbg=214
 
 highlight LineNr       ctermfg=214                  guifg=Yellow
-highlight Visual       ctermfg=19 ctermbg=White     guifg=White  guibg=Blue
+highlight Visual       ctermfg=19 ctermbg=253       guifg=White  guibg=Blue
 highlight Directory    ctermfg=Cyan                 guifg=Cyan
 highlight ModeMsg      ctermfg=214                  guifg=Yellow
 highlight MoreMsg      ctermfg=Green                guifg=Green
 highlight Question     ctermfg=Green                guifg=Green
-highlight StatusLine   cterm=None ctermfg=black ctermbg=black
+highlight StatusLine   cterm=None ctermfg=214 ctermbg=235
 highlight StatusLineNC cterm=None ctermfg=233 ctermbg=233
 highlight link StatusLineTerm   StatusLine
 highlight link StatusLineTermNC StatusLineNC
