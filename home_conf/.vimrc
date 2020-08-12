@@ -58,14 +58,10 @@ set statusline=%!GetFileColor()
 " Save the cursor position in quitting
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
-" Error format
-"set efm=%f:%l:\ error:\ %m,%f:%l:\ warning:\ %m,%Dmake[%*\\d]:\ Entering\ directory\ `%f',%Xmake[%*\\d]:\ Leaving\ directory\ `%f'
-
 " ===================================================================
 " Setting about Tab
 " ===================================================================
 " Display Tab, and end extend line
-"set listchars=tab:>-,extends:<
 set listchars=tab:>-,extends:<,trail:_
 set list
 
@@ -294,9 +290,6 @@ endfunction
 " for cscope
 " ===================================================================
 if has("cscope")
-  "set csprg=/usr/local/bin/cscope
-  "set csto=0
-  "set cst
   set nocsverb
   " add any database in current directory
   if filereadable("cscope.out")
@@ -346,13 +339,11 @@ highlight gdb_fr       ctermfg=none  ctermbg=red
 " ===================================================================
 function! Re(host,path)
   let predir = "/tmp/netsync/"
-  "let fname = system("basename ".a:path)
   let dname = system("dirname ".a:path)
 
   let r = system("mkdir -p ".predir.dname)
   let cmd = "rsync -avz ".a:host."::".a:path." ".predir.a:path
   echo cmd
-  "let r = system(cmd)
   let r = system(cmd)
   echo r
   exe "sp ".predir.a:path
@@ -362,15 +353,10 @@ endfunction
 " for SCREEN
 " ===================================================================
 function! SetScreenTabName(name)
-  "let arg = '\033k' . a:name . '\033\\'
-  "silent! exe '!echo -en "' . "$SCREEN_HOSTNAME" . arg . "\""
   silent! exe '!echo -en "' . '\033k' . $SCREEN_HOST . '{' . a:name . '}\033\\' . "\""
 endfunction
 
 if &term =~ "screen"
-  "autocmd VimLeave * call SetScreenTabName('** free **')
-  "autocmd VimLeave * call SetScreenTabName('vim')
   autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | call SetScreenTabName("%") | endif 
-  "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | call SetScreenTabName("{%:.}") | endif 
 endi
 
