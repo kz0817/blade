@@ -103,7 +103,7 @@ highlight link SpecialComment Comment
 highlight WildMenu     ctermfg=Black ctermbg=214
 
 highlight LineNr       ctermfg=214                  guifg=Yellow
-highlight Visual       ctermfg=19 ctermbg=253       guifg=White  guibg=Blue
+highlight Visual       ctermfg=19 ctermbg=251       guifg=White  guibg=Blue
 highlight Directory    ctermfg=Cyan                 guifg=Cyan
 highlight ModeMsg      ctermfg=214                  guifg=Yellow
 highlight MoreMsg      ctermfg=Green                guifg=Green
