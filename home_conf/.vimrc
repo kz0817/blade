@@ -127,8 +127,8 @@ highlight Terminal     ctermfg=white ctermbg=232
 highlight QuickFixLine ctermfg=none cterm=none ctermbg=19
 highlight TODO         ctermfg=Black ctermbg=Green
 
-highlight Pmenu        ctermfg=254 ctermbg=236
-highlight PmenuSel     ctermfg=236 ctermbg=254
+highlight Pmenu        ctermfg=254 ctermbg=237
+highlight PmenuSel     ctermfg=White ctermbg=27
 highlight PmenuSbar    ctermbg=240
 highlight PmenuThumb   ctermbg=234
 
