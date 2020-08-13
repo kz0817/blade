@@ -14,8 +14,8 @@ set laststatus=2
 "set number
 
 " unset auto indent
-set noai
-"set ai
+"set noai
+set ai
 
 " display ruler
 set ruler
@@ -47,11 +47,13 @@ set ambiwidth=double
 
 " setting for folding
 set foldmethod=indent
-set shiftwidth=2
+set shiftwidth=4
 set foldlevel=100
 " set foldnestmax=0
 set wildmenu
 set wildmode=longest:list,full
+
+set completeopt=menu
 
 " Display Status line
 set statusline=%!GetFileColor()
