@@ -167,49 +167,54 @@ endif
 " ===================================================================
 " Auto commands
 " ===================================================================
-au BufNewFile,BufRead Makefile* :set shiftwidth=8
-au BufNewFile,BufRead Makefile* :set noexpandtab
-au BufNewFile,BufRead *.s       :set ts=4
-au BufNewFile,BufRead *.s       :set noexpandtab
-au BufNewFile,BufRead *.spec    :set ts=8
-au BufNewFile,BufRead *.spec    :set noexpandtab
-au BufNewFile,BufRead *.c       :set expandtab
-au BufNewFile,BufRead *.c       :set ts=4
-au BufNewFile,BufRead *.cc      :set expandtab
-au BufNewFile,BufRead *.cc      :set ts=4
-au BufNewFile,BufRead *.h       :set expandtab
-au BufNewFile,BufRead *.h       :set ts=4
-au BufNewFile,BufRead *.cpp     :set expandtab
-au BufNewFile,BufRead *.cpp     :set ts=4
-au BufNewFile,BufRead *.hpp     :set expandtab
-au BufNewFile,BufRead *.hpp     :set ts=4
-au BufNewFile,BufRead *.cu      :set expandtab
-au BufNewFile,BufRead *.cu      :set ts=4
-au BufNewFile,BufRead *.py      :set expandtab
-au BufNewFile,BufRead *.py      :set ts=4
-au BufNewFile,BufRead *.java    :set expandtab
-au BufNewFile,BufRead *.java    :set ts=4
-au BufNewFile,BufRead *.java    :set winwidth=100
-au BufNewFile,BufRead *.scala   :set expandtab
-au BufNewFile,BufRead *.scala   :set ts=2
-au BufNewFile,BufRead *.kt      :set expandtab
-au BufNewFile,BufRead *.kt      :set ts=4
-au BufNewFile,BufRead *.jsp     :set expandtab
-au BufNewFile,BufRead *.jsp     :set ts=4
-au BufNewFile,BufRead *.html    :set expandtab
-au BufNewFile,BufRead *.html    :set ts=4
-au BufNewFile,BufRead *.js      :set expandtab
-au BufNewFile,BufRead *.js      :set ts=4
-au BufNewFile,BufRead *.php     :set expandtab
-au BufNewFile,BufRead *.php     :set ts=4
-au BufNewFile,BufRead *.go      :set expandtab
-au BufNewFile,BufRead *.go      :set ts=4
-au BufNewFile,BufRead build.xml :set expandtab
-au BufNewFile,BufRead build.xml :set ts=4
-"autocmd BufReadPost *.tex     :setlocal spell spelllang=en_us
+augroup mine
+  " Remove all registered auto commands for reloading .vimrc
+  autocmd!
 
-au WinEnter * setlocal statusline=%!SetStatusLine('on')
-au WinLeave * setlocal statusline=%!SetStatusLine('off')
+  au BufNewFile,BufRead Makefile* :set shiftwidth=8
+  au BufNewFile,BufRead Makefile* :set noexpandtab
+  au BufNewFile,BufRead *.s       :set ts=4
+  au BufNewFile,BufRead *.s       :set noexpandtab
+  au BufNewFile,BufRead *.spec    :set ts=8
+  au BufNewFile,BufRead *.spec    :set noexpandtab
+  au BufNewFile,BufRead *.c       :set expandtab
+  au BufNewFile,BufRead *.c       :set ts=4
+  au BufNewFile,BufRead *.cc      :set expandtab
+  au BufNewFile,BufRead *.cc      :set ts=4
+  au BufNewFile,BufRead *.h       :set expandtab
+  au BufNewFile,BufRead *.h       :set ts=4
+  au BufNewFile,BufRead *.cpp     :set expandtab
+  au BufNewFile,BufRead *.cpp     :set ts=4
+  au BufNewFile,BufRead *.hpp     :set expandtab
+  au BufNewFile,BufRead *.hpp     :set ts=4
+  au BufNewFile,BufRead *.cu      :set expandtab
+  au BufNewFile,BufRead *.cu      :set ts=4
+  au BufNewFile,BufRead *.py      :set expandtab
+  au BufNewFile,BufRead *.py      :set ts=4
+  au BufNewFile,BufRead *.java    :set expandtab
+  au BufNewFile,BufRead *.java    :set ts=4
+  au BufNewFile,BufRead *.java    :set winwidth=100
+  au BufNewFile,BufRead *.scala   :set expandtab
+  au BufNewFile,BufRead *.scala   :set ts=2
+  au BufNewFile,BufRead *.kt      :set expandtab
+  au BufNewFile,BufRead *.kt      :set ts=4
+  au BufNewFile,BufRead *.jsp     :set expandtab
+  au BufNewFile,BufRead *.jsp     :set ts=4
+  au BufNewFile,BufRead *.html    :set expandtab
+  au BufNewFile,BufRead *.html    :set ts=4
+  au BufNewFile,BufRead *.js      :set expandtab
+  au BufNewFile,BufRead *.js      :set ts=4
+  au BufNewFile,BufRead *.php     :set expandtab
+  au BufNewFile,BufRead *.php     :set ts=4
+  au BufNewFile,BufRead *.go      :set expandtab
+  au BufNewFile,BufRead *.go      :set ts=4
+  au BufNewFile,BufRead build.xml :set expandtab
+  au BufNewFile,BufRead build.xml :set ts=4
+  "autocmd BufReadPost *.tex     :setlocal spell spelllang=en_us
+
+  au WinEnter * setlocal statusline=%!SetStatusLine('on')
+  au WinLeave * setlocal statusline=%!SetStatusLine('off')
+augroup END
 set statusline=%!SetStatusLine('on')
 
 " ===================================================================
@@ -358,11 +363,14 @@ endfunction
 " ===================================================================
 " for SCREEN
 " ===================================================================
-function! SetScreenTabName(name)
-  silent! exe '!echo -en "' . '\033k' . $SCREEN_HOST . '{' . a:name . '}\033\\' . "\""
+function! SetScreenTabName()
+  let l:bufname = bufname("")
+  if l:bufname != ""
+    silent! exe '!echo -en "' . '\033k' . $SCREEN_HOST . '{' . l:bufname . '}\033\\' . "\""
+  endif
 endfunction
 
 if &term =~ "screen"
-  autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | call SetScreenTabName("%") | endif 
+  augroup mine | autocmd BufEnter * if bufname("") != "" | call SetScreenTabName() | endif | augroup END
 endi
 
