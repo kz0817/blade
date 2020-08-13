@@ -145,6 +145,10 @@ highlight DiffDelete   ctermbg=Black ctermfg=Gray
 highlight javaScript   ctermfg=White                guifg=White                gui=NONE
 highlight javaScriptBraces  ctermfg=White           guifg=White                gui=NONE
 
+highlight TabLine      cterm=None ctermfg=253 ctermbg=237
+highlight TabLineSel   cterm=None ctermfg=255 ctermbg=25
+highlight TabLineFill  cterm=None ctermfg=245 ctermbg=238
+
 " ===================================================================
 " Options for GVIM
 " ===================================================================
