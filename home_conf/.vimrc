@@ -100,11 +100,14 @@ highlight Search       ctermfg=Black ctermbg=226    guifg=Blue                 g
 "highlight Keyword      ctermfg=Cyan
 "highlight Macro        ctermfg=Cyan
 highlight Identifier   ctermfg=Yellow               guifg=Yellow               gui=NONE
-highlight Title        ctermfg=Cyan                 guifg=Cyan                 gui=NONE
+highlight Title        ctermfg=81 ctermbg=none     guifg=Cyan                 gui=NONE
 highlight link SpecialComment Comment
 highlight WildMenu     ctermfg=Black ctermbg=214
 
-highlight LineNr       ctermfg=214                  guifg=Yellow
+highlight LineNr       ctermfg=214  ctermbg=none     guifg=Yellow
+highlight CursorLineNr cterm=underline ctermfg=220  ctermbg=none     guifg=Yellow
+highlight CursorLine   cterm=underline ctermfg=none ctermbg=none
+
 highlight Visual       ctermfg=19 ctermbg=251       guifg=White  guibg=Blue
 highlight Directory    ctermfg=Cyan                 guifg=Cyan
 highlight ModeMsg      ctermfg=214                  guifg=Yellow
@@ -124,7 +127,7 @@ highlight SpellLocal   ctermfg=White ctermbg=214  guifg=White guibg=Yellow
 highlight MatchParen   ctermfg=White ctermbg=88
 highlight Folded       ctermfg=246   ctermbg=None guifg=Cyan
 highlight Terminal     ctermfg=white ctermbg=232
-highlight QuickFixLine ctermfg=none cterm=none ctermbg=19
+highlight QuickFixLine cterm=none ctermfg=Black ctermbg=254
 highlight TODO         ctermfg=Black ctermbg=Green
 
 highlight Pmenu        ctermfg=254 ctermbg=237
@@ -145,9 +148,9 @@ highlight DiffDelete   ctermbg=Black ctermfg=Gray
 highlight javaScript   ctermfg=White                guifg=White                gui=NONE
 highlight javaScriptBraces  ctermfg=White           guifg=White                gui=NONE
 
-highlight TabLine      cterm=None ctermfg=253 ctermbg=237
-highlight TabLineSel   cterm=None ctermfg=255 ctermbg=25
-highlight TabLineFill  cterm=None ctermfg=253 ctermbg=237
+highlight TabLine      cterm=None ctermfg=252 ctermbg=235
+highlight TabLineSel   cterm=None ctermfg=254 ctermbg=25
+highlight TabLineFill  cterm=None ctermfg=252 ctermbg=235
 
 " ===================================================================
 " Options for GVIM
