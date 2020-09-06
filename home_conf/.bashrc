@@ -47,7 +47,7 @@ alias screen-flow-offs='screen -X defflow off; screen -X flow off'
 alias update-ssh-auth-sock="$BLADE_DIR/bin/update-ssh-auth-sock.py > ~/.ssh-auth-sock-env && . ~/.ssh-auth-sock-env"
 
 # grep -----------------------------------------------------------
-export GREP_COLOR='1;37;41'
+export GREP_COLOR='1;47;41'
 alias grep='grep -E --color=auto'
 
 # PATH -----------------------------------------------------------
