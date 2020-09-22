@@ -5,5 +5,16 @@
 	default = simple
 [color]
 	ui = always
+
+[color "diff"]
+	meta = 39
+	frag = cyan
+	old = red
+	new = green
+
+[color "status"]
+	changed = 214
+	untracked = 39
+
 [include]
 	path = .gitconfig.local
