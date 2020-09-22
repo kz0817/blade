@@ -1,0 +1,30 @@
+set line-graphics = utf-8
+set diff-highlight = true
+
+# Override the default terminal colors to white on black.
+color default           color15  black
+#color cursor            color15  color27
+color cursor            color0 color254
+color status            color15  black
+color date              color76  black
+color author            color45  black
+color title-focus       color15  color18
+color title-blur        color15  color235
+color file              color15  black
+color directory         color15  black
+
+color graph-commit      color252 black
+
+color  diff-header      color15 black
+color  diff-chunk       cyan    black
+
+color diff.date         color15  black
+color diff-date         color15  black
+#color diff-commit       color15  black
+#color diff-parent       color15  black
+#color diff-tree         color15  black
+#color diff-commiter     color15  black
+#
+#color tree-header       color15  black
+#color tree-dir          color15  black
+##color tree-file         color15  black
