@@ -128,7 +128,7 @@ highlight MatchParen   ctermfg=White ctermbg=88
 highlight Folded       ctermfg=246   ctermbg=None guifg=Cyan
 highlight Terminal     ctermfg=white ctermbg=232
 highlight QuickFixLine cterm=none ctermfg=Black ctermbg=254
-highlight TODO         ctermfg=Black ctermbg=Green
+highlight TODO         ctermfg=Green ctermbg=Black
 
 highlight Pmenu        ctermfg=254 ctermbg=237
 highlight PmenuSel     ctermfg=White ctermbg=27
@@ -139,10 +139,10 @@ highlight PmenuThumb   ctermbg=234
 highlight Underlined   ctermfg=White cterm=Underline  guifg=White              gui=Underline
 highlight htmlEndTag   ctermfg=Cyan                 guifg=Cyan                 gui=NONE
 
-highlight DiffAdd      ctermbg=DarkRed
-highlight DiffChange   ctermbg=DarkBlue
-highlight DiffText     ctermbg=DarkBlue
-highlight DiffDelete   ctermbg=Black ctermfg=Gray
+highlight DiffAdd      ctermbg=22
+highlight DiffText     ctermfg=0 ctermbg=82
+highlight DiffChange   ctermbg=22
+highlight DiffDelete   ctermfg=124 ctermbg=124
 
 "Used in JavaScript
 highlight javaScript   ctermfg=White                guifg=White                gui=NONE
