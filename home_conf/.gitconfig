@@ -4,7 +4,8 @@
 [push]
 	default = simple
 [color]
-	ui = always
+#	ui = always
+	ui = auto
 
 [color "diff"]
 	meta = 39
