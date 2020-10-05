@@ -1,21 +1,30 @@
 [core]
-	pager = 
+	pager = less
 	editor = vim
 [push]
 	default = simple
 [color]
-#	ui = always
 	ui = auto
 
 [color "diff"]
-	meta = 39
+	meta = 117
 	frag = cyan
 	old = red
 	new = green
 
 [color "status"]
 	changed = 214
-	untracked = 39
+	untracked = 117
+
+[color "decorate"]
+	head = 87
+	branch = 119
+	remotebranch = 117
+
+[color "branch"]
+	current = green
+	branch = white
+	remote = 117
 
 [include]
 	path = .gitconfig.local
