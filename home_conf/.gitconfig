@@ -26,5 +26,8 @@
 	branch = white
 	remote = 117
 
+[log]
+	graphColors = 214,119,226,117,212,87,254
+
 [include]
 	path = .gitconfig.local
