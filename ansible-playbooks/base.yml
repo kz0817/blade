@@ -3,6 +3,8 @@
   roles:
     - role: debian
       when: ansible_distribution == "Debian"
+    - role: amazon
+      when: ansible_distribution == "Amazon"
     - role: user
       when: username is defined
       tags: user

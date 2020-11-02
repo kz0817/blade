@@ -1,0 +1,8 @@
+---
+- name: Install packages for Amazon Linux
+  yum:
+    name:
+      - python3
+      - git
+      - make
+      - gnupg
