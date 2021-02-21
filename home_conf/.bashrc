@@ -28,6 +28,8 @@ else
   PS1="[\h]\w $PMARK "
 fi
 
+# disable bell -------------------------------------------------
+bind 'set bell-style none'
 
 # blade --------------------------------------------------------
 if [ -z "$BLADE_DIR" ]; then

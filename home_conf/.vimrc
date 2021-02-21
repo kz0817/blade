@@ -4,6 +4,9 @@ set hlsearch
 "set numberwidth=6
 set winwidth=80
 
+" Turn off bell
+set visualbell t_vb=
+
 " Turn off Visual bell
 "set novb
 
