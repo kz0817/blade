@@ -32,3 +32,9 @@
 
 [include]
 	path = .gitconfig.local
+
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = 52 bold red
+	newNormal = green bold
+	newHighlight = green bold 22
