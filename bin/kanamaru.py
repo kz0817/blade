@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import subprocess
+import os
 
 MORE_HELP='''
 Kanamaru, a markdown viewer
@@ -90,7 +91,7 @@ def create_html(args, body_core):
         html = HTML_TEMPLATE % (css, body_core)
         f.write(html)
 
-def run(args):
+def process_input_file(args):
     cmd = ['npx', 'markdown-it', '/dev/stdin']
 
     params = {
@@ -101,7 +102,40 @@ def run(args):
     result = subprocess.run(cmd, **params)
     body_core = result.stdout.decode()
 
-    html = create_html(args, body_core)
+    create_html(args, body_core)
+
+
+def launch_inotifywait(args):
+    abs_path = os.path.abspath(args.infile.name)
+    base_dir = os.path.dirname(abs_path)
+    cmd = ['inotifywait', '-m', '-e', 'modify', base_dir]
+    args.proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+    args.file_name =  os.path.basename(abs_path)
+    print(f'Monitor dir : {base_dir}')
+    print(f'Monitor file: {args.file_name}')
+
+
+def wait_update(args):
+    while True:
+        line = args.proc.stdout.readline().decode().strip()
+        words = line.split()
+        if len(words) != 3:
+            continue
+        dirname, event, filename = words
+        if filename == args.file_name and event == 'MODIFY':
+            print(f'Detect modification: {filename}')
+            break
+
+
+def run(args):
+    if args.monitor:
+        launch_inotifywait(args)
+
+    while (True):
+        process_input_file(args)
+        if not args.monitor:
+            break
+        wait_update(args)
 
 
 def main():
@@ -112,6 +146,7 @@ def main():
     parser.add_argument('-o', '--out-filename')
     parser.add_argument('-s', '--style', choices=CSS_MAP.keys(),
                         default='default')
+    parser.add_argument('-m', '--monitor', action='store_true')
     args = parser.parse_args()
 
     if args.more_help:
