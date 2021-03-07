@@ -3,12 +3,17 @@ import argparse
 import subprocess
 import os
 
-MORE_HELP='''
-Kanamaru, a markdown viewer
+DESCRIPTION = 'kanamaru, a converter from a markdown file to an HTML file'
 
+EPILOG = '''
 This program uses markdown-it. You can install it as
 
     npm install markdown-it --save
+
+The -m or --monitor option requires inotifywait command. On Debin/Ubuntu,
+you can install it as
+
+    sudo apt install inotify-tools
 '''
 
 HTML_TEMPLATE = '''
@@ -90,6 +95,7 @@ def create_html(args, body_core):
     with open(args.out_filename, 'w') as f:
         html = HTML_TEMPLATE % (css, body_core)
         f.write(html)
+    print(f'Wrote: {args.out_filename}')
 
 def process_input_file(args):
     cmd = ['npx', 'markdown-it', '/dev/stdin']
@@ -137,21 +143,24 @@ def run(args):
             break
         wait_update(args)
 
+class Formatter(argparse.ArgumentDefaultsHelpFormatter,
+                argparse.RawDescriptionHelpFormatter):
+    pass
 
 def main():
-    parser = argparse.ArgumentParser()
+    argparser_param = {
+        'description': DESCRIPTION,
+        'epilog': EPILOG,
+        'formatter_class': Formatter,
+    }
+    parser = argparse.ArgumentParser(**argparser_param)
     parser.add_argument('infile', type=argparse.FileType('r'), default='-')
-    parser.add_argument('--more-help', action='store_true')
-    parser.add_argument('-p', '--port', default=8000)
     parser.add_argument('-o', '--out-filename')
     parser.add_argument('-s', '--style', choices=CSS_MAP.keys(),
-                        default='default')
-    parser.add_argument('-m', '--monitor', action='store_true')
+                        default='default', help='style name')
+    parser.add_argument('-m', '--monitor', action='store_true',
+                        help='recreate if infile is modified')
     args = parser.parse_args()
-
-    if args.more_help:
-        print(MORE_HELP)
-        return
 
     if args.out_filename is None:
         args.out_filename = args.infile.name + '.html'
