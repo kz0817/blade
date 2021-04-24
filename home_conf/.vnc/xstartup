@@ -9,4 +9,5 @@ unset STY
 xsetroot -solid darkgray
 urxvt &
 fcitx &
-i3 &
+#i3 &
+jwm &
