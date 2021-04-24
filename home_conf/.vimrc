@@ -185,14 +185,19 @@ augroup mine
   au BufNewFile,BufRead *.spec    :set noexpandtab
   au BufNewFile,BufRead *.c       :set expandtab
   au BufNewFile,BufRead *.c       :set ts=4
+  au BufNewFile,BufRead *.c       :set winwidth=100
   au BufNewFile,BufRead *.cc      :set expandtab
   au BufNewFile,BufRead *.cc      :set ts=4
+  au BufNewFile,BufRead *.cc      :set winwidth=100
   au BufNewFile,BufRead *.h       :set expandtab
   au BufNewFile,BufRead *.h       :set ts=4
+  au BufNewFile,BufRead *.h       :set winwidth=100
   au BufNewFile,BufRead *.cpp     :set expandtab
   au BufNewFile,BufRead *.cpp     :set ts=4
+  au BufNewFile,BufRead *.cpp     :set winwidth=100
   au BufNewFile,BufRead *.hpp     :set expandtab
   au BufNewFile,BufRead *.hpp     :set ts=4
+  au BufNewFile,BufRead *.hpp     :set winwidth=100
   au BufNewFile,BufRead *.cu      :set expandtab
   au BufNewFile,BufRead *.cu      :set ts=4
   au BufNewFile,BufRead *.py      :set expandtab
