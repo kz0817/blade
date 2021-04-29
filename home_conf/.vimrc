@@ -85,7 +85,8 @@ syntax enable
 " Syntax elements
 highlight Normal                                    guifg=White  guibg=Black   gui=NONE
 highlight Constant     ctermfg=Cyan                 guifg=Cyan                 gui=NONE
-highlight Error        ctermfg=White   ctermbg=Red  guifg=White  guibg=Red     gui=NONE
+highlight Error        ctermfg=White ctermbg=DarkRed guifg=White guibg=Red     gui=NONE
+highlight WarningMsg   ctermfg=214                  guifg=White  guibg=Red     gui=NONE
 highlight Special      ctermfg=Yellow               guifg=Yellow               gui=NONE
 highlight Comment      ctermfg=Green                guifg=#00ff00              gui=NONE
 highlight Statement    ctermfg=Yellow               guifg=Yellow               gui=NONE
@@ -95,7 +96,7 @@ highlight Function     ctermfg=Cyan                 guifg=Cyan                 g
 highlight SpecialKey   ctermfg=242                  guifg=DarkGray             gui=NONE
 highlight Delimiter    ctermfg=Cyan                 guifg=Cyan                 gui=NONE
 highlight String       ctermfg=Cyan                 guifg=Cyan                 gui=NONE
-highlight Search       ctermfg=Black ctermbg=226    guifg=Blue                 gui=NONE
+highlight Search       ctermfg=Black ctermbg=Yellow guifg=Blue                 gui=NONE
 "highlight PreProc      ctermfg=Yellow               guifg=Yellow
 "highlight Label        ctermfg=Cyan
 "highlight Tag          ctermfg=Cyan
