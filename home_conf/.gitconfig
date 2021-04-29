@@ -9,9 +9,9 @@
 [color "diff"]
 	commit = 226
 	meta = 117
-	frag = cyan
-	old = red
-	new = green
+	frag = 117
+	old = red bold
+	new = green bold
 
 [color "status"]
 	changed = 214
@@ -23,7 +23,7 @@
 	remotebranch = 117
 
 [color "branch"]
-	current = green
+	current = green bold
 	branch = white
 	remote = 117
 
@@ -35,6 +35,6 @@
 
 [color "diff-highlight"]
 	oldNormal = red bold
-	oldHighlight = 52 bold red
+	oldHighlight = 251 red
 	newNormal = green bold
 	newHighlight = green bold 22
