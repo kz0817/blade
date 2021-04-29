@@ -183,28 +183,11 @@ augroup mine
   au BufNewFile,BufRead *.s       :set noexpandtab
   au BufNewFile,BufRead *.spec    :set ts=8
   au BufNewFile,BufRead *.spec    :set noexpandtab
-  au BufNewFile,BufRead *.c       :set expandtab
-  au BufNewFile,BufRead *.c       :set ts=4
-  au BufNewFile,BufRead *.c       :set winwidth=100
-  au BufNewFile,BufRead *.cc      :set expandtab
-  au BufNewFile,BufRead *.cc      :set ts=4
-  au BufNewFile,BufRead *.cc      :set winwidth=100
-  au BufNewFile,BufRead *.h       :set expandtab
-  au BufNewFile,BufRead *.h       :set ts=4
-  au BufNewFile,BufRead *.h       :set winwidth=100
-  au BufNewFile,BufRead *.cpp     :set expandtab
-  au BufNewFile,BufRead *.cpp     :set ts=4
-  au BufNewFile,BufRead *.cpp     :set winwidth=100
-  au BufNewFile,BufRead *.hpp     :set expandtab
-  au BufNewFile,BufRead *.hpp     :set ts=4
-  au BufNewFile,BufRead *.hpp     :set winwidth=100
+  au BufNewFile,BufRead *.h,*.hpp,*.c,*.cpp,*.cc,*.java set expandtab ts=4 winwidth=100
   au BufNewFile,BufRead *.cu      :set expandtab
   au BufNewFile,BufRead *.cu      :set ts=4
   au BufNewFile,BufRead *.py      :set expandtab
   au BufNewFile,BufRead *.py      :set ts=4
-  au BufNewFile,BufRead *.java    :set expandtab
-  au BufNewFile,BufRead *.java    :set ts=4
-  au BufNewFile,BufRead *.java    :set winwidth=100
   au BufNewFile,BufRead *.scala   :set expandtab
   au BufNewFile,BufRead *.scala   :set ts=2
   au BufNewFile,BufRead *.kt      :set expandtab
