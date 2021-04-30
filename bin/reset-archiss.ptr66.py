@@ -47,6 +47,8 @@ def run(args):
 
     addr = get_usb_addr(args)
     print(f'Found {args.product}: {addr}')
+    if args.dry_run:
+        return
 
     unbind(addr)
 
@@ -59,6 +61,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--product', default=DEFAULT_PRODUCT)
     parser.add_argument('-s', '--sleep-time', default=3, type=float)
+    parser.add_argument('-n', '--dry-run', action='store_true')
     args = parser.parse_args()
     run(args)
 
