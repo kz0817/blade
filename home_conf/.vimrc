@@ -130,7 +130,7 @@ highlight SpellLocal   ctermfg=White ctermbg=214  guifg=White guibg=Yellow
 
 highlight MatchParen   ctermfg=White ctermbg=88
 highlight Folded       ctermfg=246   ctermbg=None guifg=Cyan
-highlight Terminal     ctermfg=white ctermbg=232
+highlight Terminal     ctermfg=white
 highlight QuickFixLine cterm=none ctermfg=Black ctermbg=254
 highlight TODO         ctermfg=Green ctermbg=Black
 
