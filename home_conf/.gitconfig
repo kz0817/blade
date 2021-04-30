@@ -14,6 +14,7 @@
 	new = green bold
 
 [color "status"]
+	added = green bold
 	changed = 214
 	untracked = 117
 
@@ -35,6 +36,6 @@
 
 [color "diff-highlight"]
 	oldNormal = red bold
-	oldHighlight = 251 red
+	oldHighlight = 252 red
 	newNormal = green bold
 	newHighlight = green bold 22
