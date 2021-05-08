@@ -17,6 +17,7 @@
 	added = green bold
 	changed = 214
 	untracked = 117
+	unmerged = 214
 
 [color "decorate"]
 	head = 87
