@@ -143,6 +143,7 @@ def run(args):
         if not args.monitor:
             break
         wait_update(args)
+        args.infile = open(args.file_name, 'r') # reload the file
 
 class Formatter(argparse.ArgumentDefaultsHelpFormatter,
                 argparse.RawDescriptionHelpFormatter):
