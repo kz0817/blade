@@ -122,10 +122,12 @@ if [ $OS_TYPE = "Darwin" ]; then
 fi
 
 # GNU screen: title ----------------------------------------------
-if [ -n "$NICKNAME" ]; then
-   export SCREEN_HOST=$NICKNAME:
-else
-   export SCREEN_HOST=`echo $HOSTNAME | sed "s,\..*$,,"`:
+if [ -z "$SCREEN_HOST" ]; then
+  if [ -n $NICNAME ]; then
+    export SCREEN_HOST=$NICKNAME:
+  else
+    export SCREEN_HOST=`echo $HOSTNAME | sed "s,\..*$,,"`:
+  fi
 fi
 
 if [ "$TERM" = "screen" -o "$TERM" = "screen-256color" ]; then
