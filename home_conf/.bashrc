@@ -121,6 +121,12 @@ if [ $OS_TYPE = "Darwin" ]; then
   export LSCOLORS=GxCxcxdxDxegedabagHfHf
 fi
 
+# MAKE -----------------------------------------------------------
+if [ -z "$MAKEFLAGS" ]; then
+  NUM_CPU=`cat /proc/cpuinfo | grep ^processor | wc -l`
+  export MAKEFLAGS="-j${NUM_CPU}"
+fi
+
 # GNU screen: title ----------------------------------------------
 if [ -z "$SCREEN_HOST" ]; then
   if [ -n $NICNAME ]; then
