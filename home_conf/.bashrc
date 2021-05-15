@@ -129,11 +129,7 @@ fi
 
 # GNU screen: title ----------------------------------------------
 if [ -z "$SCREEN_HOST" ]; then
-  if [ -n $NICNAME ]; then
-    export SCREEN_HOST=$NICKNAME:
-  else
-    export SCREEN_HOST=`echo $HOSTNAME | sed "s,\..*$,,"`:
-  fi
+  export SCREEN_HOST=`echo $HOSTNAME | sed "s,\..*$,,"`:
 fi
 
 if [ "$TERM" = "screen" -o "$TERM" = "screen-256color" ]; then
