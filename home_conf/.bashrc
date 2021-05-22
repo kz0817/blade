@@ -8,6 +8,9 @@ fi
 alias ja='export LANG=ja_JP.UTF-8; export LANGUAGE=ja_JP.UTF-8; export LC_ALL=ja_JP.UTF-8'
 alias en='export LANG=en_US.UTF-8; export LANGUAGE=en_US.UTF-8; export LC_ALL=en_US.UTF-8'
 
+# is this interactive shell or not -------------------------------
+echo $- | grep -q i && INTERACTIVE=1 || INTERACTIVE=0
+
 # Source the Machine independent setting  ------------------------
 if [ -f .bashrc.local ]; then
   source .bashrc.local
@@ -29,7 +32,9 @@ else
 fi
 
 # disable bell -------------------------------------------------
-bind 'set bell-style none'
+if [ $INTERACTIVE -eq 1 ]; then
+  bind 'set bell-style none'
+fi
 
 # blade --------------------------------------------------------
 if [ -z "$BLADE_DIR" ]; then
