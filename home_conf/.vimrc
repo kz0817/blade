@@ -123,7 +123,7 @@ highlight link StatusLineTerm   StatusLine
 highlight link StatusLineTermNC StatusLineNC
 highlight VertSplit    cterm=None ctermfg=233 ctermbg=233
 
-highlight SpellBad     ctermfg=White ctermbg=Red  guifg=White guibg=Red
+highlight SpellBad     ctermfg=White ctermbg=DarkRed  guifg=White guibg=Red
 highlight SpellCap     ctermfg=White ctermbg=163  guifg=White guibg=Blue
 highlight SpellRare    ctermfg=White ctermbg=214  guifg=White guibg=Yellow
 highlight SpellLocal   ctermfg=White ctermbg=214  guifg=White guibg=Yellow
