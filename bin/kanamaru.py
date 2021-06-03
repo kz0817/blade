@@ -83,6 +83,12 @@ pre {
 code {
   background-color: #080808;
 }
+a {
+    color: cyan
+}
+a:link {
+    color: cyan
+}
 '''
 
 CSS_MAP = {
