@@ -73,6 +73,9 @@ pre {
 code {
   background-color: #f0f0f0;
 }
+a {
+  color: #0000e8;
+}
 table th {
   background-color: #e8e8e8;
 }
@@ -97,10 +100,7 @@ code {
   background-color: #080808;
 }
 a {
-    color: cyan
-}
-a:link {
-    color: cyan
+  color: #40c0e0;
 }
 table th {
   background-color: #404040;
