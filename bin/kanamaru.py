@@ -53,6 +53,13 @@ pre code {
 ul {
   margin: 0em;
 }
+table {
+  border-collapse: collapse;
+}
+table th, table td {
+  border: solid 1px;
+  padding: 0.2em 0.5em;
+}
 '''
 
 CSS_LIGHT = CSS_COMMON + '''
@@ -65,6 +72,12 @@ pre {
 }
 code {
   background-color: #f0f0f0;
+}
+table th {
+  background-color: #e8e8e8;
+}
+table th, table td {
+  border-color: #a0a0a0;
 }
 '''
 
@@ -88,6 +101,12 @@ a {
 }
 a:link {
     color: cyan
+}
+table th {
+  background-color: #404040;
+}
+table th, table td {
+  border-color: #808080;
 }
 '''
 
