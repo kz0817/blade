@@ -188,6 +188,7 @@ augroup mine
     \ *.h,*.hpp,*.c,*.cpp,*.cc,*.java
     \ set expandtab
     \     ts=4
+    \     shiftwidth=4
     \     winwidth=100
   au BufNewFile,BufRead *.cu      :set expandtab
   au BufNewFile,BufRead *.cu      :set ts=4
