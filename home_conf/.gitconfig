@@ -37,6 +37,6 @@
 
 [color "diff-highlight"]
 	oldNormal = red bold
-	oldHighlight = 252 124
+	oldHighlight = 253 124
 	newNormal = green bold
-	newHighlight = 253 22
+	newHighlight = 254 22
