@@ -96,7 +96,7 @@ highlight Function     ctermfg=Cyan                 guifg=Cyan                 g
 highlight SpecialKey   ctermfg=242                  guifg=DarkGray             gui=NONE
 highlight Delimiter    ctermfg=Cyan                 guifg=Cyan                 gui=NONE
 highlight String       ctermfg=Cyan                 guifg=Cyan                 gui=NONE
-highlight Search       ctermfg=Black ctermbg=Yellow guifg=Blue                 gui=NONE
+highlight Search       ctermfg=16 ctermbg=Yellow guifg=Blue                 gui=NONE
 "highlight PreProc      ctermfg=Yellow               guifg=Yellow
 "highlight Label        ctermfg=Cyan
 "highlight Tag          ctermfg=Cyan
