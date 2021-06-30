@@ -144,8 +144,8 @@ highlight Underlined   ctermfg=White cterm=Underline  guifg=White              g
 highlight htmlEndTag   ctermfg=Cyan                 guifg=Cyan                 gui=NONE
 
 highlight DiffAdd      ctermbg=22
-highlight DiffText     ctermfg=16 ctermbg=159
-highlight DiffChange   ctermbg=18
+highlight DiffText     ctermfg=None ctermbg=25
+highlight DiffChange   ctermbg=17
 highlight DiffDelete   ctermfg=52 ctermbg=52
 
 "Used in JavaScript
