@@ -57,6 +57,7 @@ set wildmenu
 set wildmode=longest:list,full
 
 set completeopt=menu
+set diffopt=internal,filler,algorithm:histogram,indent-heuristic
 
 " Display Status line
 set statusline=%!GetFileColor()
