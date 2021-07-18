@@ -41,6 +41,7 @@ if [ -z "$BLADE_DIR" ]; then
   export BLADE_DIR=~/misc/blade
 fi
 
+
 # Editor --------------------------------------------------------
 export EDITOR=vim
 export SVN_EDITOR=$EDITOR

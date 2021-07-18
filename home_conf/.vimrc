@@ -230,6 +230,11 @@ map <Down>  <Nop>
 " ===================================================================
 " Functions
 " ===================================================================
+highlight InsertMode       cterm=None ctermfg=232 ctermbg=106
+highlight NormalMode       cterm=None ctermfg=232 ctermbg=249
+highlight VisualMode       cterm=None ctermfg=0   ctermbg=214
+highlight ReplaceMode      cterm=None ctermfg=255 ctermbg=88
+
 highlight ActiveSLPath     cterm=None ctermfg=25  ctermbg=255
 highlight InactiveSLPath   cterm=None ctermfg=233 ctermbg=250
 
@@ -248,7 +253,23 @@ highlight InactiveSLType   cterm=None ctermfg=15  ctermbg=242
 highlight ActiveSLPos      cterm=None ctermfg=233 ctermbg=81
 highlight InactiveSLPos    cterm=None ctermfg=234 ctermbg=250
 
+function! GetMode()
+  let mode = mode()
+  if mode == 'i'
+    return '%#InsertMode#' . ' I '
+  elseif mode == 'n'
+    return '%#NormalMode#' . ' N '
+  elseif mode == 'v' || mode == 'V'
+    return '%#VisualMode#' . ' V '
+  elseif mode == 'R'
+    return '%#ReplaceMode#' . ' R '
+  else
+    return mode
+  endif
+endfunction
+
 function! SetStatusLine(mode)
+  let sl = ''
   if a:mode == 'on'
     let c_path = '%#ActiveSLPath#'
     let c_attr = '%#ActiveSLAttr#'
@@ -256,6 +277,7 @@ function! SetStatusLine(mode)
     let c_fmt  = '%#ActiveSLFmt#'
     let c_type = '%#ActiveSLType#'
     let c_pos  = '%#ActiveSLPos#'
+    let sl = sl . GetMode()
   else
     let c_path = '%#InactiveSLPath#'
     let c_attr = '%#InactiveSLAttr#'
@@ -264,7 +286,6 @@ function! SetStatusLine(mode)
     let c_type = '%#InactiveSLType#'
     let c_pos  = '%#InactiveSLPos#'
   endif
-  let sl = ''
   let sl = sl . c_path . ' %h%f '
   let sl = sl . c_attr . '%m%r'
   let sl = sl . c_base . '%='
