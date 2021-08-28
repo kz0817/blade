@@ -66,6 +66,10 @@ set statusline=%!GetFileColor()
 " Save the cursor position in quitting
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
+" completion option
+" 'i' (include) is removed compared to the default
+set complete=.,w,b,u,t
+
 " ===================================================================
 " Setting about Tab
 " ===================================================================
