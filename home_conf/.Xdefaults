@@ -45,6 +45,10 @@ XTerm*eightBitOutput: true
 XTerm*font: rk14
 XTerm*boldFont: rk14
 
+XTerm*faceName: DejaVu Sans Mono
+XTerm*faceNameDoubleSize: MotoyaLCedar
+XTerm*faceSize: 10
+
 URxvt.foreground: white
 URxvt.background: black
 URxvt.scrollBar: false
