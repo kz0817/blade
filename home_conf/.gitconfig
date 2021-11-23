@@ -10,11 +10,11 @@
 	commit = 226
 	meta = 117
 	frag = 117
-	old = red bold
-	new = green bold
+	old = 217
+	new = 118
 
 [color "status"]
-	added = green bold
+	added = 118
 	changed = 214
 	untracked = 117
 	unmerged = 214
@@ -25,7 +25,7 @@
 	remotebranch = 117
 
 [color "branch"]
-	current = green bold
+	current = 118
 	branch = white
 	remote = 117
 
@@ -36,7 +36,7 @@
 	path = .gitconfig.local
 
 [color "diff-highlight"]
-	oldNormal = red bold
+	oldNormal = 217
 	oldHighlight = 253 124
-	newNormal = green bold
+	newNormal = 118
 	newHighlight = 254 22
