@@ -58,7 +58,11 @@ set wildmode=longest:list,full
 
 set completeopt=menu
 if v:version > 800
-  set diffopt=internal,filler,algorithm:histogram,indent-heuristic
+  if has('macunix')
+    set diffopt=filler
+  else
+    set diffopt=internal,filler,algorithm:histogram,indent-heuristic
+  endif
 endif
 
 " Display Status line
