@@ -274,7 +274,7 @@ function! GetMode()
   elseif mode == 'R'
     return '%#ReplaceMode#' . ' R '
   else
-    return mode
+    return '%#NormalMode#' . ' ' . mode . ' '
   endif
 endfunction
 
