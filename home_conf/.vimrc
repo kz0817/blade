@@ -263,19 +263,12 @@ highlight InactiveSLType   cterm=None ctermfg=15  ctermbg=242
 highlight ActiveSLPos      cterm=None ctermfg=233 ctermbg=81
 highlight InactiveSLPos    cterm=None ctermfg=234 ctermbg=250
 
+let s:mode_color_map = {'i': '%#InsertMode#', 'v': '%#VisualMode#', 'V': '%#VisualMode#', 'R': '%#ReplaceMode#'}
+
 function! GetMode()
   let mode = mode()
-  if mode == 'i'
-    return '%#InsertMode#' . ' I '
-  elseif mode == 'n'
-    return '%#NormalMode#' . ' N '
-  elseif mode == 'v' || mode == 'V'
-    return '%#VisualMode#' . ' V '
-  elseif mode == 'R'
-    return '%#ReplaceMode#' . ' R '
-  else
-    return '%#NormalMode#' . ' ' . mode . ' '
-  endif
+  let color = has_key(s:mode_color_map, mode) ? s:mode_color_map[mode] : '%#NormalMode#'
+  return color . ' ' . mode . ' '
 endfunction
 
 function! SetStatusLine(mode)
