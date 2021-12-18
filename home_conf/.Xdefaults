@@ -55,7 +55,7 @@ URxvt.scrollBar: false
 URxvt.termName: xterm-256color
 !URxvt.font: xft:DejaVu Sans Mono:size=10, xft:Noto Sans CJK JP
 URxvt.font: xft:DejaVu Sans Mono:size=10, xft:MotoyaLCedar:size=9.5
-!URxvt.boldFont: xft:DejaVu Sans Mono:size=10, xft:MotoyaLCedar:size=9.5
+URxvt.boldFont:
 URxvt.letterSpace: -1
 
 ! line color for underline
