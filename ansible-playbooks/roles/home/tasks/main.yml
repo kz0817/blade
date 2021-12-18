@@ -46,7 +46,7 @@
     state: link
 
 - name: Check .bashrc is not link
-  command: test -f ~/.bashrc -a ! -L .bashrc
+  command: test -f ~/.bashrc -a ! -L ~/.bashrc
   register: bashrc_is_not_link
   changed_when: bashrc_is_not_link.rc == 0
   failed_when: false
