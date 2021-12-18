@@ -45,30 +45,6 @@
     dest: ~/bin/diff-highlight
     state: link
 
-- name: Link .vimrc
-  file:
-    src: '{{ blade_dir }}/home_conf/.vimrc'
-    dest: ~/.vimrc
-    state: link
-
-- name: Link .screenrc
-  file:
-    src: '{{ blade_dir }}/home_conf/.screenrc'
-    dest: ~/.screenrc
-    state: link
-
-- name: Link .gdbinit
-  file:
-    src: '{{ blade_dir }}/home_conf/.gdbinit'
-    dest: ~/.gdbinit
-    state: link
-
-- name: Link .gitconfig
-  file:
-    src: '{{ blade_dir }}/home_conf/.gitconfig'
-    dest: ~/.gitconfig
-    state: link
-
 - name: Check .bashrc is not link
   command: test -f ~/.bashrc -a ! -L .bashrc
   register: bashrc_is_not_link
@@ -78,12 +54,6 @@
 - name: Backup .bashrc if needed
   command: mv ~/.bashrc ~/.bashrc.orig
   when: bashrc_is_not_link.rc == 0
-
-- name: Link .bashrc
-  file:
-    src: '{{ blade_dir }}/home_conf/.bashrc'
-    dest: ~/.bashrc
-    state: link
 
 - name: Copy .bash_profile
   copy:
@@ -108,25 +78,22 @@
     path: ~/.vnc
     state: directory
 
-- name: Link .vnc/xstartup
-  file:
-    src: '{{ blade_dir }}/home_conf/.vnc/xstartup'
-    dest: ~/.vnc/xstartup
-    state: link
-
 - name: Create .config/i3/
   file:
     path: ~/.config/i3
     state: directory
 
-- name: Link .config/i3/config
+- name: Link filesr on the home directory
   file:
-    src: '{{ blade_dir }}/home_conf/.config/i3/config'
-    dest: ~/.config/i3/config
+    src: '{{ blade_dir }}/home_conf/{{ item }}'
+    dest: ~/{{ item }}
     state: link
-
-- name: Link .Xdefaults
-  file:
-    src: '{{ blade_dir }}/home_conf/.Xdefaults'
-    dest: ~/.Xdefaults
-    state: link
+  with_items:
+    - .vimrc
+    - .screenrc
+    - .gdbinit
+    - .gitconfig
+    - .bashrc
+    - .Xdefaults
+    - .vnc/xstartup
+    - .config/i3/config
