@@ -52,7 +52,11 @@
   failed_when: false
 
 - name: Backup .bashrc if needed
-  command: mv ~/.bashrc ~/.bashrc.orig
+  copy: remote_src=True src=~/.bashrc dest=~/.bashrc.orig
+  when: bashrc_is_not_link.rc == 0
+
+- name: Remove .bashrc for making a symbolic link
+  file: path=~/.bashrc state=absent
   when: bashrc_is_not_link.rc == 0
 
 - name: Copy .bash_profile
