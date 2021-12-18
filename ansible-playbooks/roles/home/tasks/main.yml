@@ -1,13 +1,13 @@
 ---
-- name: Create misc dir
+- name: Create directories
   file:
-    dest: '{{ misc_dir }}'
+    dest: '{{ item }}'
     state: directory
-
-- name: Create ~/bin
-  file:
-    dest: ~/bin
-    state: directory
+  with_items:
+    - '{{ misc_dir }}'
+    - ~/bin
+    - ~/.vnc
+    - ~/.config/i3
 
 - name: Download blade
   git:
@@ -72,16 +72,6 @@
     src: files/ssh_config
     dest: ~/.ssh/config
     force: no
-
-- name: Create .vnc/
-  file:
-    path: ~/.vnc
-    state: directory
-
-- name: Create .config/i3/
-  file:
-    path: ~/.config/i3
-    state: directory
 
 - name: Link filesr on the home directory
   file:
