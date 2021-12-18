@@ -87,3 +87,4 @@
     - .Xdefaults
     - .vnc/xstartup
     - .config/i3/config
+    - .docker
