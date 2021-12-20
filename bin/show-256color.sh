@@ -1,10 +1,23 @@
 #!/bin/bash
 
+function set_fg_color() {
+    tput setaf $1
+}
+
+function set_bg_color() {
+    tput setab $1
+}
+
+function show_number() {
+    printf "%3d " ${color}
+}
+
 # 16 color
 color=0
 while [ ${color} -lt 16 ]; do
-    for ((i=0; i<8; i++)); do
-        printf "$(tput setaf ${color})%3d " ${color}
+    for in in {0..7}; do
+        set_fg_color ${color}
+        show_number ${color}
         color=$((${color} + 1))
     done
     printf "\n"
@@ -12,8 +25,9 @@ done
 
 # colors
 while [ ${color} -lt 232 ]; do
-    for ((i=0; i<18; i++)); do
-        printf "$(tput setaf ${color})%3d " ${color}
+    for i in {0..35}; do
+        set_fg_color ${color}
+        show_number ${color}
         color=$((${color} + 1))
     done
     printf "\n"
@@ -21,7 +35,8 @@ done
 
 # gray scale
 while [ ${color} -lt 256 ]; do
-    printf "$(tput setaf ${color})%3d " ${color}
+    set_fg_color ${color}
+    show_number ${color}
     color=$((${color} + 1))
 done
 printf "\n"
@@ -44,36 +59,29 @@ done
 printf "\n"
 
 # colors
-tput setaf 15
 while [ ${color} -lt 232 ]; do
-    for ((i=0; i<18; i++)); do
-        printf "$(tput setab ${color})%3d " ${color}
-        color=$((${color} + 1))
+    line_head_color=${color}
+    for fg_color in 15 0; do
+        color=${line_head_color}
+        for in in {0..35}; do
+            set_fg_color ${fg_color}
+            set_bg_color ${color}
+            show_number ${color}
+            color=$((${color} + 1))
+        done
+        printf "\n"
     done
-    printf "\n"
-done
-
-color=16
-tput setaf 0
-while [ ${color} -lt 232 ]; do
-    for ((i=0; i<18; i++)); do
-        printf "$(tput setab ${color})%3d " ${color}
-        color=$((${color} + 1))
-    done
-    printf "\n"
 done
 
 # gray scale
-tput setaf 15
-while [ ${color} -lt 244 ]; do
-      printf "$(tput setab ${color})%3d " ${color}
-      color=$((${color} + 1))
+line_head_color=${color}
+for fg_color in 15 0; do
+    color=${line_head_color}
+    for i in {0..23}; do
+        set_fg_color ${fg_color}
+        set_bg_color ${color}
+        show_number ${color}
+        color=$((${color} + 1))
+    done
+    printf "\n"
 done
-printf "\n"
-
-tput setaf 0
-while [ ${color} -lt 256 ]; do
-      printf "$(tput setab ${color})%3d " ${color}
-      color=$((${color} + 1))
-done
-printf "\n"
