@@ -30,7 +30,7 @@
 	remote = 117
 
 [log]
-	graphColors = 214,119,226,117,212,87,254
+	graphColors = 218,118,226,75,177,87,254
 
 [include]
 	path = .gitconfig.local
