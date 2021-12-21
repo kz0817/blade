@@ -63,7 +63,7 @@ while [ ${color} -lt 232 ]; do
     line_head_color=${color}
     for fg_color in 15 0; do
         color=${line_head_color}
-        for in in {0..35}; do
+        for in in {0..5}; do
             set_fg_color ${fg_color}
             set_bg_color ${color}
             show_number ${color}
