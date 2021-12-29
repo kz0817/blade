@@ -128,7 +128,7 @@ if [ $OS_TYPE = "Darwin" ]; then
 fi
 
 # MAKE -----------------------------------------------------------
-if [ -z "$MAKEFLAGS" ]; then
+if [ $OS_TYPE = "Linux" -a -z "$MAKEFLAGS" ]; then
   NUM_CPU=`cat /proc/cpuinfo | grep ^processor | wc -l`
   export MAKEFLAGS="-j${NUM_CPU}"
 fi
