@@ -5,10 +5,17 @@ import argparse
 import sys
 
 
+def put_to_stderr(msg):
+    sys.stderr.write(msg + '\n')
+
 def verbose_msg(args, msg):
     if not args.verbose:
         return
-    sys.stderr.write(msg + '\n')
+    put_to_stderr(msg)
+
+
+def error_msg(msg):
+    put_to_stderr(msg)
 
 
 def get_name_and_parent_pid(pid):
@@ -96,7 +103,7 @@ def main(args):
         show_result(args, path)
         break
     else:
-        verbose_msg("Failed to find ssh auth sock.")
+        error_msg("Failed to find ssh auth sock.")
         return -1
 
 def start():
