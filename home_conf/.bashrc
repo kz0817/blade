@@ -52,7 +52,7 @@ export SVN_EDITOR=$EDITOR
 # screen ---------------------------------------------------------
 alias screen='screen -U'
 alias screen-flow-offs='screen -X defflow off; screen -X flow off'
-alias update-ssh-auth-sock="$BLADE_DIR/bin/update-ssh-auth-sock.py > ~/.ssh-auth-sock-env && . ~/.ssh-auth-sock-env"
+alias update-ssh-auth-sock="$BLADE_DIR/bin/update-ssh-auth-sock.py -v > ~/.ssh-auth-sock-env && . ~/.ssh-auth-sock-env"
 
 # grep -----------------------------------------------------------
 export GREP_COLOR='1;47;41'

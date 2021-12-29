@@ -2,6 +2,13 @@
 import os
 import re
 import argparse
+import sys
+
+
+def verbose_msg(args, msg):
+    if not args.verbose:
+        return
+    sys.stderr.write(msg + '\n')
 
 
 def get_name_and_parent_pid(pid):
@@ -80,18 +87,16 @@ def main(args):
     else:
         sshd_pids = get_sshd_pids_from_all()
 
-    if args.verbose:
-        print("sshd or ssh-agent PIDs: %s" % sshd_pids)
+    verbose_msg(args, "found: sshd or ssh-agent PIDs: %s" % sshd_pids)
 
     for pid, path in get_ssh_auth_socks():
-        if args.verbose:
-            print(path)
+        verbose_msg(args, "-> auth sock: %s" % path)
         if pid not in sshd_pids:
             continue
         show_result(args, path)
         break
     else:
-        print("Failed to find ssh auth sock.")
+        verbose_msg("Failed to find ssh auth sock.")
         return -1
 
 def start():
