@@ -1,4 +1,4 @@
-escape ^s^s
+escape ^Tt
 startup_message off
 
 # %`   : result of backtick command
