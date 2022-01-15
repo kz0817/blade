@@ -35,3 +35,17 @@
 # Setup software (in the container)
     cd /blade/ansible-playbooks
     ansible-playbook -i localhost, -c local zabbix-server.yml -e 'ansible_python_interpreter=/usr/bin/python3'
+
+
+## Move Maria DB storage to the directory on a HDD to reduce write operations to SSD
+Create the directory on the HOST machie
+
+    ZABBIX_DATA_DIR=/store/zabbix-data
+    mkdir ${ZABBIX_DATA_DIR}
+    chmod o+w ${ZABBIX_DATA_DIR}
+    lxc config device add ${NAME} data disk  source=${ZABBIX_DATA_DIR} path=/data
+
+Move and link the Maria DB directory on the container
+
+    mv /var/lib/mysql /data
+    ln -s /data/mysql /var/lib/mysql
