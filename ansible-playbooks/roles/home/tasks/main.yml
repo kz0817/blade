@@ -75,7 +75,11 @@
   copy:
     src: files/ssh_config
     dest: ~/.ssh/config
-    force: no
+
+- name: Create .ssh/conf.d
+  file:
+    path: ~/.ssh/conf.d
+    state: directory
 
 - name: Link filesr on the home directory
   file:
