@@ -10,3 +10,5 @@
       - screen
       - make
       - gnupg
+      - vim
+      - vim-fugitive
