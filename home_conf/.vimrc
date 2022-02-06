@@ -221,10 +221,9 @@ augroup mine
   au BufNewFile,BufRead build.xml :set ts=4
   "autocmd BufReadPost *.tex     :setlocal spell spelllang=en_us
 
-  au WinEnter * setlocal statusline=%!SetStatusLine('on')
-  au WinLeave * setlocal statusline=%!SetStatusLine('off')
 augroup END
-set statusline=%!SetStatusLine('on')
+set statusline=%!SetStatusLine()
+
 
 " ===================================================================
 " Key mapping
@@ -275,9 +274,10 @@ function! GetMode()
   return color . ' ' . mode . ' '
 endfunction
 
-function! SetStatusLine(mode)
+function! SetStatusLine()
+  let is_active = (win_getid() == g:statusline_winid)
   let sl = ''
-  if a:mode == 'on'
+  if is_active
     let c_path = '%#ActiveSLPath#'
     let c_attr = '%#ActiveSLAttr#'
     let c_base = '%#ActiveSLBase#'
