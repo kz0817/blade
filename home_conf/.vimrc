@@ -260,14 +260,16 @@ highlight InactiveSLType   cterm=None ctermfg=15  ctermbg=242
 highlight ActiveSLPos      cterm=None ctermfg=233 ctermbg=81
 highlight InactiveSLPos    cterm=None ctermfg=234 ctermbg=250
 
+let s:mode_map = {} " The key is winid, value is mode
+
 let s:mode_color_map = {
   \ 'i': '%#InsertMode#',
   \ 'v': '%#VisualMode#',
   \ 'V': '%#VisualMode#',
   \ 'R': '%#ReplaceMode#'}
 
-function! GetMode()
-  let mode = mode()
+function! GetMode(mode)
+  let mode = a:mode
   let color = has_key(s:mode_color_map, mode)
               \ ? s:mode_color_map[mode]
               \ : '%#NormalMode#'
@@ -275,7 +277,17 @@ function! GetMode()
 endfunction
 
 function! SetStatusLine()
-  let is_active = (win_getid() == g:statusline_winid)
+  let winid = g:statusline_winid
+  let is_active = (win_getid() == winid)
+  if is_active
+    " TODO: remove elements at the window close
+    let s:mode_map[winid] = mode()
+  endif
+
+  let mode = has_key(s:mode_map, winid)
+             \ ? s:mode_map[winid]
+             \ : '?'
+
   let sl = ''
   if is_active
     let c_path = '%#ActiveSLPath#'
@@ -284,7 +296,7 @@ function! SetStatusLine()
     let c_fmt  = '%#ActiveSLFmt#'
     let c_type = '%#ActiveSLType#'
     let c_pos  = '%#ActiveSLPos#'
-    let sl = sl . GetMode()
+    let sl = sl . GetMode(mode)
   else
     let c_path = '%#InactiveSLPath#'
     let c_attr = '%#InactiveSLAttr#'
