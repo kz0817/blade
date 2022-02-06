@@ -65,8 +65,6 @@ if v:version > 800
   endif
 endif
 
-" Display Status line
-set statusline=%!GetFileColor()
 " Save the cursor position in quitting
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
