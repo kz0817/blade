@@ -262,6 +262,7 @@ highlight ActiveSLPos      cterm=None ctermfg=233 ctermbg=81
 highlight InactiveSLPos    cterm=None ctermfg=234 ctermbg=250
 
 let s:mode_map = {} " The key is winid, value is mode
+let g:statusline_winid = '' " Set an initial value for vim that doesn't has this variable
 
 let s:mode_color_map = {
   \ 'i': '%#InsertMode#',
