@@ -144,8 +144,12 @@ else
   USE_SCREEN=0
 fi
 
+function escape_non_ascii() {
+  LANG=C sed s/[^[:print:]]\\+/?/g
+}
+
 function set_screen_title () {
-  cmd=`history 1 | sed s/\ *[0-9]*\ *//`
+  cmd=`history 1 | sed s/\ *[0-9]*\ *// | escape_non_ascii`
   echo -en "\033k${SCREEN_HOST}${cmd}\033\\"
 }
 
@@ -154,7 +158,8 @@ if [ $USE_SCREEN -eq 1 ]; then
 fi
 
 function printdir() {
-  echo -en "\033k${SCREEN_HOST}[`basename ${PWD}`]\033\\"
+  dirname=$(basename ${PWD} | escape_non_ascii)
+  echo -en "\033k${SCREEN_HOST}[$dirname]\033\\"
 }
 
 if [ $USE_SCREEN -eq 1 ]; then
