@@ -241,6 +241,7 @@ highlight InsertMode       cterm=None ctermfg=232 ctermbg=106
 highlight NormalMode       cterm=None ctermfg=232 ctermbg=249
 highlight VisualMode       cterm=None ctermfg=0   ctermbg=214
 highlight ReplaceMode      cterm=None ctermfg=255 ctermbg=88
+highlight TermMode         cterm=None ctermfg=0   ctermbg=117
 
 highlight ActiveSLPath     cterm=None ctermfg=25  ctermbg=255
 highlight InactiveSLPath   cterm=None ctermfg=233 ctermbg=250
@@ -266,7 +267,8 @@ let s:mode_color_map = {
   \ 'i': '%#InsertMode#',
   \ 'v': '%#VisualMode#',
   \ 'V': '%#VisualMode#',
-  \ 'R': '%#ReplaceMode#'}
+  \ 'R': '%#ReplaceMode#',
+  \ 't': '%#TermMode#'}
 
 function! GetMode(mode)
   let mode = a:mode
@@ -287,6 +289,7 @@ function! SetStatusLine()
   let mode = has_key(s:mode_map, winid)
              \ ? s:mode_map[winid]
              \ : '?'
+  let is_terminal = (mode == 't')
 
   let sl = ''
   if is_active
@@ -296,7 +299,6 @@ function! SetStatusLine()
     let c_fmt  = '%#ActiveSLFmt#'
     let c_type = '%#ActiveSLType#'
     let c_pos  = '%#ActiveSLPos#'
-    let sl = sl . GetMode(mode)
   else
     let c_path = '%#InactiveSLPath#'
     let c_attr = '%#InactiveSLAttr#'
@@ -305,12 +307,23 @@ function! SetStatusLine()
     let c_type = '%#InactiveSLType#'
     let c_pos  = '%#InactiveSLPos#'
   endif
-  let sl = sl . c_path . ' %h%f '
-  let sl = sl . c_attr . '%m%r'
+
+  if is_active || is_terminal
+    let sl = sl . GetMode(mode)
+  endif
+
+  if !is_terminal
+    let sl = sl . c_path . ' %h%f '
+    let sl = sl . c_attr . '%m%r'
+  endif
+
   let sl = sl . c_base . '%='
-  let sl = sl . c_fmt  . ' %{GetStatusEx()}'
-  let sl = sl . c_type . ' %Y '
-  let sl = sl . c_pos  . ' %4l:%-3c'
+
+  if !is_terminal
+    let sl = sl . c_fmt  . ' %{GetStatusEx()}'
+    let sl = sl . c_type . ' %Y '
+    let sl = sl . c_pos  . ' %4l:%-3c'
+  endif
   return sl
 endfunction
 
