@@ -53,6 +53,34 @@ class Data(object):
         self.cpu_load_set = cpu_load_set
 
 
+def format_tempreture(temp: float) -> str:
+    return f'{temp:.1f}'
+
+
+class SystemTempreture(object):
+    SYS_THERMAL = '/sys/class/thermal'
+
+    def __init__(self):
+        self.temp_file_path_list = self.__get_temperature_file_path_list()
+
+    def __get_temperature_file_path_list(self):
+        re_zone = re.compile(r'^thermal_zone(\d)')
+        temp_file_path_list = []
+        for filename in os.listdir(os.path.join(SystemTempreture.SYS_THERMAL)): 
+            match = re_zone.match(filename)
+            if not match:
+                continue
+            temp_file_path_list.append(f'{SystemTempreture.SYS_THERMAL}/{filename}/temp')
+        return temp_file_path_list
+
+    def __get_zone_temp_str(self, temp_file_path) -> str:
+        with open(temp_file_path) as f:
+           return format_tempreture(float(f.read())/1e3)
+
+    def get_line(self):
+        return ' '.join([self.__get_zone_temp_str(path) for path in self.temp_file_path_list])
+
+
 def get_each_cpu_load(line) -> CpuLoad:
     match = RE_CPU_LINE.match(line)
     if not match:
@@ -107,28 +135,35 @@ def show_each_cpu_load(args, prev_cpu_load, curr_cpu_load):
     return get_load_bar_char(args, load)
 
 
-def show_cpu_load(args, prev_cpu_load_set, curr_cpu_load_set):
+def get_cpu_load_line(args, prev_cpu_load_set, curr_cpu_load_set) -> str:
     num_cpu = len(curr_cpu_load_set)
     assert len(prev_cpu_load_set) == num_cpu
 
     s = 'CPU '
     for idx in range(num_cpu):
         s += show_each_cpu_load(args, prev_cpu_load_set[idx], curr_cpu_load_set[idx])
-    print(s)
+    return s
 
 
-def show(args, prev_data, curr_data):
+def show(args, prev_data, curr_data, sys_tempreture):
     if prev_data is None:
         return
-    show_cpu_load(args, prev_data.cpu_load_set, curr_data.cpu_load_set)
+
+    s = ''
+    s += get_cpu_load_line(args, prev_data.cpu_load_set, curr_data.cpu_load_set)
+    s += ' 🌡 '
+    s += sys_tempreture.get_line()
+
+    print(s)
 
 
 def run(args):
     prev_data = None
+    sys_tempreture = SystemTempreture()
     while True:
         cpu_load_set = get_cpu_load()
         curr_data = Data(cpu_load_set)
-        show(args, prev_data, curr_data)
+        show(args, prev_data, curr_data, sys_tempreture)
         prev_data = curr_data
         time.sleep(args.interval)
 
