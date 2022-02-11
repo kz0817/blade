@@ -120,6 +120,29 @@ class GpuInfo(threading.Thread):
         return '🌡 ' + ' '.join([format_tempreture(t) for t in self.temp_list])
 
 
+class MemoryInfo(object):
+    def __init__(self):
+        self.total = self.__read_meminfo('MemTotal')
+        assert self.total
+
+    def __read_meminfo(self, item):
+        search_key = item + ':'
+        with open('/proc/meminfo') as f:
+            for line in f:
+                words = line.split()
+                if len(words) != 3:
+                    continue
+                if words[0] == search_key:
+                    return int(words[1])
+        return None
+
+    def get_line(self):
+        avail = self.__read_meminfo('MemAvailable')
+        assert avail
+        used = int((self.total - avail) / 1024) # MiB
+        return f'{used:,}'
+
+
 def get_each_cpu_load(line) -> CpuLoad:
     match = RE_CPU_LINE.match(line)
     if not match:
@@ -184,7 +207,7 @@ def get_cpu_load_line(args, prev_cpu_load_set, curr_cpu_load_set) -> str:
     return s
 
 
-def show(args, prev_data, curr_data, sys_tempreture, gpu_info):
+def show(args, prev_data, curr_data, sys_tempreture, gpu_info, mem_info):
     if prev_data is None:
         return
 
@@ -194,6 +217,8 @@ def show(args, prev_data, curr_data, sys_tempreture, gpu_info):
     s += sys_tempreture.get_line()
     s += ' GPU '
     s += gpu_info.get_line()
+    s += ' MEM '
+    s += mem_info.get_line()
 
     print(s)
 
@@ -205,10 +230,12 @@ def run(args):
     gpu_info = GpuInfo(args)
     gpu_info.start()
 
+    mem_info = MemoryInfo()
+
     while True:
         cpu_load_set = get_cpu_load()
         curr_data = Data(cpu_load_set)
-        show(args, prev_data, curr_data, sys_tempreture, gpu_info)
+        show(args, prev_data, curr_data, sys_tempreture, gpu_info, mem_info)
         prev_data = curr_data
         time.sleep(args.interval)
 
