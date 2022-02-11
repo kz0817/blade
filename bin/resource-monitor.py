@@ -5,6 +5,9 @@ import time
 import sys
 import os
 import math
+import threading
+import subprocess
+import traceback
 
 
 RE_CPU_LINE = re.compile(r'^cpu(\d+) (\d+) (\d+) (\d+) (\d+) (\d+) (\d+) (\d+)')
@@ -81,6 +84,42 @@ class SystemTempreture(object):
         return ' '.join([self.__get_zone_temp_str(path) for path in self.temp_file_path_list])
 
 
+class GpuInfo(threading.Thread):
+    def __init__(self, args):
+        threading.Thread.__init__(self)
+        self.num_gpus = self.__get_num_gpus()
+        self.args = args
+        self.temp_list = [None] * self.num_gpus
+
+    def __get_num_gpus(self):
+        result = subprocess.run(['nvidia-smi', '--query-gpu=name', '--format=csv,noheader'],
+                                stdout=subprocess.PIPE, check=True, encoding='UTF-8')
+        names = list(filter(lambda s: len(s) > 0, result.stdout.split('\n')))
+        return len(names)
+
+    def __run(self):
+        cmd = ['nvidia-smi', '--query-gpu=temperature.gpu', '--format=csv,noheader',
+               '-l', f'{self.args.interval}']
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, encoding='UTF-8')
+
+        while True:
+            self.__update_tempreture(proc)
+
+    def __update_tempreture(self, proc):
+        for idx in range(self.num_gpus):
+            self.temp_list[idx] = float(proc.stdout.readline())
+
+    def run(self):
+        try:
+            self.__run()
+        except:
+            traceback.print_exc()
+            os._exit(1)
+
+    def get_line(self):
+        return '🌡 ' + ' '.join([format_tempreture(t) for t in self.temp_list])
+
+
 def get_each_cpu_load(line) -> CpuLoad:
     match = RE_CPU_LINE.match(line)
     if not match:
@@ -145,7 +184,7 @@ def get_cpu_load_line(args, prev_cpu_load_set, curr_cpu_load_set) -> str:
     return s
 
 
-def show(args, prev_data, curr_data, sys_tempreture):
+def show(args, prev_data, curr_data, sys_tempreture, gpu_info):
     if prev_data is None:
         return
 
@@ -153,6 +192,8 @@ def show(args, prev_data, curr_data, sys_tempreture):
     s += get_cpu_load_line(args, prev_data.cpu_load_set, curr_data.cpu_load_set)
     s += ' 🌡 '
     s += sys_tempreture.get_line()
+    s += ' GPU '
+    s += gpu_info.get_line()
 
     print(s)
 
@@ -160,10 +201,14 @@ def show(args, prev_data, curr_data, sys_tempreture):
 def run(args):
     prev_data = None
     sys_tempreture = SystemTempreture()
+
+    gpu_info = GpuInfo(args)
+    gpu_info.start()
+
     while True:
         cpu_load_set = get_cpu_load()
         curr_data = Data(cpu_load_set)
-        show(args, prev_data, curr_data, sys_tempreture)
+        show(args, prev_data, curr_data, sys_tempreture, gpu_info)
         prev_data = curr_data
         time.sleep(args.interval)
 
