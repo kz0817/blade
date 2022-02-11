@@ -57,7 +57,7 @@ class Data(object):
 
 
 def format_tempreture(temp: float) -> str:
-    return f'{temp:.1f}'
+    return f'{int(temp)}'
 
 
 class SystemTempreture(object):
@@ -139,8 +139,8 @@ class MemoryInfo(object):
     def get_line(self):
         avail = self.__read_meminfo('MemAvailable')
         assert avail
-        used = int((self.total - avail) / 1024) # MiB
-        return f'{used:,}'
+        used = (self.total - avail) / (2**20) # GiB
+        return f'{used:.1f}'
 
 
 def get_each_cpu_load(line) -> CpuLoad:
