@@ -8,6 +8,7 @@ startup_message off
 # %{-} : reset the color
 # %n   : window title
 # %+w  : window list after the current windo
+caption string "%?%F%{= Wk}%:%{= wk}%? %n %t %?%F%{= W.}%:%{= K.}%?"
 hardstatus alwayslastline " %`%-w%{= .C}%50>%2n %{-}%{= .G}%t %{-}%+w %<"
 
 encoding utf8
