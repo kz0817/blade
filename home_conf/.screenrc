@@ -8,8 +8,8 @@ startup_message off
 # %{-} : reset the color
 # %n   : window title
 # %+w  : window list after the current windo
-caption string "%?%F%{= Wk}%:%{= wk}%? %n %t %?%F%{= W.}%:%{= K.}%?"
-hardstatus alwayslastline " %`%-w%{= .C}%50>%2n %{-}%{= .G}%t %{-}%+w %<"
+caption always "%?%F%{= Wk}%:%{= Kk}%? %`%-w%?%P%{= b.}%:%{= k.}%?%?%F%{= .C}%:%{= Kw}%?%50> %n %?%F%{= .W}%:%{= Kw}%?%t %?%F%{= Wk}%:%{= Kk}%?%+w %<"
+hardstatus ignore
 
 encoding utf8
 defscrollback 1024
