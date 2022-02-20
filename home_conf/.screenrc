@@ -8,7 +8,7 @@ startup_message off
 # %{-} : reset the color
 # %n   : window title
 # %+w  : window list after the current windo
-caption always "%?%F%{= Wk}%:%{= Kk}%? %`%-w%?%P%{= b.}%:%{= k.}%?%?%F%{= .C}%:%{= kw}%?%50> %n %?%F%{= .W}%:%{= kw}%?%t %?%F%{= Wk}%:%{= Kk}%?%+w %<"
+caption always "%?%F%{= Wk}%:%{= Kk}%? %`%-w%?%P%{= b.}%:%{= k.}%?%?%F%{= .C}%:%{= kw}%?%50> %n %?%F%{= .W}%:%{= kw}%?%?%t %?%?%F%{= Wk}%:%{= Kk}%?%+w %<"
 hardstatus ignore
 
 encoding utf8
