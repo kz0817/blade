@@ -36,10 +36,12 @@ bind = resize =
 
 bind w focus
 bind j focus down
-bind l focus down
+bind l focus right
 bind k focus up
-bind h focus up
+bind h focus left
 bind K kill
+
+bind P paste
 
 shelltitle "$ |bash"
 vbell off
