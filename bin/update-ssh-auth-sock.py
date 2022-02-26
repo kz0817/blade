@@ -4,6 +4,10 @@ import re
 import argparse
 import sys
 
+HELP_DESCENDENT_PID = '''
+search sshd or ssh-agent from the process with the given PID and its ancestors
+(parent, grand parent, ...)
+'''
 
 def put_to_stderr(msg):
     sys.stderr.write(msg + '\n')
@@ -109,7 +113,7 @@ def main(args):
 
 def start():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-p', '--descendent-pid', type=int)
+    parser.add_argument('-p', '--descendent-pid', type=int, help=HELP_DESCENDENT_PID)
     parser.add_argument('-v', '--verbose', action='store_true')
 
     args = parser.parse_args()
