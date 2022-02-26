@@ -9,6 +9,10 @@ search sshd or ssh-agent from the process with the given PID and its ancestors
 (parent, grand parent, ...)
 '''
 
+EPILOG = '''
+Example to update SSH_AUTH_SOCK environment variable: `. <(update-ssh-auth-sock.py -v -p 1234)`
+'''
+
 def put_to_stderr(msg):
     sys.stderr.write(msg + '\n')
 
@@ -112,7 +116,7 @@ def main(args):
         return -1
 
 def start():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(epilog=EPILOG)
     parser.add_argument('-p', '--descendent-pid', type=int, help=HELP_DESCENDENT_PID)
     parser.add_argument('-v', '--verbose', action='store_true')
 
