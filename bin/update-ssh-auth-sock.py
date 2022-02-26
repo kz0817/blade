@@ -32,7 +32,7 @@ def get_ancestors(pid):
         cmd_name, parent_pid = get_name_and_parent_pid(pid)
         if parent_pid is None:
             break
-        ancestors.append((cmd_name, pid))
+        ancestors.append((cmd_name, pid, parent_pid))
         if parent_pid == "1":
             break
         pid = parent_pid
@@ -69,10 +69,11 @@ def get_ssh_auth_socks():
 
 def get_anscestore_sshd_pids(descendent_pid):
     sshd_pids = set()
-    for cmd, pid in get_ancestors(descendent_pid):
-        if cmd != "sshd":
-            continue
-        sshd_pids.add(pid)
+    for cmd, pid, parent_pid in get_ancestors(descendent_pid):
+        if cmd == "sshd":
+            sshd_pids.add(pid)
+        elif cmd == "ssh-agent":
+            sshd_pids.add(parent_pid)
     return sshd_pids
 
 
