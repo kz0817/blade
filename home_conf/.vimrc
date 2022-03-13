@@ -234,6 +234,9 @@ map <Up>    <Nop>
 map <Down>  <Nop>
 "map <Esc>   <Nop>
 
+" Some terminal sends C-? when DEL is pressed. We remap it to C-h (Backspace)
+noremap! <C-?> <C-h>
+
 " ===================================================================
 " Functions
 " ===================================================================
