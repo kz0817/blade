@@ -6,8 +6,16 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
 
 unset STY
-xsetroot -solid darkgray
+xsetroot -solid SlateGray
+autocutsel -s CLIPBOARD  &
+autocutsel -s PRIMARY &
 urxvt &
 fcitx &
-#i3 &
-jwm &
+
+POST_XSTARTUP=~/.vnc/post-xstartup
+
+if [ -e $POST_XSTARTUP ]; then
+  . $POST_XSTARTUP
+else
+  jwm &
+fi
