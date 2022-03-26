@@ -106,6 +106,7 @@ highlight SpecialKey   ctermfg=242                  guifg=DarkGray             g
 highlight Delimiter    ctermfg=Cyan                 guifg=Cyan                 gui=NONE
 highlight String       ctermfg=Cyan                 guifg=Cyan                 gui=NONE
 highlight Search       ctermfg=16 ctermbg=Yellow guifg=Blue                 gui=NONE
+highlight nonText      ctermfg=242
 "highlight PreProc      ctermfg=Yellow               guifg=Yellow
 "highlight Label        ctermfg=Cyan
 "highlight Tag          ctermfg=Cyan
@@ -164,6 +165,12 @@ highlight javaScriptBraces  ctermfg=White           guifg=White                g
 highlight TabLine      cterm=None ctermfg=252 ctermbg=235
 highlight TabLineSel   cterm=None ctermfg=254 ctermbg=25
 highlight TabLineFill  cterm=None ctermfg=252 ctermbg=235
+
+" vim-fugitive
+let g:fugitive_dynamic_colors=0
+highlight FugitiveblameHash ctermfg=112
+highlight FugitiveblameTime ctermfg=189
+highlight FugitiveblameDelimiter ctermfg=246
 
 " ===================================================================
 " Options for GVIM
