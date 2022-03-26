@@ -133,6 +133,19 @@ highlight link StatusLineTerm   StatusLine
 highlight link StatusLineTermNC StatusLineNC
 highlight VertSplit    cterm=None ctermfg=233 ctermbg=233
 
+highlight diffAdded     ctermfg=118
+highlight diffRemoved   ctermfg=217
+highlight diffIndexLine ctermfg=117
+highlight diffFile      ctermfg=117
+highlight diffLine      ctermfg=117
+highlight diffSubname   ctermfg=White
+highlight gitKeyword    ctermfg=White
+highlight gitIdentity   ctermfg=White
+highlight gitDate       ctermfg=White
+highlight gitEmail      ctermfg=153
+highlight gitEmailDelimiter ctermfg=153
+highlight gitIdentityKeyword ctermfg=Yellow
+
 highlight SpellBad     ctermfg=White ctermbg=DarkRed  guifg=White guibg=Red
 highlight SpellCap     ctermfg=White ctermbg=163  guifg=White guibg=Blue
 highlight SpellRare    ctermfg=White ctermbg=214  guifg=White guibg=Yellow
