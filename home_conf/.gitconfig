@@ -42,4 +42,4 @@
 	newHighlight = 254 22
 
 [alias]
-	log1=log --graph --pretty=format:'%C(yellow)%h %Creset%C(bold blue)%ci %Creset%s %C(green)%an <%ae>%Creset'
+	log1=log --graph --pretty=format:'%C(yellow)%h %Creset%C(bold blue)%ai %Creset%s %C(green)%an <%ae>%Creset'
