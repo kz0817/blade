@@ -42,4 +42,4 @@
 	newHighlight = 254 22
 
 [alias]
-	log1=log --graph --pretty=format:'%C(112)%h %Creset%C(111)%ai %Creset%s %C(30)%an <%ae>  %C(89 253 reverse)%D%Creset'
+	log1=log --graph --pretty=tformat:'%C(112)%h %Creset%C(111)%ai %Creset%s %C(30)%an <%ae>  %C(89 253 reverse)%D%Creset'
