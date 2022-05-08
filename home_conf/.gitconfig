@@ -6,6 +6,9 @@
 [color]
 	ui = auto
 
+[diff]
+	compactionHeuristic = true
+
 [color "diff"]
 	commit = yellow bold
 	meta = 110
