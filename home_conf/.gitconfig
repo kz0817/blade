@@ -7,11 +7,12 @@
 	ui = auto
 
 [color "diff"]
-	commit = 226
-	meta = 117
+	commit = yellow bold
+	meta = 110
 	frag = 117
 	old = 217
 	new = 118
+	context = 253
 
 [color "status"]
 	added = 118
