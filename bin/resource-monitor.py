@@ -136,11 +136,23 @@ class MemoryInfo(object):
                     return int(words[1])
         return None
 
-    def get_line(self):
+    def __get_used(self):
         avail = self.__read_meminfo('MemAvailable')
         assert avail
-        used = (self.total - avail) / (2**20) # GiB
-        return f'{used:.1f}'
+        return self.total - avail
+
+    def __get_cached(self):
+        cached = self.__read_meminfo('Cached')
+        assert cached
+
+        buffers = self.__read_meminfo('Buffers')
+        assert buffers
+        return cached + buffers
+
+    def get_line(self):
+        used = self.__get_used() / (2**20) # GiB
+        cached = self.__get_cached() / (2**20) # GiB
+        return f'U:{used:.1f} C:{cached:.1f}'
 
 
 def get_each_cpu_load(line) -> CpuLoad:
