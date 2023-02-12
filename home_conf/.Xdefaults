@@ -54,7 +54,8 @@ URxvt.background: black
 URxvt.scrollBar: false
 URxvt.termName: xterm-256color
 !URxvt.font: xft:DejaVu Sans Mono:size=10, xft:Noto Sans CJK JP
-URxvt.font: xft:DejaVu Sans Mono:size=10, xft:MotoyaLCedar:size=9.5
+!URxvt.font: xft:DejaVu Sans Mono:size=10, xft:MotoyaLCedar:size=9.5
+URxvt.font: xft:UDEV Gothic:size=11.5
 URxvt.boldFont:
 URxvt.letterSpace: -1
 
