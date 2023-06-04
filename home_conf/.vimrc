@@ -185,6 +185,9 @@ highlight FugitiveblameHash ctermfg=112
 highlight FugitiveblameTime ctermfg=189
 highlight FugitiveblameDelimiter ctermfg=246
 
+" markdown: disable the highlighting of the '_'
+syntax match markdownError '\w\@<=\w\@='
+
 " ===================================================================
 " Options for GVIM
 " ===================================================================
