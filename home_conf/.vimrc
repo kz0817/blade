@@ -16,6 +16,9 @@ set laststatus=2
 " display line nubmer
 "set number
 
+" To lightligh line number (CursorLine and CursorLineNr)
+set cursorline
+
 " unset auto indent
 "set noai
 set ai
@@ -118,9 +121,9 @@ highlight Title        ctermfg=81 ctermbg=none     guifg=Cyan                 gu
 highlight link SpecialComment Comment
 highlight WildMenu     ctermfg=Black ctermbg=214
 
-highlight LineNr       ctermfg=214  ctermbg=none     guifg=Yellow
-highlight CursorLineNr cterm=underline ctermfg=220  ctermbg=none     guifg=Yellow
-highlight CursorLine   cterm=underline ctermfg=none ctermbg=none
+highlight LineNr       ctermfg=248  ctermbg=233   guifg=Yellow
+highlight CursorLineNr cterm=none ctermfg=214  ctermbg=233    guifg=Yellow
+highlight CursorLine   cterm=none ctermfg=none ctermbg=none
 
 highlight Visual       ctermfg=19 ctermbg=251       guifg=White  guibg=Blue
 highlight Directory    ctermfg=Cyan                 guifg=Cyan
