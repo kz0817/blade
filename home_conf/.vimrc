@@ -95,41 +95,47 @@ endif
 syntax enable
 
 " Syntax elements
-highlight Normal                                    guifg=White  guibg=Black   gui=NONE
-highlight Constant     ctermfg=Cyan                 guifg=Cyan                 gui=NONE
-highlight Error        ctermfg=White ctermbg=DarkRed guifg=White guibg=Red     gui=NONE
-highlight WarningMsg   ctermfg=214                  guifg=White  guibg=Red     gui=NONE
-highlight Special      ctermfg=Yellow               guifg=Yellow               gui=NONE
-highlight Comment      ctermfg=Green                guifg=#00ff00              gui=NONE
-highlight Statement    ctermfg=Yellow               guifg=Yellow               gui=NONE
-highlight Type         ctermfg=Yellow               guifg=Yellow               gui=NONE
-highlight Preproc      ctermfg=Yellow               guifg=Yellow               gui=NONE
-highlight Function     ctermfg=Cyan                 guifg=Cyan                 gui=NONE
-highlight SpecialKey   ctermfg=242                  guifg=DarkGray             gui=NONE
-highlight Delimiter    ctermfg=Cyan                 guifg=Cyan                 gui=NONE
-highlight String       ctermfg=Cyan                 guifg=Cyan                 gui=NONE
-highlight Search       ctermfg=16 ctermbg=Yellow guifg=Blue                 gui=NONE
-highlight nonText      ctermfg=242
-"highlight PreProc      ctermfg=Yellow               guifg=Yellow
-"highlight Label        ctermfg=Cyan
-"highlight Tag          ctermfg=Cyan
-"highlight Define       ctermfg=Cyan
-"highlight Keyword      ctermfg=Cyan
-"highlight Macro        ctermfg=Cyan
-highlight Identifier   ctermfg=Yellow               guifg=Yellow               gui=NONE
-highlight Title        ctermfg=81 ctermbg=none     guifg=Cyan                 gui=NONE
-highlight link SpecialComment Comment
-highlight WildMenu     ctermfg=Black ctermbg=214
+highlight Normal       ctermfg=231
 
-highlight LineNr       ctermfg=248  ctermbg=233   guifg=Yellow
-highlight CursorLineNr cterm=none ctermfg=214  ctermbg=233    guifg=Yellow
+highlight Error        ctermfg=231 ctermbg=160
+highlight WarningMsg   ctermfg=214
+
+" Green
+highlight Comment      ctermfg=118
+
+" Cyan
+highlight Constant     ctermfg=87
+highlight Function     ctermfg=87
+highlight Delimiter    ctermfg=87
+highlight String       ctermfg=87
+
+highlight Directory    ctermfg=87
+
+" Yellow
+highlight Special      ctermfg=227
+highlight Statement    ctermfg=227
+highlight Type         ctermfg=227
+highlight PreProc      ctermfg=227
+highlight Identifier   ctermfg=227
+
+highlight IncSearch    cterm=none  ctermfg=231 ctermbg=160
+highlight Search       ctermfg=231 ctermbg=160
+
+highlight SpecialKey   ctermfg=242
+highlight nonText      ctermfg=242
+highlight Title        ctermfg=81  ctermbg=none
+highlight link SpecialComment Comment
+highlight WildMenu     ctermfg=16  ctermbg=214
+
+highlight LineNr       ctermfg=248 ctermbg=233
+highlight CursorLineNr cterm=none ctermfg=214  ctermbg=233
 highlight CursorLine   cterm=none ctermfg=none ctermbg=none
 
-highlight Visual       ctermfg=19 ctermbg=251       guifg=White  guibg=Blue
-highlight Directory    ctermfg=Cyan                 guifg=Cyan
-highlight ModeMsg      ctermfg=214                  guifg=Yellow
-highlight MoreMsg      ctermfg=Green                guifg=Green
-highlight Question     ctermfg=Green                guifg=Green
+highlight Visual       ctermfg=19 ctermbg=251
+highlight ModeMsg      ctermfg=214
+highlight MoreMsg      ctermfg=118
+highlight Question     ctermfg=118
+
 highlight StatusLine   cterm=None ctermfg=214 ctermbg=235
 highlight StatusLineNC cterm=None ctermfg=233 ctermbg=233
 highlight link StatusLineTerm   StatusLine
@@ -141,24 +147,24 @@ highlight diffRemoved   ctermfg=217
 highlight diffIndexLine ctermfg=117
 highlight diffFile      ctermfg=117
 highlight diffLine      ctermfg=117
-highlight diffSubname   ctermfg=White
-highlight gitKeyword    ctermfg=White
-highlight gitIdentity   ctermfg=White
-highlight gitDate       ctermfg=White
+highlight diffSubname   ctermfg=231
+highlight gitKeyword    ctermfg=231
+highlight gitIdentity   ctermfg=231
+highlight gitDate       ctermfg=231
 highlight gitEmail      ctermfg=153
 highlight gitEmailDelimiter ctermfg=153
-highlight gitIdentityKeyword ctermfg=Yellow
+highlight gitIdentityKeyword ctermfg=227
 
-highlight SpellBad     ctermfg=White ctermbg=DarkRed  guifg=White guibg=Red
-highlight SpellCap     ctermfg=White ctermbg=163  guifg=White guibg=Blue
-highlight SpellRare    ctermfg=White ctermbg=214  guifg=White guibg=Yellow
-highlight SpellLocal   ctermfg=White ctermbg=214  guifg=White guibg=Yellow
+highlight SpellBad     ctermfg=White ctermbg=160
+highlight SpellCap     ctermfg=White ctermbg=163
+highlight SpellRare    ctermfg=White ctermbg=214
+highlight SpellLocal   ctermfg=White ctermbg=214
 
 highlight MatchParen   ctermfg=White ctermbg=88
-highlight Folded       ctermfg=246   ctermbg=None guifg=Cyan
+highlight Folded       ctermfg=246   ctermbg=None
 highlight Terminal     ctermfg=white
 highlight QuickFixLine cterm=none ctermfg=Black ctermbg=254
-highlight TODO         ctermfg=Green ctermbg=Black
+highlight TODO         ctermfg=118 ctermbg=Black
 
 highlight Pmenu        ctermfg=254 ctermbg=237
 highlight PmenuSel     ctermfg=White ctermbg=27
@@ -166,8 +172,8 @@ highlight PmenuSbar    ctermbg=240
 highlight PmenuThumb   ctermbg=234
 
 "Used in HTML syntax
-highlight Underlined   ctermfg=White cterm=Underline  guifg=White              gui=Underline
-highlight htmlEndTag   ctermfg=Cyan                 guifg=Cyan                 gui=NONE
+highlight Underlined   ctermfg=White cterm=Underline
+highlight htmlEndTag   ctermfg=87
 
 highlight DiffAdd      ctermbg=22
 highlight DiffText     ctermfg=None ctermbg=25
@@ -175,8 +181,8 @@ highlight DiffChange   ctermbg=17
 highlight DiffDelete   ctermfg=52 ctermbg=52
 
 "Used in JavaScript
-highlight javaScript   ctermfg=White                guifg=White                gui=NONE
-highlight javaScriptBraces  ctermfg=White           guifg=White                gui=NONE
+highlight javaScript   ctermfg=White
+highlight javaScriptBraces  ctermfg=White
 
 highlight TabLine      cterm=None ctermfg=252 ctermbg=235
 highlight TabLineSel   cterm=None ctermfg=254 ctermbg=25
