@@ -112,11 +112,11 @@ highlight String       ctermfg=87
 highlight Directory    ctermfg=87
 
 " Yellow
-highlight Special      ctermfg=227
-highlight Statement    ctermfg=227
-highlight Type         ctermfg=227
-highlight PreProc      ctermfg=227
-highlight Identifier   ctermfg=227
+highlight Special      ctermfg=228
+highlight Statement    ctermfg=228
+highlight Type         ctermfg=228
+highlight PreProc      ctermfg=228
+highlight Identifier   ctermfg=228
 
 highlight IncSearch    cterm=none  ctermfg=231 ctermbg=160
 highlight Search       ctermfg=231 ctermbg=160
