@@ -36,6 +36,9 @@ else
   PS1="[\h]\w $PMARK "
 fi
 
+# shopt --------------------------------------------------------
+shopt -s globstar
+
 # disable bell -------------------------------------------------
 if [ $INTERACTIVE -eq 1 ]; then
   bind 'set bell-style none'
