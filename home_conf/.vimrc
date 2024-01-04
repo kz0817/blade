@@ -131,6 +131,8 @@ highlight LineNr       ctermfg=248 ctermbg=233
 highlight CursorLineNr cterm=none ctermfg=214  ctermbg=233
 highlight CursorLine   cterm=none ctermfg=none ctermbg=none
 
+highlight ColorColumn cterm=none ctermfg=none ctermbg=236
+
 highlight Visual       ctermfg=19 ctermbg=251
 highlight ModeMsg      ctermfg=214
 highlight MoreMsg      ctermfg=118
