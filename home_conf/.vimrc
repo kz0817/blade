@@ -57,7 +57,8 @@ set shiftwidth=4
 set foldlevel=100
 " set foldnestmax=0
 set wildmenu
-set wildmode=longest:list,full
+set wildmode=longest:full,full
+set wildoptions=pum
 
 set completeopt=menu
 if v:version > 800
