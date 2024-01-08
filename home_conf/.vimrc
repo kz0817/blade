@@ -29,10 +29,6 @@ set ruler
 " search mode line
 set modeline
 
-" Don't wrap at end of display
-"set nowrap
-set wrap
-
 " Display inputing command
 set showcmd
 
@@ -166,7 +162,7 @@ highlight SpellLocal   ctermfg=White ctermbg=214
 highlight MatchParen   ctermfg=White ctermbg=88
 highlight Folded       ctermfg=246   ctermbg=None
 highlight Terminal     ctermfg=white
-highlight QuickFixLine cterm=none ctermfg=Black ctermbg=254
+highlight QuickFixLine cterm=none ctermfg=none ctermbg=238
 highlight TODO         ctermfg=118 ctermbg=Black
 
 highlight Pmenu        ctermfg=254 ctermbg=237
@@ -256,6 +252,10 @@ augroup mine
   au BufNewFile,BufRead build.xml :set ts=4
   au BufNewFile,BufRead COMMIT_EDITMSG :set cc=73
   "autocmd BufReadPost *.tex     :setlocal spell spelllang=en_us
+
+  "Only active window uses nowrap
+  au WinLeave * set nowrap
+  au WinEnter * set wrap
 
 augroup END
 set statusline=%!SetStatusLine()
