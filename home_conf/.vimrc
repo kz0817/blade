@@ -372,20 +372,6 @@ function! GetStatusEx()
   return str
 endfunction
 
-function! TimeStamp()
-  let str = ''
-  let ftim = getftime(bufname("%"))
-  let ctim = localtime()
-  if ftim >= 0
-    if ctim - ftim < 365 * 24 * 3600
-      let str = '<' . strftime("%m/%d %H:%M", ftim ) . '>'
-    else
-      let str = '<' . strftime("%Y/%m/%d", ftim ) . '>'
-    endif
-  endif
-  return str
-endfunction
-
 " ===================================================================
 " for cscope
 " ===================================================================
