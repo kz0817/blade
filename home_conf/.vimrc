@@ -421,21 +421,6 @@ highlight gdb_dbp      ctermfg=white ctermbg=green
 highlight gdb_fr       ctermfg=none  ctermbg=red
 
 " ===================================================================
-" rsync
-" ===================================================================
-function! Re(host,path)
-  let predir = "/tmp/netsync/"
-  let dname = system("dirname ".a:path)
-
-  let r = system("mkdir -p ".predir.dname)
-  let cmd = "rsync -avz ".a:host."::".a:path." ".predir.a:path
-  echo cmd
-  let r = system(cmd)
-  echo r
-  exe "sp ".predir.a:path
-endfunction
-
-" ===================================================================
 " for SCREEN
 " ===================================================================
 function! SetScreenTabName()
