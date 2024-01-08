@@ -162,7 +162,7 @@ highlight SpellLocal   ctermfg=White ctermbg=214
 highlight MatchParen   ctermfg=White ctermbg=88
 highlight Folded       ctermfg=246   ctermbg=None
 highlight Terminal     ctermfg=white
-highlight QuickFixLine cterm=none ctermfg=none ctermbg=238
+highlight QuickFixLine cterm=none ctermfg=none ctermbg=23
 highlight TODO         ctermfg=118 ctermbg=Black
 
 highlight Pmenu        ctermfg=254 ctermbg=237
@@ -256,6 +256,10 @@ augroup mine
   "Only active window uses nowrap
   au WinLeave * set nowrap
   au WinEnter * set wrap
+
+  "Show line number in Quickfix List
+  au BufRead quickfix set number
+  au BufRead quickfix highlight CursorLineNr ctermfg=81
 
 augroup END
 set statusline=%!SetStatusLine()
