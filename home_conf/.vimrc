@@ -192,6 +192,8 @@ let g:fugitive_dynamic_colors=0
 highlight FugitiveblameHash ctermfg=112
 highlight FugitiveblameTime ctermfg=189
 highlight FugitiveblameDelimiter ctermfg=246
+highlight FugitiveblameOriginalLineNumber ctermfg=153
+highlight FugitiveblameLineNumber ctermfg=153
 
 " markdown: disable the highlighting of the '_'
 syntax match markdownError '\w\@<=\w\@='
@@ -256,6 +258,7 @@ augroup mine
   "Only active window uses nowrap
   au WinLeave * set nowrap
   au WinEnter * set wrap
+  au WinEnter *.fugitiveblame set nowrap
 
   "Show line number in Quickfix List
   au BufRead quickfix set number
