@@ -18,6 +18,7 @@ set laststatus=2
 
 " To lightligh line number (CursorLine and CursorLineNr)
 set cursorline
+set cursorlineopt=number
 
 " unset auto indent
 "set noai
@@ -125,8 +126,7 @@ highlight link SpecialComment Comment
 highlight WildMenu     ctermfg=16  ctermbg=214
 
 highlight LineNr       ctermfg=248 ctermbg=233
-highlight CursorLineNr cterm=none ctermfg=214  ctermbg=233
-highlight CursorLine   cterm=none ctermfg=none ctermbg=none
+highlight CursorLineNr cterm=none ctermfg=81  ctermbg=233
 
 highlight ColorColumn cterm=none ctermfg=none ctermbg=236
 
@@ -262,7 +262,6 @@ augroup mine
 
   "Show line number in Quickfix List
   au BufRead quickfix set number
-  au BufRead quickfix highlight CursorLineNr ctermfg=81
 
 augroup END
 set statusline=%!SetStatusLine()
