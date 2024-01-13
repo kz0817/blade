@@ -2,6 +2,14 @@
 import argparse
 import subprocess
 
+HELP = '''
+
+The following example launches Xvfb (-X, display :5), x11vnc (-V, port 5905), \
+and noVNC (-N port 6905).
+
+  launch-xvfb-vnc.py -W 1200 -H 720 -O 5 -X -V -N --novnc-bind-addr 0.0.0.0 --vnc-passwd ~/.vnc/passwd
+ 
+'''
 
 def launch_xvfb(args):
     if not args.run_xvfb:
@@ -21,14 +29,17 @@ def launch_x11vnc(args):
     if not args.run_x11vnc:
         return
 
-    cmd = (
+    cmd = [
         'x11vnc',
         '-display', f':{args.display_number}',
         '-forever',
-        '-usepw',
         '-listen', f'{args.vnc_host_addr}',
         '-rfbport', f'{args.vnc_port}',
-    )
+    ]
+
+    if args.vnc_passwd:
+        cmd += ['-rfbauth', args.vnc_passwd]
+
     print(cmd)
     proc = subprocess.Popen(cmd)
 
@@ -65,17 +76,21 @@ def fixup_args(args):
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+                formatter_class=argparse.RawDescriptionHelpFormatter,
+                epilog=HELP)
 
     parser.add_argument('-O', '--number-offset', default=0, type=int)
 
     parser.add_argument('--display-number', default=0, type=int)
     parser.add_argument('--vnc-port', default=5900, type=int)
     parser.add_argument('--vnc-host-addr', default='localhost')
+    parser.add_argument('--vnc-passwd',
+                        help='a path to password file, which can be craeted by vncpasswd')
 
     parser.add_argument('--novnc-bind-addr', default='localhost')
     parser.add_argument('--novnc-port', default=6900, type=int)
-    parser.add_argument('--novnc-web-dir')
+    parser.add_argument('--novnc-web-dir', default='/usr/share/novnc')
 
     parser.add_argument('-W', '--width', default=1024, type=int)
     parser.add_argument('-H', '--height', default=768, type=int)
