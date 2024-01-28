@@ -23,9 +23,10 @@
 	unmerged = 214
 
 [color "decorate"]
-	head = 87
-	branch = 119
-	remotebranch = 117
+	head = 123
+	branch = 22 252 reverse
+	remotebranch = 89 253 reverse
+	tag = 214 16 reverse
 
 [color "branch"]
 	current = 118
@@ -33,7 +34,7 @@
 	remote = 117
 
 [log]
-	graphColors = 217,118,226,75,177,87,254
+	graphColors = 250,217,112,220,75,141
 
 [include]
 	path = .gitconfig.local
@@ -45,4 +46,5 @@
 	newHighlight = 254 22
 
 [alias]
-	log1=log --graph --pretty=tformat:'%C(112)%h %Creset%C(111)%ai %Creset%s %C(30)%an <%ae>  %C(89 253 reverse)%D%Creset'
+	log1=log --graph --date=format-local:'%y-%m-%d %H:%M' --pretty=tformat:'%C(112)%h %Creset%C(111)%ad %Creset%s %C(30)%an  %C(auto)%D%Creset'
+	log1a=log --graph --pretty=tformat:'%C(112)%h %Creset%C(111)%ai %Creset%s %C(30)%an <%ae>  %C(auto)%D%Creset'
