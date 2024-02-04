@@ -101,20 +101,22 @@ highlight WarningMsg   ctermfg=214
 " Green
 highlight Comment      ctermfg=118
 
-" Cyan
-highlight Constant     ctermfg=87
-highlight Function     ctermfg=87
-highlight Delimiter    ctermfg=87
-highlight String       ctermfg=87
+" Orange
+highlight Function     ctermfg=214
 
-highlight Directory    ctermfg=87
+" Cyan
+highlight Constant     ctermfg=123
+highlight Delimiter    ctermfg=123
+highlight String       ctermfg=123
+
+highlight Directory    ctermfg=123
 
 " Yellow
 highlight Special      ctermfg=228
 highlight Statement    ctermfg=228
 highlight Type         ctermfg=228
 highlight PreProc      ctermfg=228
-highlight Identifier   ctermfg=228
+highlight Identifier   ctermfg=255
 
 highlight IncSearch    cterm=none  ctermfg=231 ctermbg=160
 highlight Search       ctermfg=231 ctermbg=160
@@ -163,7 +165,7 @@ highlight MatchParen   ctermfg=White ctermbg=88
 highlight Folded       ctermfg=246   ctermbg=None
 highlight Terminal     ctermfg=white
 highlight QuickFixLine cterm=none ctermfg=none ctermbg=23
-highlight TODO         ctermfg=118 ctermbg=Black
+highlight TODO         ctermfg=16 ctermbg=70
 
 highlight Pmenu        ctermfg=254 ctermbg=237
 highlight PmenuSel     ctermfg=White ctermbg=27
