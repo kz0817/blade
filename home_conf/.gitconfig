@@ -47,4 +47,5 @@
 
 [alias]
 	log1=log --graph --date=format-local:'%y-%m-%d %H:%M' --pretty=tformat:'%C(112)%h %Creset%C(111)%ad %Creset%s %C(30)%an  %C(auto)%D%Creset'
-	log1a=log --graph --pretty=tformat:'%C(112)%h %Creset%C(111)%ai %Creset%s %C(30)%an <%ae>  %C(auto)%D%Creset'
+	loga=log --graph --pretty=format:'%C(112)%h %C(auto)%D%n%Creset%s%n%C(111)%ai %C(30)%an <%ae>%n'
+	logb=log --graph --pretty=format:'%C(112)%h %C(auto)%D%n%Creset%s%n%C(111)%ai %C(30)%an <%ae>%n%C(109)%ci %C(65)%cn <%ae>%n'
