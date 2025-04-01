@@ -8,6 +8,7 @@
     - ~/bin
     - ~/.vnc
     - ~/.config/i3
+    - ~/.config/fontconfig
 
 - name: Download blade
   git:
@@ -95,4 +96,5 @@
     - .Xdefaults
     - .vnc/xstartup
     - .config/i3/config
+    - .config/fontconfig/fonts.conf
     - .docker
