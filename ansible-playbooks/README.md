@@ -52,6 +52,8 @@ Run the following commnad by the user.
 
     ansible-playbook -i hosts home.yml
 
+When you skip to download the blade repository, add the `--skip-tags dl_blade`
+
 Keep in mind that
 - SSH agent forwarding be enabled
 - python3 and git pakcages be installed
