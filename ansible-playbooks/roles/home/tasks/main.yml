@@ -15,6 +15,7 @@
     repo: git@github.com:kz0817/blade.git
     dest: '{{ misc_dir }}/blade'
     accept_hostkey: yes
+  tags: dl_blade
 
 - name: Download dog
   git:
