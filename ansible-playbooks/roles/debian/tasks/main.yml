@@ -12,3 +12,4 @@
       - gnupg
       - vim
       - vim-fugitive
+    update_cache: yes
