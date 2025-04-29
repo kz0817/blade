@@ -9,7 +9,6 @@
     name: '{{ username }}'
     uid: '{{ uid }}'
     group: '{{ groupname }}'
-    append: yes
     shell: /bin/bash
 
 - name: Create ~/.ssh
