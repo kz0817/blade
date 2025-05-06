@@ -124,7 +124,7 @@ if [ $OS_TYPE = "Linux" ]; then
   alias ll='ls -lhs'
   alias lla='ls -alhs'
 
-  export LS_COLORS='no=97:fi=97:di=38;5;110:ln=38;5;80:pi=93:so=95:bd=93:cd=93:or=92:ex=38;5;118:su=93;44:sg=93;44:ow=38;5;253;48;5;23:*core=91'
+  export LS_COLORS='no=97:fi=97:di=38;5;117:ln=38;5;146:pi=93:so=95:bd=93:cd=93:or=92:ex=38;5;112:su=93;44:sg=93;44:ow=38;5;253;48;5;23:*core=91'
   alias ls='ls --color=auto --show-control-chars'
 fi
 if [ $OS_TYPE = "Darwin" ]; then
