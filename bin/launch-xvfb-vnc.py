@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import os
 import subprocess
 
 HELP = '''
@@ -63,10 +64,23 @@ def launch_no_vnc(args):
     proc = subprocess.Popen(cmd)
 
 
+def launch_command_in_dbus_session(args):
+    if not args.dbus_session:
+        return
+
+    cmd = ['dbus-run-session', '--'] + args.dbus_session
+
+    print(cmd)
+    env = os.environ.copy()
+    env['DISPLAY'] = f':{args.display_number}'
+    proc = subprocess.Popen(cmd, env=env)
+
+
 def run(args):
     launch_xvfb(args)
     launch_x11vnc(args)
     launch_no_vnc(args)
+    launch_command_in_dbus_session(args)
 
 
 def fixup_args(args):
@@ -99,6 +113,8 @@ def main():
     parser.add_argument('-X', '--run-xvfb', action='store_true')
     parser.add_argument('-V', '--run-x11vnc', action='store_true')
     parser.add_argument('-N', '--run-novnc', action='store_true')
+    parser.add_argument('-D', '--dbus-session', nargs='*', metavar='CMD',
+                        help='a command in a new D-Bus session')
 
     args = parser.parse_args()
     fixup_args(args)
