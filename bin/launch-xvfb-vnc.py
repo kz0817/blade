@@ -73,6 +73,10 @@ def launch_command_in_dbus_session(args):
     print(cmd)
     env = os.environ.copy()
     env['DISPLAY'] = f':{args.display_number}'
+    env['GTK_IM_MODULE'] = args.im_module
+    env['QT_IM_MODULE'] =  args.im_module
+    env['XMODIFIERS'] = f'@im={args.im_module}'
+
     proc = subprocess.Popen(cmd, env=env)
 
 
@@ -105,6 +109,8 @@ def main():
     parser.add_argument('--novnc-bind-addr', default='localhost')
     parser.add_argument('--novnc-port', default=6900, type=int)
     parser.add_argument('--novnc-web-dir', default='/usr/share/novnc')
+
+    parser.add_argument('--im-module', default='fcitx')
 
     parser.add_argument('-W', '--width', default=1024, type=int)
     parser.add_argument('-H', '--height', default=768, type=int)
