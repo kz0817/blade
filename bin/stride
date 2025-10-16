@@ -1,0 +1,6 @@
+#!/bin/bash
+
+FONT="UDev Gothic:size=12"
+GEOMETRY="80x24"
+
+exec st -f "$FONT" -g "$GEOMETRY" "$@"
