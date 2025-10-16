@@ -1,4 +1,5 @@
 escape ^Tt
+bindkey ^Y command
 startup_message off
 
 # %`   : result of backtick command
