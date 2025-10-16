@@ -1,0 +1,15 @@
+#!/bin/sh
+
+export DefaultImModule=fcitx
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS="@im=fcitx"
+
+unset STY
+i3 &
+xsetroot -solid SlateGray
+autocutsel -s CLIPBOARD  &
+autocutsel -s PRIMARY &
+tint2 &
+fcitx &
+wait
