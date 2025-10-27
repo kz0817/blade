@@ -99,3 +99,4 @@
     - .config/i3/config
     - .config/fontconfig/fonts.conf
     - .docker
+    - .local/share/applications/stride.desktop

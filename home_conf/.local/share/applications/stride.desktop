@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=STride
+Exec=/home/kyamato/misc/blade/bin/stride
+Icon=utilities-terminal
+Terminal=false
