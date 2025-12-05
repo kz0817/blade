@@ -6,10 +6,17 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
 
 unset STY
+
+test -f ~/.xinitrc.local && . ~/.xinitrc.local
+
+if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
+    eval $(dbus-launch --sh-syntax --exit-with-session)
+fi
+
 i3 &
 xsetroot -solid SlateGray
 autocutsel -s CLIPBOARD  &
 autocutsel -s PRIMARY &
 tint2 &
-fcitx &
+fcitx5 &
 wait
