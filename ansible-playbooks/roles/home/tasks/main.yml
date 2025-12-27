@@ -9,6 +9,7 @@
     - ~/.vnc
     - ~/.config/i3
     - ~/.config/fontconfig
+    - ~/.local/share/applications
 
 - name: Download blade
   git:
