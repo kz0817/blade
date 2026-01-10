@@ -227,8 +227,9 @@ def show(args, prev_data, curr_data, sys_tempreture, gpu_info, mem_info):
     s += get_cpu_load_line(args, prev_data.cpu_load_set, curr_data.cpu_load_set)
     s += ' 🌡 '
     s += sys_tempreture.get_line()
-    s += ' GPU '
-    s += gpu_info.get_line()
+    if args.use_nvidia:
+        s += ' GPU '
+        s += gpu_info.get_line()
     s += ' MEM '
     s += mem_info.get_line()
 
@@ -239,8 +240,11 @@ def run(args):
     prev_data = None
     sys_tempreture = SystemTempreture()
 
-    gpu_info = GpuInfo(args)
-    gpu_info.start()
+    if args.use_nvidia:
+        gpu_info = GpuInfo(args)
+        gpu_info.start()
+    else:
+        gpu_info = None
 
     mem_info = MemoryInfo()
 
@@ -255,6 +259,7 @@ def run(args):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--interval', type=int, default=1)
+    parser.add_argument('-nv', '--use-nvidia', action='store_true')
     parser.add_argument('--cpu-bar-min', type=float, default=0.05)
     parser.add_argument('--cpu-bar-max', type=float, default=0.9)
     args = parser.parse_args()
