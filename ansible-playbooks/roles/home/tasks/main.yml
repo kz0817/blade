@@ -9,6 +9,7 @@
     - ~/.vnc
     - ~/.config/i3
     - ~/.config/fontconfig
+    - ~/.config/picom
     - ~/.local/share/applications
 
 - name: Download blade
@@ -99,5 +100,6 @@
     - .vnc/xstartup
     - .config/i3/config
     - .config/fontconfig/fonts.conf
+    - .config/picom/picom.conf
     - .docker
     - .local/share/applications/stride.desktop
