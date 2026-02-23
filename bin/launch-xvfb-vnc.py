@@ -34,6 +34,7 @@ def launch_x11vnc(args):
         'x11vnc',
         '-display', f':{args.display_number}',
         '-forever',
+        '-shared',
         '-listen', f'{args.vnc_host_addr}',
         '-rfbport', f'{args.vnc_port}',
     ]
