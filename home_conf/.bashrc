@@ -121,7 +121,7 @@ alias reset2='reset; stty sane; tput rs1; clear; echo -e "\033c"'
 # ls -------------------------------------------------------------
 if [ $OS_TYPE = "Linux" ]; then
   alias ls='ls -h'
-  alias ll='ls -lhs'
+  alias ll='ls -lhs --time-style=long-iso'
   alias lla='ls -alhs'
 
   export LS_COLORS='no=97:fi=97:di=38;5;117:ln=38;5;146:pi=93:so=95:bd=93:cd=93:or=92:ex=38;5;112:su=93;44:sg=93;44:ow=38;5;253;48;5;23:*core=91'

@@ -36,6 +36,7 @@
 
 [log]
 	graphColors = 250,217,112,220,75,141
+	date = iso
 
 [include]
 	path = .gitconfig.local
