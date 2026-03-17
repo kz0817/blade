@@ -12,6 +12,22 @@ and noVNC (-N port 6905).
  
 '''
 
+def launch_xvnc(args):
+    if not args.run_xvnc:
+        return
+
+    cmd = (
+        'Xvnc',
+        f':{args.display_number}',
+        '-geometry', f'{args.width}x{args.height}',
+        '-depth', f'{args.color_depth}',
+        '-localhost',
+        '-SecurityTypes', 'None',
+    )
+    print(cmd)
+    proc = subprocess.Popen(cmd)
+
+
 def launch_xvfb(args):
     if not args.run_xvfb:
         return
@@ -82,6 +98,7 @@ def launch_command_in_dbus_session(args):
 
 
 def run(args):
+    launch_xvnc(args)
     launch_xvfb(args)
     launch_x11vnc(args)
     launch_no_vnc(args)
@@ -117,6 +134,7 @@ def main():
     parser.add_argument('-H', '--height', default=768, type=int)
     parser.add_argument('-C', '--color-depth', default=24, type=int)
 
+    parser.add_argument('-T', '--run-xvnc', action='store_true')
     parser.add_argument('-X', '--run-xvfb', action='store_true')
     parser.add_argument('-V', '--run-x11vnc', action='store_true')
     parser.add_argument('-N', '--run-novnc', action='store_true')
