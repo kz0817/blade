@@ -96,6 +96,7 @@
     - .gdbinit
     - .gitconfig
     - .bashrc
+    - .inputrc
     - .Xdefaults
     - .vnc/xstartup
     - .config/i3/config
