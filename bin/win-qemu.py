@@ -90,6 +90,7 @@ def generate_base_qemu_command(ctx):
         '-display', 'gtk,gl=on',
         '-device', 'virtio-net-pci,netdev=net0',
         '-netdev', 'user,id=net0',
+        '-device', 'usb-tablet',
         '-drive', f'file={args.drive},if=virtio,format=qcow2',
     ]
     if args.virtiofsd_dir is not None:
