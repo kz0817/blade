@@ -8,6 +8,7 @@ class Context:
     def __init__(self, args):
         self.args = args
         self.swtpm = None
+        self.virtiofsd = None
 
     def stop_swtpm(self):
         if self.swtpm is None:
@@ -16,8 +17,16 @@ class Context:
         self.swtpm.terminate()
         print('  -> Done')
 
+    def stop_virtiofsd(self):
+        if self.virtiofsd is None:
+            return
+        print('Stop virtiofsd')
+        self.virtiofsd.terminate()
+        print('  -> Done')
+
     def cleanup(self):
         self.stop_swtpm()
+        self.stop_virtiofsd()
 
 
 def prepare_ovmf(ctx):
@@ -42,9 +51,23 @@ def launch_swtpm(ctx):
     print('Launched: SWTPM')
 
 
+def launch_virtiofsd(ctx):
+    if ctx.args.virtiofsd_dir is None:
+        return
+
+    cmd = (
+        '/usr/lib/qemu/virtiofsd',
+        f'--socket-path={ctx.args.virtiofsd_sock}',
+        f'--shared-dir', ctx.args.virtiofsd_dir,
+        '--sandbox', 'none')
+    ctx.virtiofsd = subprocess.Popen(cmd)
+    print('Launched: virtiofsd')
+
+
 def prepare(ctx):
     prepare_ovmf(ctx)
     launch_swtpm(ctx)
+    launch_virtiofsd(ctx)
 
 
 def generate_base_qemu_command(ctx):
@@ -69,6 +92,13 @@ def generate_base_qemu_command(ctx):
         '-netdev', 'user,id=net0',
         '-drive', f'file={args.drive},if=virtio,format=qcow2',
     ]
+    if args.virtiofsd_dir is not None:
+        cmd += [
+            '-object', f'memory-backend-memfd,id=mem,size={args.memory},share=on',
+            '-numa', 'node,memdev=mem',
+            '-chardev', f'socket,id=char0,path={args.virtiofsd_sock}',
+            '-device', 'vhost-user-fs-pci,queue-size=1024,chardev=char0,tag=hostshare',
+        ]
     return cmd
 
 
@@ -113,6 +143,8 @@ def main():
     parser.add_argument('--swtpm-state-dir', default='./')
     parser.add_argument('-c', '--cores', type=int, default=4)
     parser.add_argument('-m', '--memory', default='8G')
+    parser.add_argument('-s', '--virtiofsd-dir')
+    parser.add_argument('--virtiofsd-sock', default='virtiofsd.sock')
     parser.add_argument('drive')
 
     sub_parsers = parser.add_subparsers(dest='command')
