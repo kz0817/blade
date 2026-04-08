@@ -78,6 +78,7 @@ def generate_base_qemu_command(ctx):
         '-smp', f'cores={args.cores},threads=1,sockets=1',
         '-m', f'{args.memory}',
         '-machine', 'q35',
+        '-rtc', 'base=localtime,clock=host,driftfix=slew',
         '-device', 'qemu-xhci,id=usb-bus',
         '-drive', f'if=pflash,format=raw,readonly=on,file={args.ovmf_code}',
         '-drive', f'if=pflash,format=raw,file={args.ovmf_local_vars}',
