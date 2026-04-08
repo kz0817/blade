@@ -91,8 +91,17 @@ def generate_base_qemu_command(ctx):
         '-device', 'virtio-net-pci,netdev=net0',
         '-netdev', 'user,id=net0',
         '-device', 'usb-tablet',
-        '-drive', f'file={args.drive},if=virtio,format=qcow2',
     ]
+
+    if args.drive.startswith('/dev/'):
+        cmd += [
+            '-drive', f'file={args.drive},if=virtio,format=raw,discard=unmap,cache=none,aio=io_uring'
+        ]
+    else:
+        cmd += [
+            '-drive', f'file={args.drive},if=virtio,format=qcow2',
+        ]
+
     if args.virtiofsd_dir is not None:
         cmd += [
             '-object', f'memory-backend-memfd,id=mem,size={args.memory},share=on',
