@@ -87,7 +87,8 @@ def generate_base_qemu_command(ctx):
         '-chardev', f'socket,id=chrtpm,path={args.swtpm_sock}',
         '-tpmdev', 'emulator,id=tpm0,chardev=chrtpm',
         '-device', 'tpm-tis,tpmdev=tpm0',
-        '-device', 'virtio-gpu-pci',
+        '-vga', 'none',
+        '-device', f'virtio-vga,xres={args.resolution[0]},yres={args.resolution[1]}',
         '-display', 'gtk,gl=on',
         '-device', 'virtio-net-pci,netdev=net0',
         '-netdev', 'user,id=net0',
@@ -155,6 +156,7 @@ def main():
     parser.add_argument('-c', '--cores', type=int, default=4)
     parser.add_argument('-m', '--memory', default='8G')
     parser.add_argument('-s', '--virtiofsd-dir')
+    parser.add_argument('-r', '--resolution', nargs=2, default=('1920', '1200'))
     parser.add_argument('--virtiofsd-sock', default='virtiofsd.sock')
     parser.add_argument('drive')
 
