@@ -101,7 +101,7 @@ export PATH=$PYENV_ROOT/bin:$PATH
 # Aliases --------------------------------------------------------
 alias vi=vim
 
-alias cp='cp -iv'
+alias cp='cp -iv --reflink=auto'
 alias rm='rm -iv'
 alias mv='mv -iv'
 if [ $OS_TYPE = "Linux" ]; then
