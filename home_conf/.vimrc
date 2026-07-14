@@ -276,6 +276,10 @@ set statusline=%!SetStatusLine()
 " Some terminal sends C-? when DEL is pressed. We remap it to C-h (Backspace)
 noremap! <C-?> <C-h>
 
+" When using a US keyboad and OS key layout is JP106, Ctrl-[ is work as Ctrl-@.
+" We treat such input also as Ctrl-[ (ESC)
+inoremap <C-@> <Esc>
+
 " ===================================================================
 " Functions
 " ===================================================================
