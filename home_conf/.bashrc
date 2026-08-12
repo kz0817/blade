@@ -168,8 +168,9 @@ if [ $USE_SCREEN -eq 1 ]; then
 fi
 
 function printdir() {
-  dirname=$(basename ${PWD} | escape_non_ascii)
-  echo -en "\033k${SCREEN_HOST}[$dirname]\033\\"
+  local dir_name
+  dir_name=$(basename "$PWD" | escape_non_ascii)
+  echo -en "\033k${SCREEN_HOST}[$dir_name]\033\\"
 }
 
 if [ $USE_SCREEN -eq 1 ]; then
