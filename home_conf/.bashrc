@@ -17,8 +17,8 @@ alias en='export LANG=en_US.UTF-8; export LANGUAGE=en_US.UTF-8; export LC_ALL=en
 echo $- | grep -q i && INTERACTIVE=1 || INTERACTIVE=0
 
 # Source the Machine independent setting  ------------------------
-if [ -f .bashrc.local ]; then
-  source .bashrc.local
+if [ -f "$HOME/.bashrc.local" ]; then
+  source "$HOME/.bashrc.local"
 fi
 
 if [ "$USER" = "root" ]; then
