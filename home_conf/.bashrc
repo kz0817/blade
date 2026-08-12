@@ -62,7 +62,8 @@ alias update-ssh-auth-sock="$BLADE_DIR/bin/update-ssh-auth-sock.py -v > ~/.ssh-a
 
 # grep -----------------------------------------------------------
 export GREP_COLORS='1;47;41'
-alias grep='grep -E --color=auto'
+alias grep='grep --color=auto'
+alias egrep='grep -E --color=auto'
 
 # PATH -----------------------------------------------------------
 PATH="$HOME/bin:$BLADE_DIR/bin:$HOME/.local/bin:$PATH"
