@@ -1,8 +1,3 @@
-# Source system default ---------------------------------------
-if [ -f /etc/profile ]; then
-  . /etc/profile
-fi
-
 # Basic setting -----------------------------------------------
 OS_TYPE=`uname`
 if [ -z "$OS_TYPE" ]; then
