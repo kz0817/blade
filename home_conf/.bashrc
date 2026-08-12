@@ -67,7 +67,11 @@ export GREP_COLORS='1;47;41'
 alias grep='grep -E --color=auto'
 
 # PATH -----------------------------------------------------------
-export PATH=$EXTRA_PATH:~/bin:$BLADE_DIR/bin:~/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+PATH="$HOME/bin:$BLADE_DIR/bin:$HOME/.local/bin:$PATH"
+if [ -n "$EXTRA_PATH" ]; then
+  PATH="$EXTRA_PATH:$PATH"
+fi
+export PATH
 
 DEVTOOLSET2_DIR=/opt/rh/devtoolset-2
 DEVTOOLSET2_BIN_DIR=$DEVTOOLSET2_DIR/root/usr/bin
