@@ -174,7 +174,7 @@ function printdir() {
 }
 
 if [ $USE_SCREEN -eq 1 ]; then
-  PROMPT_COMMAND='printdir'
+  PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }printdir"
 fi
 
 # SSH -----------------------------------------------------------
