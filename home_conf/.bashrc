@@ -8,8 +8,11 @@ fi
 alias ja='export LANG=ja_JP.UTF-8; export LANGUAGE=ja_JP.UTF-8; export LC_ALL=ja_JP.UTF-8'
 alias en='export LANG=en_US.UTF-8; export LANGUAGE=en_US.UTF-8; export LC_ALL=en_US.UTF-8'
 
-# is this interactive shell or not -------------------------------
-echo $- | grep -q i && INTERACTIVE=1 || INTERACTIVE=0
+# Is this an interactive shell? --------------------------------
+case $- in
+  *i*) INTERACTIVE=1 ;;
+  *) INTERACTIVE=0 ;;
+esac
 
 # Source the Machine independent setting  ------------------------
 if [ -f "$HOME/.bashrc.local" ]; then
