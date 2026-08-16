@@ -77,8 +77,11 @@ class SystemTempreture(object):
         return temp_file_path_list
 
     def __get_zone_temp_str(self, temp_file_path) -> str:
-        with open(temp_file_path) as f:
-           return format_tempreture(float(f.read())/1e3)
+        try:
+            with open(temp_file_path) as f:
+                return format_tempreture(float(f.read())/1e3)
+        except OSError:
+            return ''
 
     def get_line(self):
         return ' '.join([self.__get_zone_temp_str(path) for path in self.temp_file_path_list])
