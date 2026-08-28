@@ -93,6 +93,9 @@ def generate_base_qemu_command(ctx):
         '-device', 'virtio-net-pci,netdev=net0',
         '-netdev', 'user,id=net0',
         '-device', 'usb-tablet',
+        '-audiodev', 'pa,id=audio0',
+        '-device', 'ich9-intel-hda',
+        '-device', 'hda-duplex,audiodev=audio0',
     ]
 
     if args.drive.startswith('/dev/'):
