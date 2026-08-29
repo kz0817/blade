@@ -178,10 +178,12 @@ if [ $USE_SCREEN -eq 1 ]; then
 fi
 
 # SSH -----------------------------------------------------------
-export SSH_AUTH_SOCK="$HOME/.ssh/ssh-agent.sock"
+if [ -z "$SSH_AUTH_SOCK" ]; then
+  export SSH_AUTH_SOCK="$HOME/.ssh/ssh-agent.sock"
 
-if [ ! -S "$SSH_AUTH_SOCK" ]; then
-  eval $(ssh-agent -a "$SSH_AUTH_SOCK") > /dev/null
-  ssh-add ~/.ssh/id_ed25519
+  if [ ! -S "$SSH_AUTH_SOCK" ]; then
+    eval $(ssh-agent -a "$SSH_AUTH_SOCK") > /dev/null
+    ssh-add ~/.ssh/id_ed25519
+  fi
 fi
 
