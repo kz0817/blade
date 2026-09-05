@@ -45,6 +45,7 @@ fi
 # blade --------------------------------------------------------
 if [ -z "$BLADE_DIR" ]; then
   export BLADE_DIR=~/misc/blade
+  export TERMINAL=stride
 fi
 
 
