@@ -13,3 +13,20 @@
       - vim
       - vim-fugitive
     update_cache: yes
+
+- name: Install Desktop packages for Debian
+  apt:
+    name:
+      - i3
+      - tint2
+      - stterm
+      - autocutsel
+      - picom
+      - pcmanfm
+      - fcitx5-mozc
+      - firefox-esr
+    update_cache: yes
+    cache_valid_time: 3600
+  tags:
+    - never
+    - desktop

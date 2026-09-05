@@ -19,6 +19,10 @@ Copy this directory to the target host. Then run the following commands in the t
     apt install ansible
     ansible-playbook -i local, -c local base.yml
 
+#### When you install desktop apps.
+
+    ansible-playbook -i local, -c local base.yml --tags desktop
+
 ### Example to put public keys to /root/.ssh for an LXD host
 
     lxc exec foo mkdir -m 700 /root/.ssh
