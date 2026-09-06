@@ -42,6 +42,11 @@ if [ $INTERACTIVE -eq 1 ]; then
   bind 'set bell-style none'
 fi
 
+# Bash completion
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+  . /usr/share/bash-completion/bash_completion
+fi
+
 # blade --------------------------------------------------------
 if [ -z "$BLADE_DIR" ]; then
   export BLADE_DIR=~/misc/blade
