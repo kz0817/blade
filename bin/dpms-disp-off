@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[ -n "$1" ] && sleep "$1"
+
+xset dpms force off

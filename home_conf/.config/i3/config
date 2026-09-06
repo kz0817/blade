@@ -177,6 +177,13 @@ for_window [class="qemu"] floating enable
 for_window [class="qemu-system-x86_64"] floating enable
 for_window [class="Qemu-system-x86_64"] floating enable
 
+# Brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+
+# Display power off
+bindsym --release Mod1+Shift+o exec --no-startup-id dpms-disp-off 0.5
+
 #######################################################################
 # automatically start i3-config-wizard to offer the user to create a
 # keysym-based config which used their favorite modifier (alt or windows)
