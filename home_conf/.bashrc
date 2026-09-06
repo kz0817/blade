@@ -180,11 +180,13 @@ fi
 
 # SSH -----------------------------------------------------------
 if [ -z "$SSH_AUTH_SOCK" ]; then
-  export SSH_AUTH_SOCK="$HOME/.ssh/ssh-agent.sock"
-
-  if [ ! -S "$SSH_AUTH_SOCK" ]; then
-    eval $(ssh-agent -a "$SSH_AUTH_SOCK") > /dev/null
-    ssh-add ~/.ssh/id_ed25519
+  if [ -n "$XDG_RUNTIME_DIR" ]; then
+    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/openssh_agent"
+  else
+    export SSH_AUTH_SOCK="/tmp/ssh-agent.$USER.sock"
+    if [ ! -S "$SSH_AUTH_SOCK" ]; then
+      eval $(ssh-agent -a "$SSH_AUTH_SOCK") > /dev/null
+      ssh-add ~/.ssh/id_ed25519
+    fi
   fi
 fi
-
