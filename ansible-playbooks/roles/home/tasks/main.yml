@@ -11,6 +11,7 @@
     - ~/.config/fontconfig
     - ~/.config/picom
     - ~/.local/share/applications
+    - ~/.config/gtk-3.0
 
 - name: Download blade
   git:
@@ -104,3 +105,4 @@
     - .config/picom/picom.conf
     - .docker
     - .local/share/applications/stride.desktop
+    - .config/gtk-3.0/settings.ini

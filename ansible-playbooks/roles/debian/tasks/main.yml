@@ -25,6 +25,9 @@
       - pcmanfm
       - fcitx5-mozc
       - firefox-esr
+      - papirus-icon-theme
+      - greybird-gtk-theme
+      - gnome-screenshot
     update_cache: yes
     cache_valid_time: 3600
   tags:
