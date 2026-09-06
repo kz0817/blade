@@ -1,6 +1,6 @@
 [Unit]
 Description=Power off discrete NVIDIA GPU
-After=multi-user.target
+After=systemd-modules-load.service
 
 [Service]
 Type=oneshot
