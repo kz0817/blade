@@ -1,0 +1,299 @@
+#!/usr/bin/env python3
+"""One-shot PCI removal and indexed gMux power-off for MacBookPro11,3.
+
+Reference: Linux v6.12, drivers/platform/x86/apple-gmux.c:
+https://github.com/torvalds/linux/blob/v6.12/drivers/platform/x86/apple-gmux.c
+and include/linux/apple-gmux.h in the same tag.
+
+/dev/port + pread/pwrite gives explicit single-byte port I/O using only stdlib.
+libc inb/outb are generally C inline functions, not portable ctypes symbols;
+ioperm alone does not perform I/O. Debugfs selected_port also requires writes.
+
+Assumes the supplied machine has indexed gMux 4.0.8; no probing/mux switching.
+flock serializes this tool, NOT the kernel's index_lock. Do not run concurrently
+with brightness changes, suspend/resume, switcheroo or other gMux clients.
+The bound kernel driver (including ACPI notifications) can still race direct
+I/O; userspace cannot guarantee kernel-level serialization. No driver unbind
+or interrupt manipulation is attempted. Successful transactions do not prove
+physical rail voltage, nor update the kernel's cached power_state.
+"""
+
+import argparse
+import fcntl
+import os
+from pathlib import Path
+import re
+import stat
+import sys
+import time
+
+MODEL = "MacBookPro11,3"
+PCI_ROOT = Path("/sys/bus/pci/devices")
+IGPU = "0000:00:02.0"
+GPU = "0000:01:00.0"
+AUDIO = "0000:01:00.1"
+EXPECTED = {GPU: (0x10DE, 0x0FE9), AUDIO: (0x10DE, 0x0E1B)}
+GMUX_PORT_VALUE = 0xC2
+GMUX_PORT_READ = 0xD0
+GMUX_PORT_WRITE = 0xD4
+GMUX_PORT_DISCRETE_POWER = 0x50  # Logical index, NEVER base + 0x50.
+
+
+class SafetyError(RuntimeError):
+    pass
+
+
+def check_root():
+    if os.geteuid() != 0:
+        raise SafetyError("root required (run with sudo); no hardware changed")
+
+
+def present(path):
+    try:
+        path.stat()
+        return True
+    except FileNotFoundError:
+        return False
+
+
+def check_platform():
+    try:
+        model = Path("/sys/class/dmi/id/product_name").read_text().strip()
+    except OSError as exc:
+        print(f"warning: cannot read model: {exc}", file=sys.stderr)
+        model = ""
+    if model and model != MODEL:
+        raise SafetyError(f"unexpected model {model!r}; expected {MODEL}")
+    if not model:
+        print("warning: model unavailable", file=sys.stderr)
+    if not present(PCI_ROOT / IGPU):
+        raise SafetyError(f"Intel GPU {IGPU} is absent")
+    return model or "unknown"
+
+
+def parse_gmux_io_range(text):
+    candidates = [line for line in text.splitlines() if "Apple gmux" in line]
+    if len(candidates) != 1:
+        raise SafetyError(f"expected one Apple gmux resource, found {len(candidates)}")
+    match = re.fullmatch(r"\s*([0-9a-fA-F]+)-([0-9a-fA-F]+)\s*:\s*Apple gmux\s*",
+                         candidates[0])
+    if not match:
+        raise SafetyError(f"malformed Apple gmux resource: {candidates[0]!r}")
+    base, end = (int(value, 16) for value in match.groups())
+    if not 0 < base <= end <= 0xFFFF:
+        raise SafetyError(f"invalid or redacted gMux range: {base:#x}-{end:#x}")
+    return base, end
+
+
+def find_gmux_io_range():
+    return parse_gmux_io_range(Path("/proc/ioports").read_text())
+
+
+def validate_gmux_ports(base, end):
+    ports = {"VALUE": base + GMUX_PORT_VALUE,
+             "READ": base + GMUX_PORT_READ, "WRITE": base + GMUX_PORT_WRITE}
+    if not 0 < base <= end <= 0xFFFF or any(
+            not base <= port <= end for port in ports.values()):
+        raise SafetyError("required indexed gMux ports are outside resource range")
+    return ports
+
+
+def get_pci_device_info(bdf):
+    path = PCI_ROOT / bdf
+    if not present(path):
+        return {"present": False, "driver": "none"}
+    ids = tuple(int((path / name).read_text().strip(), 16)
+                for name in ("vendor", "device"))
+    if bdf in EXPECTED and ids != EXPECTED[bdf]:
+        raise SafetyError(f"{bdf}: unexpected vendor/device {ids[0]:04x}:{ids[1]:04x}")
+    try:
+        driver = Path(os.readlink(path / "driver")).name
+    except FileNotFoundError:
+        driver = "unbound"
+    return {"present": True, "driver": driver, "ids": ids}
+
+
+def remove_pci_device(bdf):
+    if not get_pci_device_info(bdf)["present"]:
+        print(f"{bdf}: already removed")
+        return
+    print(f"removing {bdf}", flush=True)
+    path = PCI_ROOT / bdf
+    with (path / "remove").open("w") as stream:
+        if stream.write("1\n") != 2:
+            raise SafetyError(f"short sysfs write: {path / 'remove'}")
+    # PCI remove normally completes synchronously; allow a bounded visibility wait.
+    for _ in range(100):
+        if not present(path):
+            return
+        time.sleep(0.01)
+    raise SafetyError(f"PCI removal did not complete: {bdf}")
+
+
+def verify_removed():
+    for bdf in (AUDIO, GPU):
+        if present(PCI_ROOT / bdf):
+            raise SafetyError(f"{bdf} still present; refusing gMux power-off")
+
+
+class PortIO:
+    def __init__(self, ports, verbose=False):
+        self.ports = ports
+        self.verbose = verbose
+        self.fd = None
+
+    def __enter__(self):
+        self.fd = os.open("/dev/port", os.O_RDWR | os.O_CLOEXEC | os.O_NOFOLLOW)
+        try:
+            info = os.fstat(self.fd)
+            if not stat.S_ISCHR(info.st_mode) or os.major(info.st_rdev) != 1 or os.minor(info.st_rdev) != 4:
+                raise SafetyError("/dev/port is not Linux port device (1:4)")
+            # No lock file creation; status/dry-run never open this device.
+            fcntl.flock(self.fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BaseException:
+            os.close(self.fd)
+            raise
+        return self
+
+    def __exit__(self, *args):
+        os.close(self.fd)
+
+    def check_port(self, port):
+        if port not in self.ports.values():
+            raise SafetyError(f"unapproved physical port {port:#x}")
+
+    def io_read8(self, port):
+        self.check_port(port)
+        data = os.pread(self.fd, 1, port)
+        if len(data) != 1:
+            raise SafetyError(f"short I/O read at {port:#x}")
+        if self.verbose:
+            print(f"inb {port:#x} -> {data[0]:#04x}")
+        return data[0]
+
+    def io_write8(self, port, value):
+        self.check_port(port)
+        if self.verbose:
+            print(f"outb {port:#x} <- {value:#04x}")
+        if os.pwrite(self.fd, bytes([value]), port) != 1:
+            raise SafetyError(f"short I/O write at {port:#x}")
+
+
+def gmux_wait_ready(io):
+    # v6.12 gmux_index_wait_ready: initial WRITE read; while bit 0 is set,
+    # read READ, reread WRITE, udelay(100), decrement i (initially 200).
+    # Preserve its !!i result, including timeout on the final iteration.
+    # Python sleep(0.0001) may oversleep; it is not kernel busy-wait timing.
+    remaining = 200
+    value = io.io_read8(io.ports["WRITE"])
+    while remaining and value & 1:
+        io.io_read8(io.ports["READ"])
+        value = io.io_read8(io.ports["WRITE"])
+        time.sleep(0.0001)
+        remaining -= 1
+    if not remaining:
+        raise SafetyError("indexed gMux ready timeout")
+
+
+def gmux_wait_complete(io):
+    # v6.12 gmux_index_wait_complete: initial WRITE read; while bit 0 is
+    # clear, reread WRITE, udelay(100), decrement i (200). If bit 0 is set,
+    # read READ to acknowledge, then return !!i. Fail closed on timeout.
+    remaining = 200
+    value = io.io_read8(io.ports["WRITE"])
+    while remaining and not value & 1:
+        value = io.io_read8(io.ports["WRITE"])
+        time.sleep(0.0001)
+        remaining -= 1
+    if value & 1:
+        io.io_read8(io.ports["READ"])
+    if not remaining:
+        raise SafetyError("indexed gMux completion timeout")
+
+
+def gmux_write8(io, register, value):
+    # v6.12 gmux_index_write8: VALUE first, wait_ready, index to WRITE,
+    # wait_complete (including READ acknowledgement). No base + register I/O.
+    io.io_write8(io.ports["VALUE"], value)
+    gmux_wait_ready(io)
+    io.io_write8(io.ports["WRITE"], register)
+    gmux_wait_complete(io)
+
+
+def power_off_dgpu(io):
+    verify_removed()
+    print("powering off discrete GPU", flush=True)
+    # v6.12 gmux_set_discrete_state(..., VGA_SWITCHEROO_OFF): 1 then 0.
+    # Reissue the entire OFF sequence on every run, including partial runs.
+    # Kernel resume also reapplies OFF. Never issue the ON sequence (1, 3).
+    gmux_write8(io, GMUX_PORT_DISCRETE_POWER, 1)
+    gmux_write8(io, GMUX_PORT_DISCRETE_POWER, 0)
+    # Kernel optionally waits up to 200ms for powerchange_done via ACPI GPE.
+    # Userspace cannot await that completion: allow settling, without claiming
+    # that a delay verifies the physical rail state or GPE completion.
+    time.sleep(0.2)
+
+
+def show_status(model, base, end, ports, infos):
+    print(f"model: {model}")
+    for bdf, label in ((IGPU, "Intel GPU"), (GPU, "NVIDIA GPU"), (AUDIO, "NVIDIA Audio")):
+        info = infos[bdf]
+        print(f"{label} {bdf}: {'present' if info['present'] else 'absent'}, driver: {info['driver']}")
+    print(f"detected gmux: {base:#x}-{end:#x}")
+    print("indexed ports: " + ", ".join(f"{name}={port:#x}" for name, port in ports.items()))
+    # gmux_index_read8 writes the register index to READ. Reading VALUE alone
+    # yields stale transaction data, not an identified power register value.
+    print("dGPU power register: unknown (indexed read requires I/O write; omitted)")
+
+
+def run(args):
+    check_root()
+    model = check_platform()
+    base, end = find_gmux_io_range()
+    ports = validate_gmux_ports(base, end)
+    infos = {AUDIO: get_pci_device_info(AUDIO), GPU: get_pci_device_info(GPU),
+             IGPU: get_pci_device_info(IGPU)}
+    show_status(model, base, end, ports, infos)
+    if args.status:
+        return
+    if args.dry_run:
+        for bdf in (AUDIO, GPU):
+            print(f"would remove {bdf}" if infos[bdf]["present"] else f"{bdf}: already removed")
+        print("would verify both NVIDIA PCI devices are absent")
+        for value in (1, 0):
+            print(f"would write gmux logical register 0x50 <- {value:#04x} via indexed ports")
+        print("/dev/port access and physical power state are not verified by dry-run")
+        return
+    print("warning: direct I/O cannot share kernel gMux locking; avoid concurrent gMux activity",
+          file=sys.stderr)
+    # Open/validate/lock BEFORE irreversible PCI removal; no port I/O yet.
+    with PortIO(ports, args.verbose) as io:
+        remove_pci_device(AUDIO)
+        remove_pci_device(GPU)
+        verify_removed()
+        power_off_dgpu(io)
+        verify_removed()
+    print("final: NVIDIA Audio/GPU absent; gMux OFF transactions completed; physical power unverified")
+    print("done")
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--status", action="store_true", help="show validated status; no writes or port I/O")
+    mode.add_argument("--dry-run", action="store_true", help="show planned operations; no writes or port I/O")
+    parser.add_argument("--verbose", action="store_true", help="log each port read/write")
+    args = parser.parse_args()
+    try:
+        run(args)
+    except (SafetyError, OSError, ValueError) as exc:
+        print(f"error: {exc}; stopped (earlier changes, if any, are not rolled back)", file=sys.stderr)
+        return 1
+    except KeyboardInterrupt:
+        print("error: interrupted; partial changes may remain", file=sys.stderr)
+        return 130
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

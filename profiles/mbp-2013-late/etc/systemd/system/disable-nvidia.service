@@ -4,7 +4,7 @@ After=systemd-modules-load.service
 
 [Service]
 Type=oneshot
-ExecStart=/bin/sh -c 'for i in $(seq 1 20); do [ -e /sys/kernel/debug/vgaswitcheroo/switch ] && break; sleep 0.5; done; echo OFF > /sys/kernel/debug/vgaswitcheroo/switch'
+ExecStart=/usr/local/sbin/disable-dgpu
 RemainAfterExit=yes
 
 [Install]
