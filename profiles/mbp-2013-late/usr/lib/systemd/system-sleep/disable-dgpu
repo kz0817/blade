@@ -1,0 +1,10 @@
+#!/bin/sh
+# systemd-sleep calls hooks with: pre|post <sleep operation>.
+# Run only after ordinary hibernation; never before entering sleep.
+# Call the tool directly: the boot oneshot service uses RemainAfterExit=yes.
+case "${1-}:${2-}" in
+    post:hibernate)
+        exec /usr/local/sbin/disable-dgpu
+        ;;
+esac
+exit 0
