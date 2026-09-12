@@ -1,0 +1,32 @@
+#!/bin/sh
+set -e
+
+ROOT_UUID="$(grub-probe --target=fs_uuid /)"
+ESP_UUID="$(grub-probe --target=fs_uuid /boot/efi)"
+
+. /usr/lib/grub/grub-mkconfig_lib
+
+cat <<EOF
+menuentry 'Debian via apple_set_os' {
+    insmod part_gpt
+    insmod ext2
+    insmod fat
+
+    # Debian root filesystem
+    search --no-floppy --fs-uuid --set=root ${ROOT_UUID}
+
+    # EFI System Partition は root を変更せず esp に入れる
+    search --no-floppy --fs-uuid --set=esp ${ESP_UUID}
+
+    chainloader (\$esp)/EFI/custom/apple_set_os.efi
+    if boot; then
+        true
+    else
+        true
+    fi
+
+    linux /vmlinuz root=UUID=${ROOT_UUID} ro ${GRUB_CMDLINE_LINUX} ${GRUB_CMDLINE_LINUX_DEFAULT}
+    initrd /initrd.img
+    boot
+}
+EOF
