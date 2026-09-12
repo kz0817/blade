@@ -1,0 +1,153 @@
+#!/usr/bin/env python3
+
+import argparse
+import os
+import sys
+from pathlib import Path
+
+ROOTFS = Path("/")
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Create rootfs symlinks from a machine profile"
+    )
+
+    parser.add_argument(
+        "-f",
+        "--force",
+        action="store_true",
+        help="replace existing regular files",
+    )
+
+    parser.add_argument(
+        "profile",
+        help="profile name",
+    )
+
+    parser.add_argument(
+        "path",
+        nargs="?",
+        help="relative path to update only one file",
+    )
+
+    return parser.parse_args()
+
+
+def get_profiles_root():
+    return Path(__file__).resolve().parent
+
+
+def get_profile_dir(profiles_root, profile):
+    profile_dir = profiles_root / profile
+
+    if not profile_dir.is_dir():
+        raise RuntimeError(f"profile not found: {profile_dir}")
+
+    return profile_dir
+
+
+def resolve_source(profile_dir, relative_path):
+    relative_path = Path(relative_path)
+
+    if relative_path.is_absolute():
+        raise RuntimeError(f"path must be relative: {relative_path}")
+
+    source = (profile_dir / relative_path).resolve()
+
+    try:
+        source.relative_to(profile_dir.resolve())
+    except ValueError:
+        raise RuntimeError(
+            f"path is outside profile: {relative_path}"
+        )
+
+    if not source.is_file():
+        raise RuntimeError(f"file not found: {source}")
+
+    return source
+
+
+def destination_for(profile_dir, source):
+    relative = source.relative_to(profile_dir)
+    return ROOTFS / relative
+
+
+def update_symlink(profile_dir, source, force=False):
+    destination = destination_for(profile_dir, source)
+
+    destination.parent.mkdir(parents=True, exist_ok=True)
+
+    if destination.is_symlink():
+        current = Path(os.readlink(destination))
+
+        if not current.is_absolute():
+            current = (destination.parent / current).resolve()
+        else:
+            current = current.resolve()
+
+        if current == source.resolve():
+            print(f"unchanged: {destination} -> {source}")
+            return
+
+        destination.unlink()
+        destination.symlink_to(source)
+        print(f"update:    {destination} -> {source}")
+        return
+
+    if destination.exists():
+        if not force:
+            print(
+                f"skip:      {destination} already exists",
+                file=sys.stderr,
+            )
+            return
+
+        if destination.is_dir():
+            raise RuntimeError(
+                f"refusing to replace directory: {destination}"
+            )
+
+        destination.unlink()
+        destination.symlink_to(source)
+        print(f"replace:   {destination} -> {source}")
+        return
+
+    destination.symlink_to(source)
+    print(f"create:    {destination} -> {source}")
+
+
+def iter_profile_files(profile_dir):
+    for path in sorted(profile_dir.rglob("*")):
+        if path.is_file() and not path.is_symlink():
+            yield path
+
+
+def main():
+    args = parse_args()
+
+    try:
+        profiles_root = get_profiles_root()
+        profile_dir = get_profile_dir(profiles_root, args.profile)
+
+        if args.path:
+            sources = [resolve_source(profile_dir, args.path)]
+        else:
+            sources = iter_profile_files(profile_dir)
+
+        for source in sources:
+            update_symlink(
+                profile_dir,
+                source,
+                force=args.force,
+            )
+
+    except RuntimeError as e:
+        print(f"error: {e}", file=sys.stderr)
+        return 1
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
