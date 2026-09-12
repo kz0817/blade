@@ -12,6 +12,7 @@
       - gnupg
       - vim
       - vim-fugitive
+      - ripgrep
     update_cache: yes
 
 - name: Install Desktop packages for Debian
