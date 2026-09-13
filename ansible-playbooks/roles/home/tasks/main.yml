@@ -86,6 +86,11 @@
     path: ~/.ssh/conf.d
     state: directory
 
+- name: Create .docker directory
+  file:
+    path: ~/.docker
+    state: directory
+
 - name: Link filesr on the home directory
   file:
     src: '{{ blade_dir }}/home_conf/{{ item }}'
@@ -103,6 +108,6 @@
     - .config/i3/config
     - .config/fontconfig/fonts.conf
     - .config/picom/picom.conf
-    - .docker
+    - .docker/config.json
     - .local/share/applications/stride.desktop
     - .config/gtk-3.0/settings.ini
