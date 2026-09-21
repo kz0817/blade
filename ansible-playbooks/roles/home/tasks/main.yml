@@ -91,7 +91,7 @@
     path: ~/.docker
     state: directory
 
-- name: Link filesr on the home directory
+- name: Link files on the home directory
   file:
     src: '{{ blade_dir }}/home_conf/{{ item }}'
     dest: ~/{{ item }}
