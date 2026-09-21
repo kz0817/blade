@@ -16,6 +16,29 @@
     update_cache: yes
     cache_valid_time: 3600
 
+- name: Install Mozilla repository key
+  ansible.builtin.get_url:
+    url: https://packages.mozilla.org/apt/repo-signing-key.gpg
+    dest: /etc/apt/keyrings/packages.mozilla.org.gpg
+    mode: '0644'
+  tags:
+    - never
+    - desktop
+
+- name: Add Mozilla APT repository
+  ansible.builtin.copy:
+    dest: /etc/apt/sources.list.d/mozilla.sources
+    content: |
+      Types: deb
+      URIs: https://packages.mozilla.org/apt
+      Suites: mozilla
+      Components: main
+      Signed-By: /etc/apt/keyrings/packages.mozilla.org.gpg
+    mode: '0644'
+  tags:
+    - never
+    - desktop
+
 - name: Install Desktop packages for Debian
   apt:
     name:
@@ -26,7 +49,7 @@
       - picom
       - pcmanfm
       - fcitx5-mozc
-      - firefox-esr
+      - firefox
       - papirus-icon-theme
       - greybird-gtk-theme
       - gnome-screenshot
@@ -35,3 +58,4 @@
   tags:
     - never
     - desktop
+
